@@ -1,6 +1,6 @@
-import hljs from 'highlight.js';
-import 'highlight.js/styles/github.css';
-
-document.querySelector('pre code').addEventListener('mouseover', (e) => {
-    hljs.highlightElement(e.target);
-});
+import { GameView } from './view/GameView';
+import './style.css';
+// import hljs from '../node_modules/highlight.js/lib/common';
+// import '../node_modules/highlight.js/styles/monokai.css';
+const gameView = new GameView(document.body);
+gameView.render();
