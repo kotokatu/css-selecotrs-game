@@ -1,7 +1,7 @@
-interface ComponentParams {
+export interface ComponentParams {
     tag?: keyof HTMLElementTagNameMap;
     parent?: HTMLElement;
-    className: string;
+    className?: string;
     content?: string;
 }
 

@@ -4,48 +4,14 @@
   margin: 0;
 }
 
-.table {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  width: 400px;
-  height: 200px;
-  background-color: brown;
+.page {
+  background-color: rgb(58, 58, 58);
+  color: rgb(126, 124, 124);
+  font-family: monospace;
 }
 
-plate {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100px;
-  height: 100px;
-  border-radius: 100%;
-  background-color: #ffffff;
-}
-
-bento {
-  display: block;
-  width: 100px;
-  height: 100px;
-  background-color: chocolate;
-}
-
-apple {
-  display: block;
-  width: 40px;
-  height: 40px;
-  border-radius: 100%;
-  background-color: crimson;
-}
-
-pickle {
-  display: block;
-  width: 20px;
-  height: 70px;
-  border-radius: 10px;
-  background-color: darkgreen;
-}
-
-.viewer-window div {
-  padding-left: 20px;
+.directions {
+  text-align: center;
+  padding: 20px 0;
+  font-size: 40px;
 }
