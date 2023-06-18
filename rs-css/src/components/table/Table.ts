@@ -1,6 +1,6 @@
 import { BaseComponent } from '../../common/BaseComponent';
 import { state } from '../../controller/state';
-import { LEVELS } from '../../data/levels';
+import { LEVELS } from '../../data/levelsList';
 import './table.css';
 
 export class Table extends BaseComponent<HTMLDivElement> {

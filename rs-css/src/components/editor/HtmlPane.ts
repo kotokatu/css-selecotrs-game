@@ -1,5 +1,5 @@
 import { BaseComponent } from '../../common/BaseComponent';
-import { LEVELS } from '../../data/levels';
+import { LEVELS } from '../../data/levelsList';
 import { state } from '../../controller/state';
 import { ComponentParams } from '../../common/BaseComponent';
 
