@@ -1,7 +1,7 @@
-import { BaseComponent } from '../../common/BaseComponent';
-import { LEVELS } from '../../data/levelsList';
+import { BaseComponent } from '../../common/base-component';
+import { LEVELS_LIST } from '../../data/levels-list';
 import { state } from '../../controller/state';
-import { ComponentParams } from '../../common/BaseComponent';
+import { ComponentParams } from '../../common/base-component';
 
 export class HtmlPane extends BaseComponent {
     public output: BaseComponent;
@@ -26,7 +26,7 @@ export class HtmlPane extends BaseComponent {
     }
 
     private getViewerMarkup() {
-        const markup = LEVELS[state.level].markupElements;
+        const markup = LEVELS_LIST[state.level].markupElements;
         const escapedElements = markup.map((el) => el.replaceAll('<', '&lt;').replaceAll('>', '&gt;'));
         return escapedElements
             .map((el) => {

@@ -17,12 +17,4 @@ export class BaseComponent<T extends HTMLElement = HTMLElement> {
     remove() {
         this.element.remove();
     }
-
-    // appendTo(parentNode: HTMLElement) {
-    //     parentNode.append(this.element);
-    // }
-
-    // append(...elements: BaseComponent[] | HTMLElement[]) {
-    //     this.element.append(...elements);
-    // }
 }

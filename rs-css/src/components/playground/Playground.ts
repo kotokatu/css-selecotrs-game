@@ -1,8 +1,9 @@
-import { BaseComponent } from '../../common/BaseComponent';
-import { Table } from '../table/Table';
-import { Editor } from '../editor/Editor';
+import { BaseComponent } from '../../common/base-component';
+import { Table } from '../table/table';
+import { Editor } from '../editor/editor';
 import { state } from '../../controller/state';
-import { LEVELS } from '../../data/levelsList';
+import { LEVELS_LIST } from '../../data/levels-list';
+import './playground.css';
 
 export class Playground extends BaseComponent {
     table: HTMLElement;
@@ -12,7 +13,7 @@ export class Playground extends BaseComponent {
         new BaseComponent<HTMLHeadingElement>({
             tag: 'h2',
             parent: this.element,
-            content: `${LEVELS[state.level].doThis}`,
+            content: `${LEVELS_LIST[state.level].doThis}`,
             className: 'directions',
         });
         this.table = new Table(this.element).element;

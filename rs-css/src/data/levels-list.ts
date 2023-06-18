@@ -9,7 +9,7 @@ interface LevelObject {
     markupElements: string[];
 }
 
-export const LEVELS: LevelObject[] = [
+export const LEVELS_LIST: LevelObject[] = [
     {
         helpTitle: 'Select elements by their type',
         selectorName: 'Type Selector',

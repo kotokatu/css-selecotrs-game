@@ -1,6 +1,6 @@
-import { BaseComponent } from '../../common/BaseComponent';
+import { BaseComponent } from '../../common/base-component';
 import { state } from '../../controller/state';
-import { LEVELS } from '../../data/levelsList';
+import { LEVELS_LIST } from '../../data/levels-list';
 import './table.css';
 
 export class Table extends BaseComponent<HTMLDivElement> {
@@ -11,7 +11,7 @@ export class Table extends BaseComponent<HTMLDivElement> {
     }
 
     getTableMarkUp(): string {
-        return LEVELS[state.level].markupElements.join('');
+        return LEVELS_LIST[state.level].markupElements.join('');
     }
 
     // render() {

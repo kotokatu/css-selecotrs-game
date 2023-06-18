@@ -1,5 +1,5 @@
-import { BaseComponent } from '../../common/BaseComponent';
-import { ComponentParams } from '../../common/BaseComponent';
+import { BaseComponent } from '../../common/base-component';
+import { ComponentParams } from '../../common/base-component';
 
 export class CssPane extends BaseComponent {
     public input: HTMLInputElement;

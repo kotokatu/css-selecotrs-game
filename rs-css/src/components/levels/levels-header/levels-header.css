@@ -1,0 +1,36 @@
+.levels-header {
+  display: flex;
+  align-items: center;
+}
+
+.levels-heading {
+  padding: 10px 20px 10px;
+}
+
+.prev-level-btn,
+.next-level-btn {
+  position: relative;
+  width: 30px;
+  height: 30px;
+}
+
+.prev-level-btn::after,
+.next-level-btn::after {
+  content: '';
+  position: absolute;
+  width: 15px;
+  height: 15px;
+  top: 7px;
+  left: 0;
+  border-left: 2px solid rgba(255, 255, 255, .4);
+  border-top: 2px solid rgba(255, 255, 255, .4);
+}
+
+.prev-level-btn::after {
+  left: 7px;
+  transform: rotate(-45deg);
+}
+.next-level-btn::after {
+  transform: rotate(135deg);
+}
+

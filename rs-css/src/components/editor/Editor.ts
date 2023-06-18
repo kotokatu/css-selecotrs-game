@@ -1,6 +1,6 @@
-import { BaseComponent } from '../../common/BaseComponent';
-import { CssPane } from './CssPane';
-import { HtmlPane } from './HtmlPane';
+import { BaseComponent } from '../../common/base-component';
+import { CssPane } from './css-pane';
+import { HtmlPane } from './html-pane';
 import './editor.css';
 
 export class Editor extends BaseComponent {
