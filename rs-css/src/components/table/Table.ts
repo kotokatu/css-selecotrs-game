@@ -7,8 +7,16 @@ import './table.css';
 export class Table extends BaseComponent<HTMLDivElement> {
     tableElement: HTMLElement;
     tooltip: HTMLElement;
-    constructor(parent: HTMLElement) {
+    onMouseOver: (e: Event, selector: string) => void;
+    onMouseOut: (e: Event, selector: string) => void;
+    constructor(
+        parent: HTMLElement,
+        onMouseOver: (e: Event, selector: string) => void,
+        onMouseOut: (e: Event, selector: string) => void
+    ) {
         super({ parent, className: 'table-wrapper' });
+        this.onMouseOver = onMouseOver;
+        this.onMouseOut = onMouseOut;
         this.tableElement = new BaseComponent<HTMLDivElement>({ parent: this.element, className: 'table' }).element;
         this.tooltip = new BaseComponent<HTMLSpanElement>({
             tag: 'span',
@@ -36,6 +44,8 @@ export class Table extends BaseComponent<HTMLDivElement> {
         if (elemObject.child) {
             elem.append(this.createTableElement(elemObject.child));
         }
+        elem.addEventListener('mouseover', (e) => this.onMouseOver(e, '.table *'));
+        elem.addEventListener('mouseout', (e) => this.onMouseOut(e, '.table *'));
         return elem;
     }
 

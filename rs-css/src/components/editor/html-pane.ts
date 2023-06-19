@@ -1,13 +1,20 @@
 import { BaseComponent } from '../../common/base-component';
 import { LEVELS_LIST } from '../../data/levels-list';
 import { state } from '../../controller/state';
-import { ComponentParams } from '../../common/base-component';
 import { elemObject } from '../../data/levels-list';
 
 export class HtmlPane extends BaseComponent {
     public output: HTMLElement;
-    constructor(params: ComponentParams) {
-        super({ ...params, className: 'pane viewer-pane' });
+    onMouseOver: (e: Event, selector: string) => void;
+    onMouseOut: (e: Event, selector: string) => void;
+    constructor(
+        parent: HTMLElement,
+        onMouseOver: (e: Event, selector: string) => void,
+        onMouseOut: (e: Event, selector: string) => void
+    ) {
+        super({ parent, className: 'pane viewer-pane' });
+        this.onMouseOver = onMouseOver;
+        this.onMouseOut = onMouseOut;
         new BaseComponent({
             parent: this.element,
             className: 'pane-header',
@@ -58,6 +65,8 @@ export class HtmlPane extends BaseComponent {
             elem.insertAdjacentElement('beforeend', this.createViewerElement(elemObject.child));
         }
         elem.insertAdjacentText('beforeend', `</${elemObject.tag}>`);
+        elem.addEventListener('mouseover', (e) => this.onMouseOver(e, '.viewer-window div'));
+        elem.addEventListener('mouseout', (e) => this.onMouseOut(e, '.viewer-window div'));
         return elem;
     }
 

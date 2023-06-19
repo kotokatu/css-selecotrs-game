@@ -16,16 +16,16 @@ export class Playground extends BaseComponent {
             content: `${LEVELS_LIST[state.level].doThis}`,
             className: 'directions',
         });
-        this.table = new Table(this.element);
-        this.output = new Editor(this.element).output;
-        this.output.querySelectorAll('div').forEach((el) => {
-            el.addEventListener('mouseover', (e) => this.onMouseOver(e, '.viewer-window div'));
-            el.addEventListener('mouseout', (e) => this.onMouseOut(e, '.viewer-window div'));
-        });
-        this.table.element.querySelectorAll('.table *').forEach((el) => {
-            el.addEventListener('mouseover', (e) => this.onMouseOver(e, '.table *'));
-            el.addEventListener('mouseout', (e) => this.onMouseOut(e, '.table *'));
-        });
+        this.table = new Table(this.element, this.onMouseOver.bind(this), this.onMouseOut.bind(this));
+        this.output = new Editor(this.element, this.onMouseOver.bind(this), this.onMouseOut.bind(this)).output;
+        // this.output.querySelectorAll('div').forEach((el) => {
+        //     el.addEventListener('mouseover', (e) => this.onMouseOver(e, '.viewer-window div'));
+        //     el.addEventListener('mouseout', (e) => this.onMouseOut(e, '.viewer-window div'));
+        // });
+        // this.table.element.querySelectorAll('.table *').forEach((el) => {
+        //     el.addEventListener('mouseover', (e) => this.onMouseOver(e, '.table *'));
+        //     el.addEventListener('mouseout', (e) => this.onMouseOut(e, '.table *'));
+        // });
     }
 
     onMouseOver(e: Event, selector: string) {
