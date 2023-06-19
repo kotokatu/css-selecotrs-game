@@ -5,7 +5,7 @@ import './editor.css';
 
 export class Editor extends BaseComponent {
     input: HTMLInputElement = new CssPane({ parent: this.element }).input;
-    output: HTMLElement = new HtmlPane({ parent: this.element }).output.element;
+    output: HTMLElement = new HtmlPane({ parent: this.element }).output;
     constructor(parent: HTMLElement) {
         super({ parent, className: 'editor-wrapper' });
     }

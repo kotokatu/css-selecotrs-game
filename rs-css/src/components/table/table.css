@@ -48,3 +48,15 @@ pickle {
   border-radius: 10px;
   background-color: darkgreen;
 }
+
+.tooltip {
+  position: absolute;
+  padding: 10px;
+  width: fit-content;
+  background-color: aliceblue;
+  display: none;
+}
+
+.tooltip.visible {
+  display: block;
+}

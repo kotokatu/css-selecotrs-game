@@ -1,3 +1,3 @@
 export const state = {
-    level: 3,
+    level: 0,
 };
