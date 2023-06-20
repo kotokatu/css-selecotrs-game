@@ -1,6 +1,6 @@
 interface LevelObject {
     helpTitle?: string;
-    selectorName?: string;
+    selectorType?: string;
     doThis: string;
     selector: string;
     syntax: string;
@@ -17,10 +17,10 @@ export type elemObject = {
     child?: elemObject;
 };
 
-export const LEVELS_LIST: LevelObject[] = [
+export const LEVELS_LIST: readonly LevelObject[] = [
     {
         helpTitle: 'Select elements by their type',
-        selectorName: 'Type Selector',
+        selectorType: 'Type Selector',
         doThis: 'Select the plates',
         selector: 'plate',
         syntax: 'A',
@@ -40,11 +40,11 @@ export const LEVELS_LIST: LevelObject[] = [
         ],
     },
     {
+        helpTitle: 'Select elements by their type',
+        selectorType: 'Type Selector',
         doThis: 'Select the bento boxes',
         selector: 'bento',
         syntax: 'A',
-        helpTitle: 'Select elements by their type',
-        selectorName: 'Type Selector',
         help:
             'Selects all elements of type <strong>A</strong>. Type refers to the type of tag, so <tag>div</tag>, <tag>p</tag> and <tag>ul</tag> are all different element types.',
         examples: [

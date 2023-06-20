@@ -16,7 +16,7 @@ export class LevelsHeader extends BaseComponent {
             tag: 'h2',
             parent: this.element,
             className: 'levels-heading',
-            content: `Level ${this.level + 1} of 10`,
+            content: `Level ${this.level + 1} of ${LEVELS_LIST.length}`,
         }).element;
         this.prevLevelBtn = new Button(
             {
@@ -32,9 +32,12 @@ export class LevelsHeader extends BaseComponent {
             },
             this.setNextLevel.bind(this)
         ).element;
-        this.menuBtn = new BaseComponent<HTMLButtonElement>({
+        this.menuBtn = new Button({
             parent: this.element,
             className: 'menu-btn',
+            content: `<span class="menu-btn-line"></span>
+                      <span class="menu-btn-line"></span>
+                      <span class="menu-btn-line"></span>`,
         }).element;
     }
 
@@ -49,6 +52,6 @@ export class LevelsHeader extends BaseComponent {
     }
 
     update() {
-        this.levelsHeading.innerHTML = `Level ${this.level + 1} of 10`;
+        this.levelsHeading.innerHTML = `Level ${this.level + 1} of ${LEVELS_LIST.length}`;
     }
 }

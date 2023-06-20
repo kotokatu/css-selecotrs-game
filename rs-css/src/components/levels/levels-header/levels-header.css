@@ -1,10 +1,11 @@
 .levels-header {
   display: flex;
   align-items: center;
+  padding: 10px 20px 10px;
 }
 
 .levels-heading {
-  padding: 10px 20px 10px;
+  margin-right: 10px;
 }
 
 .prev-level-btn,
@@ -34,3 +35,16 @@
   transform: rotate(135deg);
 }
 
+.menu-btn {
+  width: 30px;
+  height: 25px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: stretch;
+  margin-left: auto;
+}
+
+.menu-btn-line {
+  border: 1px solid rgba(255, 255, 255, .4);
+}
