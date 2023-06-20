@@ -51,22 +51,30 @@ export class HtmlPane extends BaseComponent {
     createViewerElement(elemObject: elemObject): HTMLElement {
         const elem = document.createElement('div');
         let elemContent = `<${elemObject.tag}`;
+
         if (elemObject.class) {
             elemContent += ` class="${elemObject.class}"`;
         }
+
         if (elemObject.id) {
             elemContent += ` id="${elemObject.id}"`;
         }
+
         if (elemObject.attribute) {
             elemContent += ` ${elemObject.attribute[0]}="${elemObject.attribute[1]}"`;
         }
+
         elem.insertAdjacentText('afterbegin', `${elemContent}>`);
+
         if (elemObject.child) {
             elem.insertAdjacentElement('beforeend', this.createViewerElement(elemObject.child));
         }
+
         elem.insertAdjacentText('beforeend', `</${elemObject.tag}>`);
-        elem.addEventListener('mouseover', (e) => this.onMouseOver(e, '.viewer-window div'));
-        elem.addEventListener('mouseout', (e) => this.onMouseOut(e, '.viewer-window div'));
+
+        elem.addEventListener('mouseover', (e: Event): void => this.onMouseOver(e, '.viewer-window div'));
+        elem.addEventListener('mouseout', (e: Event): void => this.onMouseOut(e, '.viewer-window div'));
+
         return elem;
     }
 

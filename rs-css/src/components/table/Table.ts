@@ -32,43 +32,49 @@ export class Table extends BaseComponent<HTMLDivElement> {
 
     private createTableElement(elemObject: elemObject): HTMLElement {
         const elem = document.createElement(elemObject.tag);
+
         if (elemObject.class) {
             elem.className = elemObject.class;
         }
+
         if (elemObject.id) {
             elem.id = elemObject.id;
         }
+
         if (elemObject.attribute) {
             elem.setAttribute(elemObject.attribute[0], elemObject.attribute[1]);
         }
+
         if (elemObject.child) {
             elem.append(this.createTableElement(elemObject.child));
         }
+
         elem.addEventListener('mouseover', (e) => this.onMouseOver(e, '.table *'));
         elem.addEventListener('mouseout', (e) => this.onMouseOut(e, '.table *'));
+
         return elem;
     }
 
-    renderTableElements() {
+    private renderTableElements(): void {
         const elems = this.getTableMarkUp();
         elems.forEach((elem) => this.tableElement.append(this.createTableElement(elem)));
     }
 
-    public showTooltip(elem: HTMLElement, posLeft: number, posTop: number) {
+    public showTooltip(elem: HTMLElement, posLeft: number, posTop: number): void {
         this.tooltip.classList.add('visible');
         this.tooltip.textContent = this.getTooltipContent(elem);
         this.tooltip.style.left = `${posLeft - 10}px`;
         this.tooltip.style.top = `${posTop - 45}px`;
     }
 
-    public hideTooltip() {
+    public hideTooltip(): void {
         this.tooltip.classList.remove('visible');
         this.tooltip.textContent = '';
     }
 
-    private getTooltipContent(elem: HTMLElement) {
+    private getTooltipContent(elem: HTMLElement): string {
         return Array.from(elem.childNodes)
-            .filter((item) => item.nodeType === 3)
+            .filter((item) => item.nodeType === Node.TEXT_NODE)
             .map((item) => item.textContent)
             .join('');
     }

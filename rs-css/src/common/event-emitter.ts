@@ -2,7 +2,7 @@ interface Events {
     [key: string]: ((data: number) => void)[];
 }
 
-export class EventEmitter {
+export class LevelChangeEmitter {
     public events: Events;
     constructor(events?: Events) {
         this.events = events || {};
