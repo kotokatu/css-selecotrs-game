@@ -48,3 +48,16 @@
 .menu-btn-line {
   border: 1px solid rgba(255, 255, 255, .4);
 }
+
+.checkmark {
+  margin: 0 5px;
+  transform: rotate(45deg);
+  height: 24px;
+  width: 12px;
+  border-bottom: 4px solid #6e6e6e;
+  border-right: 4px solid #6e6e6e;
+}
+
+.levels-header.completed .checkmark {
+  border-color: chartreuse;
+}

@@ -10,15 +10,22 @@ export class LevelsHeader extends BaseComponent {
     nextLevelBtn: HTMLButtonElement;
     prevLevelBtn: HTMLButtonElement;
     menuBtn: HTMLButtonElement;
-    constructor(parent: HTMLElement, levelNum: number) {
+    levelsCompleted: number[];
+    constructor(parent: HTMLElement, levelNum: number, levelsCompleted: number[]) {
         super({ parent, className: 'levels-header' });
         this.levelNum = levelNum;
+        this.levelsCompleted = levelsCompleted;
         this.levelsHeading = new BaseComponent<HTMLHeadingElement>({
             tag: 'h2',
             parent: this.element,
             className: 'levels-heading',
             content: `Level ${this.levelNum + 1} of ${LEVELS_LIST.length}`,
         }).element;
+        new BaseComponent<HTMLSpanElement>({
+            tag: 'span',
+            parent: this.element,
+            className: 'checkmark',
+        });
         this.prevLevelBtn = new Button(
             {
                 parent: this.element,
@@ -41,7 +48,7 @@ export class LevelsHeader extends BaseComponent {
                       <span class="menu-btn-line"></span>`,
         }).element;
 
-        // emitter.subscribe('levelChange', this.update.bind(this));
+        this.markCompletedLevel();
     }
 
     setNextLevel() {
@@ -50,6 +57,12 @@ export class LevelsHeader extends BaseComponent {
 
     setPrevLevel() {
         if (this.levelNum !== 0) observer.notify(this.levelNum - 1);
+    }
+
+    markCompletedLevel() {
+        if (this.levelsCompleted.includes(this.levelNum)) {
+            this.element.classList.add('completed');
+        }
     }
 
     // update(level: number) {

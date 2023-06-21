@@ -1,15 +1,15 @@
 class Observer {
-    observers: ((data: number) => void)[];
+    observers: ((levelNum: number, isCompleted?: boolean) => void)[];
     constructor() {
         this.observers = [];
     }
 
-    subscribe(fn: (data: number) => void) {
+    subscribe(fn: (levelNum: number, isCompleted?: boolean) => void) {
         this.observers.push(fn);
     }
 
-    notify(data: number) {
-        this.observers.forEach((subscriber) => subscriber(data));
+    notify(levelNum: number, isCompleted?: boolean) {
+        this.observers.forEach((subscriber) => subscriber(levelNum, isCompleted));
     }
 }
 

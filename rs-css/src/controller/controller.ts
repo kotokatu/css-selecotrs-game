@@ -8,8 +8,8 @@ export const LEVELS_TOTAL = LEVELS_LIST.length;
 export const DEFAULT_LEVEL = 0;
 
 export class Controller {
-    levelsCompleted: number[] = [];
     levelNum: number = Number(localStorage.getItem('level')) || DEFAULT_LEVEL;
+    levelsCompleted: number[] = [];
     levelData: LevelObject = LEVELS_LIST[this.levelNum];
     appRoot: HTMLElement;
     constructor(appRoot: HTMLElement) {
@@ -20,12 +20,13 @@ export class Controller {
     public start() {
         this.appRoot.replaceChildren();
         new Playground(this.appRoot, this.levelData, this.levelNum);
-        new Levels(this.appRoot, this.levelNum, this.levelData);
+        new Levels(this.appRoot, this.levelNum, this.levelData, this.levelsCompleted);
     }
 
-    private update(levelNum: number) {
+    private update(levelNum: number, levelCompleted?: boolean) {
+        if (levelCompleted && !this.levelsCompleted.includes(this.levelNum)) this.levelsCompleted.push(this.levelNum);
         this.levelNum = levelNum;
-        this.levelData = LEVELS_LIST[levelNum];
+        this.levelData = LEVELS_LIST[this.levelNum];
         this.start();
     }
 }

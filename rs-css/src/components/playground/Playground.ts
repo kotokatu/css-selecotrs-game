@@ -27,7 +27,7 @@ export class Playground extends BaseComponent {
             this.levelData,
             this.onMouseOver.bind(this),
             this.onMouseOut.bind(this),
-            this.setNextLevel.bind(this)
+            this.completeLevel.bind(this)
         );
         this.editor = new Editor(
             this.element,
@@ -96,7 +96,7 @@ export class Playground extends BaseComponent {
         this.editor.addEditorAnimation();
     }
 
-    public setNextLevel() {
-        if (this.levelNum < LEVELS_TOTAL - 1) observer.notify(this.levelNum + 1);
+    public completeLevel() {
+        observer.notify(this.levelNum < LEVELS_TOTAL - 1 ? this.levelNum + 1 : this.levelNum, true);
     }
 }

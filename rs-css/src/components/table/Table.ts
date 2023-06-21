@@ -20,7 +20,7 @@ export class Table extends BaseComponent<HTMLDivElement> {
         this.onMouseOut = onMouseOut;
         this.levelData = levelData;
         this.tableElement = new BaseComponent<HTMLDivElement>({ parent: this.element, className: 'table' }).element;
-        this.tableElement.addEventListener('animationend', onAnimationEnd);
+        this.tableElement.addEventListener('animationend', onAnimationEnd, { once: true });
         this.tooltip = new BaseComponent<HTMLSpanElement>({
             tag: 'span',
             parent: this.element,
