@@ -35,24 +35,32 @@ export class Playground extends BaseComponent {
 
     public onMouseOver(e: MouseEvent): void {
         if (e.target instanceof HTMLElement) {
-            const { tableElement, viewerElement } = this.getElements(e.target) || {};
+            const elem = e.target.closest('.viewer-window div') || e.target;
 
-            if (tableElement && viewerElement) {
-                tableElement.classList.add('hover');
-                viewerElement.classList.add('hover');
-                this.table.showTooltip(viewerElement, tableElement.offsetLeft, tableElement.offsetTop);
+            if (elem instanceof HTMLElement) {
+                const { tableElement, viewerElement } = this.getElements(elem) || {};
+
+                if (tableElement && viewerElement) {
+                    tableElement.classList.add('hover');
+                    viewerElement.classList.add('hover');
+                    this.table.showTooltip(viewerElement, tableElement.offsetLeft, tableElement.offsetTop);
+                }
             }
         }
     }
 
     public onMouseOut(e: MouseEvent): void {
         if (e.target instanceof HTMLElement) {
-            const { tableElement, viewerElement } = this.getElements(e.target) || {};
+            const elem = e.target.closest('.viewer-window div') || e.target;
 
-            if (tableElement && viewerElement) {
-                tableElement.classList.remove('hover');
-                viewerElement.classList.remove('hover');
-                this.table.hideTooltip();
+            if (elem instanceof HTMLElement) {
+                const { tableElement, viewerElement } = this.getElements(elem) || {};
+
+                if (tableElement && viewerElement) {
+                    tableElement.classList.remove('hover');
+                    viewerElement.classList.remove('hover');
+                    this.table.hideTooltip();
+                }
             }
         }
     }

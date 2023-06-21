@@ -75,7 +75,7 @@
   padding-left: 20px;
 }
 
-.viewer-window div.hover {
+.viewer-window div.hover span {
   color: rgba(255, 255, 255, .9);
 }
 
