@@ -3,7 +3,7 @@ import { Table } from '../table/table';
 import { Editor } from '../editor/editor';
 import { observer } from '../../common/observer';
 import { LevelObject } from '../../data/levels-list';
-import { LEVELS_TOTAL } from '../../controller/controller';
+import { LEVELS_TOTAL } from '../../app';
 import './playground.css';
 
 export class Playground extends BaseComponent {
