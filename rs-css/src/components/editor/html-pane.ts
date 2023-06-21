@@ -4,10 +4,11 @@ import { LevelObject } from '../../data/levels-list';
 import { elemObject } from '../../data/levels-list';
 
 export class HtmlPane extends BaseComponent {
-    public output: HTMLElement;
+    public viewer: HTMLElement;
+    public viewerElements: HTMLElement[];
     onMouseOver: (e: MouseEvent, selector: string) => void;
     onMouseOut: (e: MouseEvent, selector: string) => void;
-    levelData: LevelObject;
+    private levelData: LevelObject;
     constructor(
         parent: HTMLElement,
         levelData: LevelObject,
@@ -15,9 +16,10 @@ export class HtmlPane extends BaseComponent {
         onMouseOut: (e: MouseEvent, selector: string) => void
     ) {
         super({ parent, className: 'pane viewer-pane' });
+        this.levelData = levelData;
+        this.viewerElements = [];
         this.onMouseOver = onMouseOver;
         this.onMouseOut = onMouseOut;
-        this.levelData = levelData;
         new BaseComponent({
             parent: this.element,
             className: 'pane-header',
@@ -28,7 +30,7 @@ export class HtmlPane extends BaseComponent {
             className: 'line-numbers',
             content: '1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20',
         });
-        this.output = new BaseComponent({
+        this.viewer = new BaseComponent({
             parent: this.element,
             className: 'viewer-window',
             // content: `&lt;div class="table"&gt;${this.getViewerMarkup()}&lt;/div&gt;`, //TODO
@@ -76,14 +78,14 @@ export class HtmlPane extends BaseComponent {
 
         elem.addEventListener('mouseover', (e: MouseEvent): void => this.onMouseOver(e, '.viewer-window div'));
         elem.addEventListener('mouseout', (e: MouseEvent): void => this.onMouseOut(e, '.viewer-window div'));
-
+        this.viewerElements.push(elem);
         return elem;
     }
 
     renderViewerElements() {
         const elems = this.getViewerMarkup();
-        this.output.insertAdjacentText('afterbegin', '<div class="table">');
-        elems.forEach((elem) => this.output.append(this.createViewerElement(elem)));
-        this.output.insertAdjacentText('beforeend', '</div>');
+        this.viewer.insertAdjacentText('afterbegin', '<div class="table">');
+        elems.forEach((elem) => this.viewer.append(this.createViewerElement(elem)));
+        this.viewer.insertAdjacentText('beforeend', '</div>');
     }
 }

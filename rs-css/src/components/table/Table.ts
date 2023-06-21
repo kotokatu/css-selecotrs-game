@@ -3,9 +3,10 @@ import { elemObject, LevelObject } from '../../data/levels-list';
 import './table.css';
 
 export class Table extends BaseComponent<HTMLDivElement> {
-    tableElement: HTMLElement;
-    tooltip: HTMLElement;
-    levelData: LevelObject;
+    public tableContainer: HTMLElement;
+    public tableElements: HTMLElement[];
+    private tooltip: HTMLElement;
+    private levelData: LevelObject;
     onMouseOver: (e: MouseEvent, selector: string) => void;
     onMouseOut: (e: MouseEvent, selector: string) => void;
     constructor(
@@ -19,18 +20,19 @@ export class Table extends BaseComponent<HTMLDivElement> {
         this.onMouseOver = onMouseOver;
         this.onMouseOut = onMouseOut;
         this.levelData = levelData;
-        this.tableElement = new BaseComponent<HTMLDivElement>({ parent: this.element, className: 'table' }).element;
-        this.tableElement.addEventListener('animationend', onAnimationEnd, { once: true });
+        this.tableElements = [];
+        this.tableContainer = new BaseComponent<HTMLDivElement>({ parent: this.element, className: 'table' }).element;
         this.tooltip = new BaseComponent<HTMLSpanElement>({
             tag: 'span',
             parent: this.element,
             className: 'tooltip',
         }).element;
 
+        this.tableContainer.addEventListener('animationend', onAnimationEnd, { once: true });
         this.renderTableElements();
     }
 
-    private getTableMarkUp(): elemObject[] {
+    private getMarkUp(): elemObject[] {
         return this.levelData.markupElements;
     }
 
@@ -55,13 +57,14 @@ export class Table extends BaseComponent<HTMLDivElement> {
 
         elem.addEventListener('mouseover', (e: MouseEvent) => this.onMouseOver(e, '.table *'));
         elem.addEventListener('mouseout', (e: MouseEvent) => this.onMouseOut(e, '.table *'));
+        this.tableElements.push(elem);
 
         return elem;
     }
 
     private renderTableElements(): void {
-        const elems = this.getTableMarkUp();
-        elems.forEach((elem) => this.tableElement.append(this.createTableElement(elem)));
+        const elems = this.getMarkUp();
+        elems.forEach((elem) => this.tableContainer.append(this.createTableElement(elem)));
     }
 
     public showTooltip(elem: HTMLElement, posLeft: number, posTop: number): void {

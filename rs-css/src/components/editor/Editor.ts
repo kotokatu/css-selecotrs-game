@@ -6,7 +6,7 @@ import './editor.css';
 
 export class Editor extends BaseComponent {
     input: HTMLInputElement;
-    output: HTMLElement;
+    viewer: HtmlPane;
     constructor(
         parent: HTMLElement,
         levelData: LevelObject,
@@ -17,7 +17,7 @@ export class Editor extends BaseComponent {
         super({ parent, className: 'editor-wrapper' });
         this.input = new CssPane(this.element).input;
         this.input.addEventListener('keydown', onInput);
-        this.output = new HtmlPane(this.element, levelData, onMouseOver, onMouseOut).output;
+        this.viewer = new HtmlPane(this.element, levelData, onMouseOver, onMouseOut);
         this.element.addEventListener('animationend', this.removeEditorAnimation.bind(this));
     }
 
