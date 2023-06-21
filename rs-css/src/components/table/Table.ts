@@ -1,33 +1,37 @@
 import { BaseComponent } from '../../common/base-component';
-import { state } from '../../controller/state';
-import { LEVELS_LIST } from '../../data/levels-list';
-import { elemObject } from '../../data/levels-list';
+import { elemObject, LevelObject } from '../../data/levels-list';
 import './table.css';
 
 export class Table extends BaseComponent<HTMLDivElement> {
     tableElement: HTMLElement;
     tooltip: HTMLElement;
-    onMouseOver: (e: Event, selector: string) => void;
-    onMouseOut: (e: Event, selector: string) => void;
+    levelData: LevelObject;
+    onMouseOver: (e: MouseEvent, selector: string) => void;
+    onMouseOut: (e: MouseEvent, selector: string) => void;
     constructor(
         parent: HTMLElement,
-        onMouseOver: (e: Event, selector: string) => void,
-        onMouseOut: (e: Event, selector: string) => void
+        levelData: LevelObject,
+        onMouseOver: (e: MouseEvent, selector: string) => void,
+        onMouseOut: (e: MouseEvent, selector: string) => void,
+        onAnimationEnd: () => void
     ) {
         super({ parent, className: 'table-wrapper' });
         this.onMouseOver = onMouseOver;
         this.onMouseOut = onMouseOut;
+        this.levelData = levelData;
         this.tableElement = new BaseComponent<HTMLDivElement>({ parent: this.element, className: 'table' }).element;
+        this.tableElement.addEventListener('animationend', onAnimationEnd);
         this.tooltip = new BaseComponent<HTMLSpanElement>({
             tag: 'span',
             parent: this.element,
             className: 'tooltip',
         }).element;
+
         this.renderTableElements();
     }
 
     private getTableMarkUp(): elemObject[] {
-        return LEVELS_LIST[state.level].markupElements;
+        return this.levelData.markupElements;
     }
 
     private createTableElement(elemObject: elemObject): HTMLElement {
@@ -49,8 +53,8 @@ export class Table extends BaseComponent<HTMLDivElement> {
             elem.append(this.createTableElement(elemObject.child));
         }
 
-        elem.addEventListener('mouseover', (e) => this.onMouseOver(e, '.table *'));
-        elem.addEventListener('mouseout', (e) => this.onMouseOut(e, '.table *'));
+        elem.addEventListener('mouseover', (e: MouseEvent) => this.onMouseOver(e, '.table *'));
+        elem.addEventListener('mouseout', (e: MouseEvent) => this.onMouseOut(e, '.table *'));
 
         return elem;
     }
@@ -77,5 +81,9 @@ export class Table extends BaseComponent<HTMLDivElement> {
             .filter((item) => item.nodeType === Node.TEXT_NODE)
             .map((item) => item.textContent)
             .join('');
+    }
+
+    public animateElements(elements: HTMLElement[]) {
+        elements.forEach((elem) => elem.classList.add('bounceOut'));
     }
 }

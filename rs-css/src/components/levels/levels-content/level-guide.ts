@@ -1,39 +1,39 @@
 import { BaseComponent } from '../../../common/base-component';
-import { LEVELS_LIST } from '../../../data/levels-list';
-import { state } from '../../../controller/state';
+import { LevelObject } from '../../../data/levels-list';
+// import { state } from '../../../controller/state';
 import './level-guide.css';
 
 export class LevelGuide extends BaseComponent {
-    constructor(parent: HTMLElement) {
+    constructor(parent: HTMLElement, levelData: LevelObject) {
         super({ parent, className: 'level-content' });
 
-        this.render();
+        this.render(levelData);
     }
 
-    private render() {
+    private render(levelData: LevelObject) {
         new BaseComponent<HTMLHeadingElement>({
             tag: 'h3',
             parent: this.element,
             className: 'selector-type',
-            content: LEVELS_LIST[state.level].selectorType,
+            content: levelData.selectorType,
         });
         new BaseComponent({
             tag: 'p',
             parent: this.element,
             className: 'instruction',
-            content: LEVELS_LIST[state.level].helpTitle,
+            content: levelData.helpTitle,
         });
         new BaseComponent({
             tag: 'p',
             parent: this.element,
             className: 'syntax',
-            content: LEVELS_LIST[state.level].syntax,
+            content: levelData.syntax,
         });
         new BaseComponent({
             tag: 'p',
             parent: this.element,
             className: 'hint',
-            content: LEVELS_LIST[state.level].help,
+            content: levelData.help,
         });
         new BaseComponent({
             tag: 'h4',
@@ -45,13 +45,13 @@ export class LevelGuide extends BaseComponent {
             parent: this.element,
             className: 'examples',
         });
-        LEVELS_LIST[state.level].examples?.forEach((item) => {
+        levelData.examples?.forEach((item) => {
             new BaseComponent({ tag: 'p', parent: examples.element, className: 'example', content: item });
         });
     }
 
-    update() {
+    update(levelData: LevelObject) {
         this.element.replaceChildren();
-        this.render();
+        this.render(levelData);
     }
 }

@@ -61,3 +61,23 @@ pickle {
 .tooltip.visible {
   display: block;
 }
+
+.table .bounceOut {
+  animation-name: bounceOut;
+  animation-duration: 1s;
+  animation-fill-mode: both;
+  }
+
+  @keyframes bounceOut {
+  20% {
+  transform: translate3d(0, -10px, 0);
+  }
+  40%, 45% {
+  opacity: 1;
+  transform: translate3d(0, 20px, 0);
+  }
+  100% {
+  opacity: 0;
+  transform: translate3d(0, -2000px, 0);
+  }
+  }

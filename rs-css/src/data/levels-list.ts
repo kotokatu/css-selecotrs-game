@@ -1,4 +1,4 @@
-type LevelObject = {
+export type LevelObject = {
     helpTitle?: string;
     selectorType?: string;
     doThis: string;
@@ -24,12 +24,12 @@ export const LEVELS_LIST: readonly LevelObject[] = [
         doThis: 'Select the plates',
         selector: 'plate',
         syntax: 'A',
-        help: `Selects all elements of type <strong>A</strong>. Type refers to the type of tag,
+        help: `Selects all elements of type <span class="highlight-dark">A</span>. Type refers to the type of tag,
             so <span class="highlight-dark">&lt;div&gt;</span>, <span class="highlight-dark">&lt;p&gt;</span> and
             <span class="highlight-dark">&lt;ul&gt;</span> are all different element types.`,
         examples: [
-            '<span class="highlight-dark">div</span> selects all <span class="highlight-dark">&lt;div&gt;</span> elements.',
-            '<span class="highlight-dark">p</span> selects all <span class="highlight-dark">&lt;p&gt;</span> elements.',
+            '<span class="highlight-dark">div</span> selects all <span class="highlight-dark"><span class="highlight-dark">&lt;div&gt;</span></span> elements.',
+            '<span class="highlight-dark">p</span> selects all <span class="highlight-dark"><span class="highlight-dark">&lt;p&gt;</span></span> elements.',
         ],
         markupElements: [
             {
@@ -47,27 +47,27 @@ export const LEVELS_LIST: readonly LevelObject[] = [
         selector: 'bento',
         syntax: 'A',
         help:
-            'Selects all elements of type <strong>A</strong>. Type refers to the type of tag, so &lt;div&gt;, &lt;p&gt; and &lt;ul&gt; are all different element types.',
+            'Selects all elements of type <span class="highlight-dark">A</span>. Type refers to the type of tag, so <span class="highlight-dark">&lt;div&gt;</span>, <span class="highlight-dark">&lt;p&gt;</span> and <span class="highlight-dark">&lt;ul&gt;</span> are all different element types.',
         examples: [
-            '<strong>div</strong> selects all &lt;div&gt; elements.',
-            '<strong>p</strong> selects all &lt;p&gt; elements.',
+            '<span class="highlight-dark">div</span> selects all <span class="highlight-dark">&lt;div&gt;</span> elements.',
+            '<span class="highlight-dark">p</span> selects all <span class="highlight-dark">&lt;p&gt;</span> elements.',
         ],
         markupElements: [{ tag: 'bento' }, { tag: 'plate' }, { tag: 'bento' }],
     },
-    // {
-    //     doThis: 'Select the fancy plate',
-    //     selector: '#fancy',
-    //     selectorName: 'ID Selector',
-    //     helpTitle: 'Select elements with an ID',
-    //     syntax: '#id',
-    //     help:
-    //         'Selects the element with a specific <strong>id</strong>. You can also combine the ID selector with the type selector.',
-    //     examples: [
-    //         '<strong>#cool</strong> selects any element with <strong>id="cool"</strong>',
-    //         '<strong>ul#long</strong> selects &lt;ul id="long"&gt;',
-    //     ],
-    //     markupElements: ['<plate id="fancy"></plate>', '<plate></plate>', '<bento></bento>'],
-    // },
+    {
+        selectorType: 'ID Selector',
+        helpTitle: 'Select elements with an ID',
+        doThis: 'Select the fancy plate',
+        selector: '#fancy',
+        syntax: '#id',
+        help:
+            'Selects the element with a specific <span class="highlight-dark">id</span>. You can also combine the ID selector with the type selector.',
+        examples: [
+            '<span class="highlight-dark">#cool</span> selects any element with <span class="highlight-dark">id="cool"</span>',
+            '<span class="highlight-dark">ul#long</span> selects <span class="highlight-dark">&lt;ul id="long"&gt;</span>',
+        ],
+        markupElements: [{ tag: 'plate', id: 'fancy' }, { tag: 'plate' }, { tag: 'bento' }],
+    },
     // {
     //     helpTitle: 'Select an element inside another element',
     //     selectorName: 'Descendant Selector',
@@ -75,10 +75,10 @@ export const LEVELS_LIST: readonly LevelObject[] = [
     //     selector: 'plate apple',
     //     syntax: 'A&nbsp;&nbsp;B',
     //     help:
-    //         'Selects all <strong>B</strong> inside of <strong>A</strong>. <strong>B</strong> is called a descendant because it is inside of another element.',
+    //         'Selects all <span class="highlight-dark">B</span> inside of <span class="highlight-dark">A</span>. <span class="highlight-dark">B</span> is called a descendant because it is inside of another element.',
     //     examples: [
-    //         '<strong>p&nbsp;&nbsp;strong</strong> selects all &lt;strong&gt; elements that are inside of any &lt;p&gt;',
-    //         '<strong>#fancy&nbsp;&nbsp;span</strong> selects any &lt;span&gt; elements that are inside of the element with <strong>id="fancy"</strong>',
+    //         '<span class="highlight-dark">p&nbsp;&nbsp;strong</span> selects all <span class="highlight-dark">&lt;strong&gt;</span> elements that are inside of any <span class="highlight-dark">&lt;p&gt;</span>',
+    //         '<span class="highlight-dark">#fancy&nbsp;&nbsp;span</span> selects any <span class="highlight-dark">&lt;span&gt;</span> elements that are inside of the element with <span class="highlight-dark">id="fancy"</span>',
     //     ],
     //     markupElements: ['<bento></bento>', '<plate>', '<apple></apple>', '</plate>', '<apple></apple>'],
     // },
@@ -89,7 +89,7 @@ export const LEVELS_LIST: readonly LevelObject[] = [
     //     syntax: '#id&nbsp;&nbsp;A',
     //     help: 'You can combine any selector with the descendent selector.',
     //     examples: [
-    //         '<strong>#cool&nbsp;span</strong> selects all &lt;span&gt; elements that are inside of elements with <strong>id="cool"</strong>',
+    //         '<span class="highlight-dark">#cool&nbsp;span</span> selects all <span class="highlight-dark">&lt;span&gt;</span> elements that are inside of elements with <span class="highlight-dark">id="cool"</span>',
     //     ],
     //     markupElements: `
     // <bento>
@@ -111,7 +111,7 @@ export const LEVELS_LIST: readonly LevelObject[] = [
     //     syntax: '.classname',
     //     help:
     //         'The class selector selects all elements with that class attribute. Elements can only have one ID, but many classes.',
-    //     examples: ['<strong>.neato</strong> selects all elements with <strong>class="neato"</strong>'],
+    //     examples: ['<span class="highlight-dark">.neato</span> selects all elements with <span class="highlight-dark">class="neato"</span>'],
     //     markupElements: `
     // <apple></apple>
     // <apple class="small"></apple>
@@ -128,8 +128,8 @@ export const LEVELS_LIST: readonly LevelObject[] = [
     //     syntax: 'A.className',
     //     help: 'You can combine the class selector with other selectors, like the type selector.',
     //     examples: [
-    //         '<strong>ul.important</strong> selects all &lt;ul&gt; elements that have <strong>class="important"</strong>',
-    //         '<strong>#big.wide</strong> selects all elements with <strong>id="big"</strong> that also have <strong>class="wide"</strong>',
+    //         '<span class="highlight-dark">ul.important</span> selects all <span class="highlight-dark">&lt;ul&gt;</span> elements that have <span class="highlight-dark">class="important"</span>',
+    //         '<span class="highlight-dark">#big.wide</span> selects all elements with <span class="highlight-dark">id="big"</span> that also have <span class="highlight-dark">class="wide"</span>',
     //     ],
     //     markupElements: `
     // <apple></apple>
@@ -173,10 +173,10 @@ export const LEVELS_LIST: readonly LevelObject[] = [
     //     helpTitle: 'Combine, selectors, with... commas!',
     //     syntax: 'A, B',
     //     help:
-    //         'Thanks to Shatner technology, this selects all <strong>A</strong> and <strong>B</strong> elements. You can combine any selectors this way, and you can specify more than two.',
+    //         'Thanks to Shatner technology, this selects all <span class="highlight-dark">A</span> and <span class="highlight-dark">B</span> elements. You can combine any selectors this way, and you can specify more than two.',
     //     examples: [
-    //         '<strong>p, .fun</strong> selects all &lt;p&gt; elements as well as all elements with <strong>class="fun"</strong>',
-    //         '<strong>a, p, div</strong> selects all &lt;a&gt;, &lt;p&gt; and &lt;div&gt; elements',
+    //         '<span class="highlight-dark">p, .fun</span> selects all <span class="highlight-dark">&lt;p&gt;</span> elements as well as all elements with <span class="highlight-dark">class="fun"</span>',
+    //         '<span class="highlight-dark">a, p, div</span> selects all <span class="highlight-dark">&lt;a&gt;</span>, <span class="highlight-dark">&lt;p&gt;</span> and <span class="highlight-dark">&lt;div&gt;</span> elements',
     //     ],
     //     markupElements: `
     // <pickle class="small"/>
@@ -201,7 +201,7 @@ export const LEVELS_LIST: readonly LevelObject[] = [
     //     helpTitle: 'You can select everything!',
     //     syntax: '*',
     //     help: 'You can select all elements with the universal selector! ',
-    //     examples: ['<strong>p *</strong> selects any element inside all &lt;p&gt; elements.'],
+    //     examples: ['<span class="highlight-dark">p *</span> selects any element inside all <span class="highlight-dark">&lt;p&gt;</span> elements.'],
     //     markupElements: `
     // <apple/>
     // <plate>
@@ -219,10 +219,10 @@ export const LEVELS_LIST: readonly LevelObject[] = [
     //     selector: 'plate *',
     //     syntax: 'A&nbsp;&nbsp;*',
     //     helpTitle: 'Combine the Universal Selector',
-    //     help: 'This selects all elements inside of <strong>A</strong>.',
+    //     help: 'This selects all elements inside of <span class="highlight-dark">A</span>.',
     //     examples: [
-    //         '<strong>p *</strong> selects every element inside all &lt;p&gt; elements.',
-    //         '<strong>ul.fancy *</strong> selects every element inside all &lt;ul class="fancy"&gt; elements.',
+    //         '<span class="highlight-dark">p *</span> selects every element inside all <span class="highlight-dark">&lt;p&gt;</span> elements.',
+    //         '<span class="highlight-dark">ul.fancy *</span> selects every element inside all <span class="highlight-dark">&lt;ul class="fancy"&gt;</span> elements.',
     //     ],
     //     markupElements: `
     // <plate id="fancy">
@@ -243,10 +243,10 @@ export const LEVELS_LIST: readonly LevelObject[] = [
     //     selectorName: 'Adjacent Sibling Selector',
     //     syntax: 'A + B',
     //     help:
-    //         "This selects all <strong>B</strong> elements that directly follow <strong>A</strong>. Elements that follow one another are called siblings. They're on the same level, or depth. <br/><br/>In the HTML markup for this level, elements that have the same indentation are siblings.",
+    //         "This selects all <span class="highlight-dark">B</span> elements that directly follow <span class="highlight-dark">A</span>. Elements that follow one another are called siblings. They're on the same level, or depth. <br/><br/>In the HTML markup for this level, elements that have the same indentation are siblings.",
     //     examples: [
-    //         '<strong>p + .intro</strong> selects every element with <strong>class="intro"</strong> that directly follows a &lt;p&gt;',
-    //         '<strong>div + a</strong> selects every &lt;a&gt; element that directly follows a &lt;div&gt;',
+    //         '<span class="highlight-dark">p + .intro</span> selects every element with <span class="highlight-dark">class="intro"</span> that directly follows a <span class="highlight-dark">&lt;p&gt;</span>',
+    //         '<span class="highlight-dark">div + a</span> selects every <span class="highlight-dark">&lt;a&gt;</span> element that directly follows a <span class="highlight-dark">&lt;div&gt;</span>',
     //     ],
     //     markupElements: `
     // <bento>
@@ -268,7 +268,7 @@ export const LEVELS_LIST: readonly LevelObject[] = [
     //     selector: 'bento ~ pickle',
     //     help:
     //         'You can select all siblings of an element that follow it. This is like the Adjacent Selector (A + B) except it gets all of the following elements instead of one.',
-    //     examples: ['<strong>A ~ B</strong> selects all <strong>B</strong> that follow a <strong>A</strong>'],
+    //     examples: ['<span class="highlight-dark">A ~ B</span> selects all <span class="highlight-dark">B</span> that follow a <span class="highlight-dark">A</span>'],
     //     markupElements: `
     // <pickle/>
     // <bento>
@@ -293,7 +293,7 @@ export const LEVELS_LIST: readonly LevelObject[] = [
     //     help:
     //         'You can select elements that are direct children of other elements. A child element is any element that is nested directly in another element. <br><br>Elements that are nested deeper than that are called descendant elements.',
     //     examples: [
-    //         '<strong>A > B</strong> selects all <strong>B</strong> that are a direct children <strong>A</strong>',
+    //         '<span class="highlight-dark">A > B</span> selects all <span class="highlight-dark">B</span> that are a direct children <span class="highlight-dark">A</span>',
     //     ],
     //     markupElements: `
     // <plate>
@@ -319,9 +319,9 @@ export const LEVELS_LIST: readonly LevelObject[] = [
     //     help:
     //         'You can select the first child element. A child element is any element that is directly nested in another element. You can combine this pseudo-selector with other selectors.',
     //     examples: [
-    //         '<strong>:first-child</strong> selects all first child elements.',
-    //         '<strong>p:first-child</strong> selects all first child &lt;p&gt; elements.',
-    //         '<strong>div p:first-child</strong> selects all first child &lt;p&gt; elements that are in a &lt;div&gt;.',
+    //         '<span class="highlight-dark">:first-child</span> selects all first child elements.',
+    //         '<span class="highlight-dark">p:first-child</span> selects all first child <span class="highlight-dark">&lt;p&gt;</span> elements.',
+    //         '<span class="highlight-dark">div p:first-child</span> selects all first child <span class="highlight-dark">&lt;p&gt;</span> elements that are in a <span class="highlight-dark">&lt;div&gt;</span>.',
     //     ],
     //     markupElements: `
     // <bento/>
@@ -342,8 +342,8 @@ export const LEVELS_LIST: readonly LevelObject[] = [
     //     syntax: ':only-child',
     //     help: 'You can select any element that is the only element inside of another one.',
     //     examples: [
-    //         '<strong>span:only-child</strong> selects the &lt;span&gt; elements that are the only child of some other element.',
-    //         '<strong>ul li:only-child</strong> selects the only &lt;li&gt; element that are in a &lt;ul&gt;.',
+    //         '<span class="highlight-dark">span:only-child</span> selects the <span class="highlight-dark">&lt;span&gt;</span> elements that are the only child of some other element.',
+    //         '<span class="highlight-dark">ul li:only-child</span> selects the only <span class="highlight-dark">&lt;li&gt;</span> element that are in a <span class="highlight-dark">&lt;ul&gt;</span>.',
     //     ],
     //     markupElements: `
     // <plate>
@@ -371,9 +371,9 @@ export const LEVELS_LIST: readonly LevelObject[] = [
     //     help:
     //         'You can use this selector to select an element that is the last child element inside of another element. <br><br>Pro Tip &rarr; In cases where there is only one element, that element counts as the first-child, only-child and last-child!',
     //     examples: [
-    //         '<strong>:last-child</strong> selects all last-child elements.',
-    //         '<strong>span:last-child</strong> selects all last-child &lt;span&gt; elements.',
-    //         '<strong>ul li:last-child</strong> selects the last &lt;li&gt; elements inside of any &lt;ul&gt;.',
+    //         '<span class="highlight-dark">:last-child</span> selects all last-child elements.',
+    //         '<span class="highlight-dark">span:last-child</span> selects all last-child <span class="highlight-dark">&lt;span&gt;</span> elements.',
+    //         '<span class="highlight-dark">ul li:last-child</span> selects the last <span class="highlight-dark">&lt;li&gt;</span> elements inside of any <span class="highlight-dark">&lt;ul&gt;</span>.',
     //     ],
     //     markupElements: `
     // <plate id="fancy">
@@ -392,10 +392,10 @@ export const LEVELS_LIST: readonly LevelObject[] = [
     //     doThis: 'Select the 3rd plate',
     //     selector: ':nth-child(3)',
     //     syntax: ':nth-child(A)',
-    //     help: 'Selects the <strong>nth</strong> (Ex: 1st, 3rd, 12th etc.) child element in another element.',
+    //     help: 'Selects the <span class="highlight-dark">nth</span> (Ex: 1st, 3rd, 12th etc.) child element in another element.',
     //     examples: [
-    //         '<strong>:nth-child(8)</strong> selects every element that is the 8th child of another element.',
-    //         '<strong>div p:nth-child(2)</strong> selects the second <strong>p</strong> in every <strong>div</strong>',
+    //         '<span class="highlight-dark">:nth-child(8)</span> selects every element that is the 8th child of another element.',
+    //         '<span class="highlight-dark">div p:nth-child(2)</span> selects the second <span class="highlight-dark">p</span> in every <span class="highlight-dark">div</span>',
     //     ],
     //     markupElements: `
     // <plate/>
@@ -411,7 +411,7 @@ export const LEVELS_LIST: readonly LevelObject[] = [
     //     selector: 'bento:nth-last-child(3)',
     //     syntax: ':nth-last-child(A)',
     //     help: 'Selects the children from the bottom of the parent. This is like nth-child, but counting from the back!',
-    //     examples: ['<strong>:nth-last-child(2)</strong> selects all second-to-last child elements.'],
+    //     examples: ['<span class="highlight-dark">:nth-last-child(2)</span> selects all second-to-last child elements.'],
     //     markupElements: `
     // <plate/>
     // <bento/>
@@ -430,7 +430,7 @@ export const LEVELS_LIST: readonly LevelObject[] = [
     //     selector: 'apple:first-of-type',
     //     syntax: ':first-of-type',
     //     help: 'Selects the first element of that type within another element.',
-    //     examples: ['<strong>span:first-of-type</strong> selects the first &lt;span&gt; in any element.'],
+    //     examples: ['<span class="highlight-dark">span:first-of-type</span> selects the first <span class="highlight-dark">&lt;span&gt;</span> in any element.'],
     //     markupElements: `
     // <orange class="small"/>
     // <apple/>
@@ -451,8 +451,8 @@ export const LEVELS_LIST: readonly LevelObject[] = [
     //     help:
     //         'Selects a specific element based on its type and order in another element - or even or odd instances of that element.',
     //     examples: [
-    //         '<strong>div:nth-of-type(2)</strong> selects the second instance of a div.',
-    //         '<strong>.example:nth-of-type(odd)</strong> selects all odd instances of a the example class.',
+    //         '<span class="highlight-dark">div:nth-of-type(2)</span> selects the second instance of a div.',
+    //         '<span class="highlight-dark">.example:nth-of-type(odd)</span> selects all odd instances of a the example class.',
     //     ],
     //     markupElements: `
     // <plate/>
@@ -471,7 +471,7 @@ export const LEVELS_LIST: readonly LevelObject[] = [
     //     help:
     //         'The nth-of-type formula selects every nth element, starting the count at a specific instance of that element.',
     //     examples: [
-    //         '<strong>span:nth-of-type(6n+2)</strong> selects every 6th instance of a &lt;span&gt;, starting from (and including) the second instance.',
+    //         '<span class="highlight-dark">span:nth-of-type(6n+2)</span> selects every 6th instance of a <span class="highlight-dark">&lt;span&gt;</span>, starting from (and including) the second instance.',
     //     ],
     //     markupElements: `
     // <plate/>
@@ -496,7 +496,7 @@ export const LEVELS_LIST: readonly LevelObject[] = [
     //     doThis: 'Select the apple on the middle plate',
     //     help: 'Selects the only element of its type within another element.',
     //     examples: [
-    //         '<strong>p span:only-of-type</strong> selects a &lt;span&gt; within any &lt;p&gt; if it is the only &lt;span&gt; in there.',
+    //         '<span class="highlight-dark">p span:only-of-type</span> selects a <span class="highlight-dark">&lt;span&gt;</span> within any <span class="highlight-dark">&lt;p&gt;</span> if it is the only <span class="highlight-dark">&lt;span&gt;</span> in there.',
     //     ],
     //     markupElements: `
     // <plate id="fancy">
@@ -518,10 +518,10 @@ export const LEVELS_LIST: readonly LevelObject[] = [
     //     selector: '.small:last-of-type',
     //     syntax: ':last-of-type',
     //     help:
-    //         'Selects each last element of that type within another element. Remember type refers the kind of tag, so &lt;p&gt; and &lt;span&gt; are different types. <br><br> I wonder if this is how the last dinosaur was selected before it went extinct.',
+    //         'Selects each last element of that type within another element. Remember type refers the kind of tag, so <span class="highlight-dark">&lt;p&gt;</span> and <span class="highlight-dark">&lt;span&gt;</span> are different types. <br><br> I wonder if this is how the last dinosaur was selected before it went extinct.',
     //     examples: [
-    //         '<strong>div:last-of-type</strong> selects the last &lt;div&gt; in every element.',
-    //         '<strong>p span:last-of-type</strong> selects the last &lt;span&gt; in every &lt;p&gt;.',
+    //         '<span class="highlight-dark">div:last-of-type</span> selects the last <span class="highlight-dark">&lt;div&gt;</span> in every element.',
+    //         '<span class="highlight-dark">p span:last-of-type</span> selects the last <span class="highlight-dark">&lt;span&gt;</span> in every <span class="highlight-dark">&lt;p&gt;</span>.',
     //     ],
     //     markupElements: `
     // <orange class="small"/>
@@ -539,7 +539,7 @@ export const LEVELS_LIST: readonly LevelObject[] = [
     //     selector: 'bento:empty',
     //     syntax: ':empty',
     //     help: "Selects elements that don't have any other elements inside of them.",
-    //     examples: ['<strong>div:empty</strong> selects all empty &lt;div&gt; elements.'],
+    //     examples: ['<span class="highlight-dark">div:empty</span> selects all empty <span class="highlight-dark">&lt;div&gt;</span> elements.'],
     //     markupElements: `
     // <bento/>
     // <bento>
@@ -554,11 +554,11 @@ export const LEVELS_LIST: readonly LevelObject[] = [
     //     doThis: 'Select the big apples',
     //     selector: 'apple:not(.small)',
     //     syntax: ':not(X)',
-    //     help: 'You can use this to select all elements that do not match selector <strong>"X"</strong>.',
+    //     help: 'You can use this to select all elements that do not match selector <span class="highlight-dark">"X"</span>.',
     //     examples: [
-    //         '<strong>:not(#fancy)</strong> selects all elements that do not have <strong>id="fancy"</strong>.',
-    //         '<strong>div:not(:first-child)</strong> selects every &lt;div&gt; that is not a first child.',
-    //         '<strong>:not(.big, .medium)</strong> selects all elements that do not have <strong>class="big"</strong> or <strong>class="medium"</strong>.',
+    //         '<span class="highlight-dark">:not(#fancy)</span> selects all elements that do not have <span class="highlight-dark">id="fancy"</span>.',
+    //         '<span class="highlight-dark">div:not(:first-child)</span> selects every <span class="highlight-dark">&lt;div&gt;</span> that is not a first child.',
+    //         '<span class="highlight-dark">:not(.big, .medium)</span> selects all elements that do not have <span class="highlight-dark">class="big"</span> or <span class="highlight-dark">class="medium"</span>.',
     //     ],
     //     markupElements: `
     // <plate id="fancy">
@@ -581,10 +581,10 @@ export const LEVELS_LIST: readonly LevelObject[] = [
     //     selector: '[for]',
     //     syntax: '[attribute]',
     //     help:
-    //         'Attributes appear inside the opening tag of an element, like this: &lt;span attribute="value"&gt;. An attribute does not always have a value, it can be blank!',
+    //         'Attributes appear inside the opening tag of an element, like this: <span class="highlight-dark">&lt;span attribute="value"&gt;</span>. An attribute does not always have a value, it can be blank!',
     //     examples: [
-    //         '<strong>a[href]</strong> selects all &lt;a&gt; elements that have a <strong>href="anything"</strong> attribute.',
-    //         '<strong>[type]</strong> selects all elements that have a <strong>type="anything"</strong>. attribute',
+    //         '<span class="highlight-dark">a[href]</span> selects all <span class="highlight-dark">&lt;a&gt;</span> elements that have a <span class="highlight-dark">href="anything"</span> attribute.',
+    //         '<span class="highlight-dark">[type]</span> selects all elements that have a <span class="highlight-dark">type="anything"</span>. attribute',
     //     ],
     //     markupElements: `
     // <bento><apple class="small"/></bento>
@@ -606,9 +606,9 @@ export const LEVELS_LIST: readonly LevelObject[] = [
     //     help:
     //         'Combine the attribute selector with another selector (like the tag name selector) by adding it to the end.',
     //     examples: [
-    //         '<strong>[value]</strong> selects all elements that have a <strong>value="anything"</strong> attribute.',
-    //         '<strong>a[href]</strong> selects all &lt;a&gt; elements that have a <strong>href="anything"</strong> attribute.',
-    //         '<strong>input[disabled]</strong> selects all &lt;input&gt; elements with the <strong>disabled</strong> attribute',
+    //         '<span class="highlight-dark">[value]</span> selects all elements that have a <span class="highlight-dark">value="anything"</span> attribute.',
+    //         '<span class="highlight-dark">a[href]</span> selects all <span class="highlight-dark">&lt;a&gt;</span> elements that have a <span class="highlight-dark">href="anything"</span> attribute.',
+    //         '<span class="highlight-dark">input[disabled]</span> selects all <span class="highlight-dark">&lt;input&gt;</span> elements with the <span class="highlight-dark">disabled</span> attribute',
     //     ],
     //     markupElements: `
     // <plate for="Sarah">
@@ -630,7 +630,7 @@ export const LEVELS_LIST: readonly LevelObject[] = [
     //     selector: '[for=Vitaly]',
     //     syntax: '[attribute="value"]',
     //     help: 'Attribute selectors are case sensitive, each character must match exactly.',
-    //     examples: ['<strong>input[type="checkbox"]</strong> selects all checkbox input elements.'],
+    //     examples: ['<span class="highlight-dark">input[type="checkbox"]</span> selects all checkbox input elements.'],
     //     markupElements: `
     // <apple for="Alexei" />
     // <bento for="Albina">
@@ -650,7 +650,7 @@ export const LEVELS_LIST: readonly LevelObject[] = [
     //     syntax: '[attribute^="value"]',
     //     // help : "You can use quotes around the value in the selector, or not&mdash;it's optional!",
     //     examples: [
-    //         '<strong>.toy[category^="Swim"]</strong> selects elements with class <strong>toy</strong> and either <strong>category="Swimwear"</strong> or <strong>category="Swimming"</strong>.',
+    //         '<span class="highlight-dark">.toy[category^="Swim"]</span> selects elements with class <span class="highlight-dark">toy</span> and either <span class="highlight-dark">category="Swimwear"</span> or <span class="highlight-dark">category="Swimming"</span>.',
     //     ],
     //     markupElements: `
     // <plate for="Sam">
@@ -671,7 +671,7 @@ export const LEVELS_LIST: readonly LevelObject[] = [
     //     selector: '[for$="ato"]',
     //     syntax: '[attribute$="value"]',
     //     help: '',
-    //     examples: ['<strong>img[src$=".jpg"]</strong> selects all images display a <strong>.jpg</strong> image.'],
+    //     examples: ['<span class="highlight-dark">img[src$=".jpg"]</span> selects all images display a <span class="highlight-dark">.jpg</span> image.'],
     //     markupElements: `
     // <apple class="small"/>
     // <bento for="Hayato">
@@ -691,10 +691,10 @@ export const LEVELS_LIST: readonly LevelObject[] = [
     //     doThis: "Select the meals for names that contain 'obb'",
     //     selector: '[for*="obb"]',
     //     help:
-    //         'A useful selector if you can identify a common pattern in things like <strong>class</strong>, <strong>href</strong> or <strong>src</strong> attributes.',
+    //         'A useful selector if you can identify a common pattern in things like <span class="highlight-dark">class</span>, <span class="highlight-dark">href</span> or <span class="highlight-dark">src</span> attributes.',
     //     examples: [
-    //         '<strong>img[src*="/thumbnails/"]</strong> selects all image elements that show images from the "thumbnails" folder.',
-    //         '<strong>[class*="heading"]</strong> selects all elements with "heading" in their class, like <strong>class="main-heading"</strong> and <strong>class="sub-heading"</strong>',
+    //         '<span class="highlight-dark">img[src*="/thumbnails/"]</span> selects all image elements that show images from the "thumbnails" folder.',
+    //         '<span class="highlight-dark">[class*="heading"]</span> selects all elements with "heading" in their class, like <span class="highlight-dark">class="main-heading"</span> and <span class="highlight-dark">class="sub-heading"</span>',
     //     ],
     //     markupElements: `
     // <bento for="Robbie">

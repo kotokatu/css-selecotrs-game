@@ -1,20 +1,23 @@
 import { BaseComponent } from '../../common/base-component';
-import { LEVELS_LIST } from '../../data/levels-list';
-import { state } from '../../controller/state';
+import { LevelObject } from '../../data/levels-list';
+// import { state } from '../../controller/state';
 import { elemObject } from '../../data/levels-list';
 
 export class HtmlPane extends BaseComponent {
     public output: HTMLElement;
-    onMouseOver: (e: Event, selector: string) => void;
-    onMouseOut: (e: Event, selector: string) => void;
+    onMouseOver: (e: MouseEvent, selector: string) => void;
+    onMouseOut: (e: MouseEvent, selector: string) => void;
+    levelData: LevelObject;
     constructor(
         parent: HTMLElement,
-        onMouseOver: (e: Event, selector: string) => void,
-        onMouseOut: (e: Event, selector: string) => void
+        levelData: LevelObject,
+        onMouseOver: (e: MouseEvent, selector: string) => void,
+        onMouseOut: (e: MouseEvent, selector: string) => void
     ) {
         super({ parent, className: 'pane viewer-pane' });
         this.onMouseOver = onMouseOver;
         this.onMouseOut = onMouseOut;
+        this.levelData = levelData;
         new BaseComponent({
             parent: this.element,
             className: 'pane-header',
@@ -23,8 +26,7 @@ export class HtmlPane extends BaseComponent {
         new BaseComponent({
             parent: this.element,
             className: 'line-numbers',
-            content:
-                '1<br/>2<br/>3<br/>4<br/>5<br/>6<br/>7<br/>8<br/>9<br/>10<br/>11<br/>12<br/>13<br/>14<br/>15<br/>16<br/>17<br/>18<br/>19<br/>20',
+            content: '1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20',
         });
         this.output = new BaseComponent({
             parent: this.element,
@@ -35,7 +37,7 @@ export class HtmlPane extends BaseComponent {
     }
 
     private getViewerMarkup() {
-        return LEVELS_LIST[state.level].markupElements;
+        return this.levelData.markupElements;
         //     const escapedElements = markup.map((el) => el.replaceAll('<', '&lt;').replaceAll('>', '&gt;'));
         //     return escapedElements
         //         .map((el) => {
@@ -72,8 +74,8 @@ export class HtmlPane extends BaseComponent {
 
         elem.insertAdjacentText('beforeend', `</${elemObject.tag}>`);
 
-        elem.addEventListener('mouseover', (e: Event): void => this.onMouseOver(e, '.viewer-window div'));
-        elem.addEventListener('mouseout', (e: Event): void => this.onMouseOut(e, '.viewer-window div'));
+        elem.addEventListener('mouseover', (e: MouseEvent): void => this.onMouseOver(e, '.viewer-window div'));
+        elem.addEventListener('mouseout', (e: MouseEvent): void => this.onMouseOut(e, '.viewer-window div'));
 
         return elem;
     }
