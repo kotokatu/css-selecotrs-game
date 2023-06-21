@@ -1,14 +1,15 @@
 import { BaseComponent } from '../../common/base-component';
+import { Button } from '../button/button';
 
 export class CssPane extends BaseComponent {
-    public input: HTMLInputElement;
-    constructor(parent: HTMLElement) {
+    constructor(parent: HTMLElement, onInput: (input: HTMLInputElement) => void) {
         super({ parent, className: 'pane editor-pane' });
-        new BaseComponent({
+        const paneHeader = new BaseComponent({
             parent: this.element,
             className: 'pane-header',
-            content: `CSS Editor <span class="filename">style.css</span>`,
-        });
+            content: `CSS Editor`,
+        }).element;
+        new BaseComponent({ tag: 'span', parent: paneHeader, className: 'filename', content: 'style.css' });
         new BaseComponent({
             parent: this.element,
             className: 'line-numbers',
@@ -18,13 +19,19 @@ export class CssPane extends BaseComponent {
             parent: this.element,
             className: 'editor-window',
         }).element;
-        this.input = new BaseComponent<HTMLInputElement>({
+        const input = new BaseComponent<HTMLInputElement>({
             parent: editorWindow,
             tag: 'input',
             className: 'editor-input',
         }).element;
-        this.input.setAttribute('placeholder', 'Type in a CSS selector');
-        this.input.focus();
+        input.setAttribute('placeholder', 'Type in a CSS selector');
+        input.addEventListener('keydown', (e) => {
+            if (e.code === 'Enter') {
+                onInput(input);
+            }
+        });
+        input.focus();
+        new Button({ parent: editorWindow, className: 'enter-button', content: 'Enter' }, () => onInput(input));
         new BaseComponent({ parent: editorWindow, content: '{<br/>/* Styles would go here. */<br/>}' });
     }
 }

@@ -5,19 +5,17 @@ import { LevelObject } from '../../data/levels-list';
 import './editor.css';
 
 export class Editor extends BaseComponent {
-    input: HTMLInputElement;
-    viewer: HtmlPane;
+    viewerElements: HTMLElement[];
     constructor(
         parent: HTMLElement,
         levelData: LevelObject,
         onMouseOver: (e: MouseEvent) => void,
         onMouseOut: (e: MouseEvent) => void,
-        onInput: (e: KeyboardEvent) => void
+        onInput: (input: HTMLInputElement) => void
     ) {
         super({ parent, className: 'editor-wrapper' });
-        this.input = new CssPane(this.element).input;
-        this.input.addEventListener('keydown', onInput);
-        this.viewer = new HtmlPane(this.element, levelData, onMouseOver, onMouseOut);
+        new CssPane(this.element, onInput);
+        this.viewerElements = new HtmlPane(this.element, levelData, onMouseOver, onMouseOut).viewerElements;
         this.element.addEventListener('animationend', this.removeEditorAnimation.bind(this));
     }
 

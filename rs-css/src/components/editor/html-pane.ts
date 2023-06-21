@@ -4,27 +4,28 @@ import { LevelObject } from '../../data/levels-list';
 import { elemObject } from '../../data/levels-list';
 
 export class HtmlPane extends BaseComponent {
-    public viewer: HTMLElement;
+    private viewer: HTMLElement;
     public viewerElements: HTMLElement[];
-    onMouseOver: (e: MouseEvent, selector: string) => void;
-    onMouseOut: (e: MouseEvent, selector: string) => void;
+    onMouseOver: (e: MouseEvent) => void;
+    onMouseOut: (e: MouseEvent) => void;
     private levelData: LevelObject;
     constructor(
         parent: HTMLElement,
         levelData: LevelObject,
-        onMouseOver: (e: MouseEvent, selector: string) => void,
-        onMouseOut: (e: MouseEvent, selector: string) => void
+        onMouseOver: (e: MouseEvent) => void,
+        onMouseOut: (e: MouseEvent) => void
     ) {
         super({ parent, className: 'pane viewer-pane' });
         this.levelData = levelData;
         this.viewerElements = [];
         this.onMouseOver = onMouseOver;
         this.onMouseOut = onMouseOut;
-        new BaseComponent({
+        const paneHeader = new BaseComponent({
             parent: this.element,
             className: 'pane-header',
-            content: `HTML Viewer <span class="filename">table.html</span>`,
-        });
+            content: `HTML Viewer`,
+        }).element;
+        new BaseComponent({ tag: 'span', parent: paneHeader, className: 'filename', content: 'table.html' });
         new BaseComponent({
             parent: this.element,
             className: 'line-numbers',
@@ -33,23 +34,8 @@ export class HtmlPane extends BaseComponent {
         this.viewer = new BaseComponent({
             parent: this.element,
             className: 'viewer-window',
-            // content: `&lt;div class="table"&gt;${this.getViewerMarkup()}&lt;/div&gt;`, //TODO
         }).element;
         this.renderViewerElements();
-    }
-
-    private getViewerMarkup() {
-        return this.levelData.markupElements;
-        //     const escapedElements = markup.map((el) => el.replaceAll('<', '&lt;').replaceAll('>', '&gt;'));
-        //     return escapedElements
-        //         .map((el) => {
-        //             if (el.includes('&gt;&lt;/')) {
-        //                 return `<div>${el}</div>`;
-        //             } else if (el.includes('&lt;/')) {
-        //                 return `${el}</div>`;
-        //             } else return `<div>${el}`;
-        //         })
-        //         .join('');
     }
 
     createViewerElement(elemObject: elemObject): HTMLElement {
@@ -76,16 +62,15 @@ export class HtmlPane extends BaseComponent {
 
         elem.insertAdjacentText('beforeend', `</${elemObject.tag}>`);
 
-        elem.addEventListener('mouseover', (e: MouseEvent): void => this.onMouseOver(e, '.viewer-window div'));
-        elem.addEventListener('mouseout', (e: MouseEvent): void => this.onMouseOut(e, '.viewer-window div'));
+        elem.addEventListener('mouseover', this.onMouseOver);
+        elem.addEventListener('mouseout', this.onMouseOut);
         this.viewerElements.push(elem);
         return elem;
     }
 
     renderViewerElements() {
-        const elems = this.getViewerMarkup();
         this.viewer.insertAdjacentText('afterbegin', '<div class="table">');
-        elems.forEach((elem) => this.viewer.append(this.createViewerElement(elem)));
+        this.levelData.markupElements.forEach((elem) => this.viewer.append(this.createViewerElement(elem)));
         this.viewer.insertAdjacentText('beforeend', '</div>');
     }
 }

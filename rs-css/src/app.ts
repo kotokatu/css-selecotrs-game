@@ -1,4 +1,4 @@
-import { Playground } from './components/playground/playground';
+import { Playground } from './components/playground/Playground';
 import { Levels } from './components/levels/levels';
 import { observer } from './common/observer';
 import { LEVELS_LIST, LevelObject } from './data/levels-list';

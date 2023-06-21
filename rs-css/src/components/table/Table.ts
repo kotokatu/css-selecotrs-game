@@ -30,10 +30,6 @@ export class Table extends BaseComponent<HTMLDivElement> {
         this.renderTableElements();
     }
 
-    private getMarkUp(): elemObject[] {
-        return this.levelData.markupElements;
-    }
-
     private createTableElement(elemObject: elemObject): HTMLElement {
         const elem = document.createElement(elemObject.tag);
 
@@ -53,16 +49,15 @@ export class Table extends BaseComponent<HTMLDivElement> {
             elem.append(this.createTableElement(elemObject.child));
         }
 
-        elem.addEventListener('mouseover', (e: MouseEvent) => this.onMouseOver(e));
-        elem.addEventListener('mouseout', (e: MouseEvent) => this.onMouseOut(e));
+        elem.addEventListener('mouseover', this.onMouseOver);
+        elem.addEventListener('mouseout', this.onMouseOut);
         this.tableElements.push(elem);
 
         return elem;
     }
 
     private renderTableElements(): void {
-        const elems = this.getMarkUp();
-        elems.forEach((elem) => this.tableContainer.append(this.createTableElement(elem)));
+        this.levelData.markupElements.forEach((elem) => this.tableContainer.append(this.createTableElement(elem)));
     }
 
     public showTooltip(elem: HTMLElement, posLeft: number, posTop: number): void {
