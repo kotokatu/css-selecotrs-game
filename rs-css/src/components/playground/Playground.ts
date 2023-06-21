@@ -23,13 +23,7 @@ export class Playground extends BaseComponent {
         });
         this.levelData = levelData;
         this.levelNum = levelNum;
-        this.table = new Table(
-            this.element,
-            this.levelData,
-            this.onMouseOver.bind(this),
-            this.onMouseOut.bind(this),
-            this.completeLevel.bind(this)
-        );
+        this.table = new Table(this.element, this.levelData, this.onMouseOver.bind(this), this.onMouseOut.bind(this));
         this.editor = new Editor(
             this.element,
             this.levelData,
@@ -100,13 +94,13 @@ export class Playground extends BaseComponent {
 
     private onCorrectGuess(elements: HTMLElement[]) {
         this.table.animateElements(elements);
+        setTimeout(
+            () => observer.notify(this.levelNum < LEVELS_TOTAL - 1 ? this.levelNum + 1 : this.levelNum, true),
+            1000
+        );
     }
 
     private onWrongGuess() {
         this.editor.addEditorAnimation();
-    }
-
-    public completeLevel() {
-        observer.notify(this.levelNum < LEVELS_TOTAL - 1 ? this.levelNum + 1 : this.levelNum, true);
     }
 }

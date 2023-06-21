@@ -62,7 +62,11 @@ pickle {
   display: block;
 }
 
-.table .bounceOut {
+.table * {
+  transition: transform 1s;
+}
+
+.out {
   animation-name: bounceOut;
   animation-duration: 1s;
   animation-fill-mode: forwards;

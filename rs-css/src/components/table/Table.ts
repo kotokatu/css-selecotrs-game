@@ -7,14 +7,13 @@ export class Table extends BaseComponent<HTMLDivElement> {
     public tableElements: HTMLElement[];
     private tooltip: HTMLElement;
     private levelData: LevelObject;
-    onMouseOver: (e: MouseEvent, selector: string) => void;
-    onMouseOut: (e: MouseEvent, selector: string) => void;
+    onMouseOver: (e: MouseEvent) => void;
+    onMouseOut: (e: MouseEvent) => void;
     constructor(
         parent: HTMLElement,
         levelData: LevelObject,
-        onMouseOver: (e: MouseEvent, selector: string) => void,
-        onMouseOut: (e: MouseEvent, selector: string) => void,
-        onAnimationEnd: () => void
+        onMouseOver: (e: MouseEvent) => void,
+        onMouseOut: (e: MouseEvent) => void
     ) {
         super({ parent, className: 'table-wrapper' });
         this.onMouseOver = onMouseOver;
@@ -28,7 +27,6 @@ export class Table extends BaseComponent<HTMLDivElement> {
             className: 'tooltip',
         }).element;
 
-        this.tableContainer.addEventListener('animationend', onAnimationEnd, { once: true });
         this.renderTableElements();
     }
 
@@ -55,8 +53,8 @@ export class Table extends BaseComponent<HTMLDivElement> {
             elem.append(this.createTableElement(elemObject.child));
         }
 
-        elem.addEventListener('mouseover', (e: MouseEvent) => this.onMouseOver(e, '.table *'));
-        elem.addEventListener('mouseout', (e: MouseEvent) => this.onMouseOut(e, '.table *'));
+        elem.addEventListener('mouseover', (e: MouseEvent) => this.onMouseOver(e));
+        elem.addEventListener('mouseout', (e: MouseEvent) => this.onMouseOut(e));
         this.tableElements.push(elem);
 
         return elem;
@@ -87,6 +85,6 @@ export class Table extends BaseComponent<HTMLDivElement> {
     }
 
     public animateElements(elements: HTMLElement[]) {
-        elements.forEach((elem) => elem.classList.add('bounceOut'));
+        elements.forEach((elem) => elem.classList.add('out'));
     }
 }

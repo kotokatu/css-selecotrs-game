@@ -10,8 +10,8 @@ export class Editor extends BaseComponent {
     constructor(
         parent: HTMLElement,
         levelData: LevelObject,
-        onMouseOver: (e: MouseEvent, selector: string) => void,
-        onMouseOut: (e: MouseEvent, selector: string) => void,
+        onMouseOver: (e: MouseEvent) => void,
+        onMouseOut: (e: MouseEvent) => void,
         onInput: (e: KeyboardEvent) => void
     ) {
         super({ parent, className: 'editor-wrapper' });
