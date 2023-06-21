@@ -47,7 +47,11 @@ export class CssPane extends BaseComponent {
             className: 'language-css mock-input-content',
         }).element;
         new Button({ parent: inputWrapper, className: 'enter-button', content: 'Enter' }, () => onInput(input));
-        new BaseComponent({ parent: editorWindow, content: '{<br/>/* Styles would go here. */<br/>}' });
+        new BaseComponent({
+            parent: editorWindow,
+            className: 'editor-text',
+            content: '{<br/>/* Styles would go here. */<br/>}',
+        });
     }
 
     highlightCssSyntax(text: string) {
