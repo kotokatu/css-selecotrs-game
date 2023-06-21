@@ -83,14 +83,33 @@
   color: rgba(255, 255, 255, .4);
 }
 
-.editor-input {
+.input-wrapper {
+  position: relative;
+  display: flex;
+  width: 100%;
+}
+
+.editor-input,
+.mock-input {
+  position: absolute;
   width: calc(100% - 55px);
+  height: 27px;
   border: 0;
   outline: 0;
   padding: 5px;
   margin: 0 3px;
-  background-color: rgba(0, 0, 0, .1);
+}
+
+.editor-input {
+  background-color: transparent;
+  color: transparent;
+  caret-color: rgba(0, 0, 0, .4);
   font: inherit;
+  z-index: 1;
+}
+
+.mock-input {
+  background-color: rgba(0, 0, 0, .2);
 }
 
 .shake {
@@ -111,22 +130,22 @@
   }
   }
 
-  .enter-button {
-    width: 45px;
-    padding: 3px 0;
-    text-shadow: 0 1px 2px #949494;
-    background-color: rgba(0, 0, 0, .2);
-    border-radius: 2px;
-    cursor: pointer;
-    border: 1px solid rgba(0, 0, 0, .45);
-    color: rgba(0, 0, 0, .6);
-    box-shadow: 0 4px rgba(0, 0, 0, .3);
-    transition: .3s;
-    transform: translateY(-2px);
-  }
+.enter-button {
+  width: 45px;
+  padding: 3px 0;
+  margin-left: auto;
+  text-shadow: 0 1px 2px #949494;
+  background-color: rgba(0, 0, 0, .2);
+  border-radius: 2px;
+  cursor: pointer;
+  border: 1px solid rgba(0, 0, 0, .45);
+  color: rgba(0, 0, 0, .6);
+  box-shadow: 0 4px rgba(0, 0, 0, .3);
+  transition: .3s;
+}
 
-  .enter-button:active {
-    background-color: rgba(0, 0, 0, .4);
-    box-shadow: 0 1px rgba(0, 0, 0, .3);
-    transform: translateY(2px);
-  }
+.enter-button:active {
+  background-color: rgba(0, 0, 0, .4);
+  box-shadow: 0 1px rgba(0, 0, 0, .3);
+  transform: translateY(2px);
+}

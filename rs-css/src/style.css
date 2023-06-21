@@ -15,3 +15,8 @@
   padding: 20px 0;
   font-size: 40px;
 }
+
+
+#editing {
+  z-index: 9999;
+}
