@@ -73,10 +73,12 @@ export class Table extends BaseComponent<HTMLDivElement> {
     }
 
     private getTooltipContent(elem: HTMLElement): string {
-        return Array.from(elem.childNodes)
-            .filter((item) => item.nodeType === Node.TEXT_NODE)
-            .map((item) => item.textContent)
-            .join('');
+        // return Array.from(elem.childNodes)
+        //     .filter((item) => item.nodeType === Node.TEXT_NODE)
+        //     .map((item) => item.textContent)
+        //     .join('');
+        const textElements = elem.textContent?.split('><');
+        return textElements ? `${textElements[0]}><${textElements[textElements.length - 1]}` : '';
     }
 
     public animateElements(elements: HTMLElement[]) {
