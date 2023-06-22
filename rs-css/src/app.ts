@@ -2,7 +2,7 @@ import { Playground } from './components/playground/Playground';
 import { Levels } from './components/levels/levels';
 import { observer } from './common/observer';
 import { LEVELS_LIST, LevelObject } from './data/levels-list';
-import './style.css';
+import './css/style.css';
 
 export const LEVELS_TOTAL = LEVELS_LIST.length;
 export const DEFAULT_LEVEL = 0;

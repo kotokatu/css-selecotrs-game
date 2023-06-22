@@ -2,7 +2,7 @@ import { BaseComponent } from '../../common/base-component';
 import { LevelObject } from '../../data/levels-list';
 import { elemObject } from '../../data/levels-list';
 import { prettyPrint } from '../../../node_modules/code-prettify/src/prettify.js';
-import '../../custom-pr.css';
+import '../../css/custom-pr.css';
 
 export class HtmlPane extends BaseComponent {
     private viewer: HTMLElement;
@@ -37,7 +37,6 @@ export class HtmlPane extends BaseComponent {
             className: 'viewer-window',
         }).element;
         this.renderViewerElements();
-        prettyPrint();
     }
 
     createViewerElement(elemObject: elemObject): HTMLElement {
@@ -71,9 +70,10 @@ export class HtmlPane extends BaseComponent {
     }
 
     renderViewerElements() {
-        this.viewer.insertAdjacentText('afterbegin', '<div class="table">');
-        const wrapper = new BaseComponent({ tag: 'pre', parent: this.viewer, className: 'prettyprint' }).element;
-        this.levelData.markupElements.forEach((elem) => wrapper.append(this.createViewerElement(elem)));
-        this.viewer.insertAdjacentText('beforeend', '</div>');
+        const markupWrapper = new BaseComponent({ tag: 'pre', parent: this.viewer, className: 'prettyprint' }).element;
+        markupWrapper.insertAdjacentText('afterbegin', '<div class="table">');
+        this.levelData.markupElements.forEach((elem) => markupWrapper.append(this.createViewerElement(elem)));
+        markupWrapper.insertAdjacentText('beforeend', '</div>');
+        prettyPrint();
     }
 }

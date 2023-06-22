@@ -1,7 +1,7 @@
 import { BaseComponent } from '../../common/base-component';
 import { Button } from '../button/button';
 import hljs from '../../../node_modules/highlight.js/lib/common';
-import '../../custom-hljs.css';
+import '../../css/custom-hljs.css';
 
 export class CssPane extends BaseComponent {
     mockInputContent: HTMLElement;
