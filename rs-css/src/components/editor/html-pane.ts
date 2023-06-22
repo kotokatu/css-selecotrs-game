@@ -1,7 +1,8 @@
 import { BaseComponent } from '../../common/base-component';
 import { LevelObject } from '../../data/levels-list';
-// import { state } from '../../controller/state';
 import { elemObject } from '../../data/levels-list';
+import { prettyPrint } from '../../../node_modules/code-prettify/src/prettify.js';
+import '../../custom-pr.css';
 
 export class HtmlPane extends BaseComponent {
     private viewer: HTMLElement;
@@ -36,6 +37,7 @@ export class HtmlPane extends BaseComponent {
             className: 'viewer-window',
         }).element;
         this.renderViewerElements();
+        prettyPrint();
     }
 
     createViewerElement(elemObject: elemObject): HTMLElement {
