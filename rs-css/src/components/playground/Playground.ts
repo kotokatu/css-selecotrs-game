@@ -13,7 +13,7 @@ export class Playground extends BaseComponent {
     levelNum: number;
     levelData: LevelObject;
     constructor(parent: HTMLElement, levelData: LevelObject, levelNum: number) {
-        super({ parent, className: 'game-container' });
+        super({ parent, className: 'playground-container' });
         new BaseComponent<HTMLHeadingElement>({
             tag: 'h2',
             parent: this.element,
