@@ -29,7 +29,7 @@ export class HtmlPane extends BaseComponent {
         new BaseComponent({ tag: 'span', parent: paneHeader, className: 'filename', content: 'table.html' });
         new BaseComponent({
             parent: this.element,
-            className: 'line-numbers',
+            className: 'gutter',
             content: '1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20',
         });
         this.viewer = new BaseComponent({
