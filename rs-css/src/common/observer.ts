@@ -1,15 +1,17 @@
+import { LevelState } from '../app';
+
 class Observer {
-    observers: ((levelNum: number, isCompleted?: boolean) => void)[];
+    observers: ((params: Partial<LevelState>) => void)[];
     constructor() {
         this.observers = [];
     }
 
-    subscribe(fn: (levelNum: number, isCompleted?: boolean) => void) {
+    subscribe(fn: (params: Partial<LevelState>) => void) {
         this.observers.push(fn);
     }
 
-    notify(levelNum: number, isCompleted?: boolean) {
-        this.observers.forEach((subscriber) => subscriber(levelNum, isCompleted));
+    notify(params: Partial<LevelState>) {
+        this.observers.forEach((subscriber) => subscriber(params));
     }
 }
 

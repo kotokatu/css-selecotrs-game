@@ -13,16 +13,18 @@ ul {
 }
 
 .levels-heading {
-  margin-right: 10px;
+  padding: 10px;
+  font-size: 26px;
+  border-bottom: 2px solid rgba(255, 255, 255, .4);
 }
 
 .menu-btn {
+  display: none;
   position: absolute;
   top: 0;
   right: 0;
   width: 30px;
   height: 25px;
-  display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: stretch;
@@ -33,11 +35,12 @@ ul {
   border: 1px solid rgba(255, 255, 255, .4);
 }
 
+
 .levels-item {
   position: relative;
-  font-size: 18px;
+  font-size: 20px;
   font-weight: 700;
-  padding: 10px 10px 10px 40px;
+  padding: 10px 10px 10px 50px;
   cursor: pointer;
 }
 

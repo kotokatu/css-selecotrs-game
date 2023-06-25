@@ -1,35 +1,70 @@
 import { Playground } from './components/playground/Playground';
 import { Menu } from './components/menu/levels-menu';
 import { observer } from './common/observer';
-import { LEVELS_LIST, LevelObject } from './data/levelsData';
+import { LEVELS_LIST } from './data/levelsData';
 import './css/style.css';
 
 export const LEVELS_TOTAL = LEVELS_LIST.length;
-export const DEFAULT_LEVEL = 0;
+// export const DEFAULT_LEVEL = 0;
+
+export type LevelState = {
+    levelNum: number;
+    isCompleted: boolean;
+    isHintUsed: boolean;
+};
+
+enum StorageKey {
+    State = 'state',
+    Level = 'level',
+}
 
 class App {
-    levelNum: number = Number(localStorage.getItem('level')) || DEFAULT_LEVEL;
-    levelsCompleted: number[] = [];
-    levelData: LevelObject = LEVELS_LIST[this.levelNum];
+    currLevel: number;
+    state: LevelState[];
     appRoot: HTMLElement;
     constructor(appRoot: HTMLElement) {
         this.appRoot = appRoot;
-        observer.subscribe(this.update.bind(this));
+        this.currLevel = Number(localStorage.getItem(StorageKey.Level));
+        const storedState: string | null = localStorage.getItem(StorageKey.State);
+        this.state = typeof storedState === 'string' ? JSON.parse(storedState) : this.createState();
+        observer.subscribe(this.updateState.bind(this));
+        window.addEventListener('beforeunload', () =>
+            localStorage.setItem(StorageKey.State, JSON.stringify(this.state))
+        );
+        window.addEventListener('beforeunload', () => localStorage.setItem(StorageKey.Level, `${this.currLevel}`));
     }
 
-    public start() {
-        new Playground(this.appRoot, this.levelData, this.levelNum);
-        new Menu(this.appRoot, this.levelNum, LEVELS_TOTAL, this.levelsCompleted);
+    public init(): void {
+        new Playground(this.appRoot, LEVELS_LIST[this.currLevel], this.currLevel);
+        new Menu(this.appRoot, this.currLevel, LEVELS_TOTAL, this.state);
     }
 
-    private update(levelNum: number, levelCompleted?: boolean) {
-        if (levelCompleted && !this.levelsCompleted.includes(this.levelNum)) this.levelsCompleted.push(this.levelNum);
-        this.levelNum = levelNum;
-        this.levelData = LEVELS_LIST[this.levelNum];
+    private updateState(params: Partial<LevelState>): void {
+        if (params.isCompleted) {
+            this.state[this.currLevel].isCompleted = params.isCompleted;
+        }
+
+        if (params.isHintUsed) {
+            this.state[this.currLevel].isHintUsed = params.isHintUsed;
+        }
+
+        if (params.levelNum) {
+            this.currLevel = params.levelNum;
+            this.updateApp();
+        }
+    }
+
+    private updateApp(): void {
         this.appRoot.replaceChildren();
-        this.start();
+        this.init();
+    }
+
+    private createState(): LevelState[] {
+        return LEVELS_LIST.map((_, idx) => {
+            return { levelNum: idx, isCompleted: false, isHintUsed: false };
+        });
     }
 }
 
 const app = new App(document.body);
-app.start();
+app.init();

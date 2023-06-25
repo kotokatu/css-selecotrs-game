@@ -1,19 +1,20 @@
 import { BaseComponent } from '../../common/base-component';
 import { Button } from '../button/button';
 import { observer } from '../../common/observer';
+import { LevelState } from '../../app';
 import './levels-menu.css';
 
 export class Menu extends BaseComponent {
     levelNum: number;
-    levelsCompleted: number[];
+    state: LevelState[];
     levelsTotal: number;
-    constructor(parent: HTMLElement, levelNum: number, levelsTotal: number, levelsCompleted: number[]) {
+    constructor(parent: HTMLElement, levelNum: number, levelsTotal: number, state: LevelState[]) {
         super({ parent, className: 'levels-container' });
         this.levelNum = levelNum;
-        this.levelsCompleted = levelsCompleted;
+        this.state = state;
         this.levelsTotal = levelsTotal;
 
-        const levelsHeading = new BaseComponent<HTMLHeadingElement>({
+        new BaseComponent<HTMLHeadingElement>({
             tag: 'h2',
             parent: this.element,
             className: 'levels-heading',
@@ -51,13 +52,15 @@ export class Menu extends BaseComponent {
 
         this.highlightCurrent(levelNum, levelsItem);
         this.markCompleted(levelNum, levelsItem);
-        levelsItem.addEventListener('click', () => observer.notify(levelNum));
+        levelsItem.addEventListener('click', () => observer.notify({ levelNum }));
 
         return levelsItem;
     }
 
     markCompleted(levelNum: number, elem: HTMLLIElement): void {
-        if (this.levelsCompleted.includes(levelNum)) {
+        if (this.state[levelNum].isHintUsed && this.state[levelNum].isCompleted) {
+            elem.classList.add('hint-used');
+        } else if (this.state[levelNum].isCompleted) {
             elem.classList.add('completed');
         }
     }

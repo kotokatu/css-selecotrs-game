@@ -98,12 +98,21 @@ export class Playground extends BaseComponent {
     private onCorrectGuess(elements: HTMLElement[]) {
         this.table.animateElements(elements);
         setTimeout(
-            () => observer.notify(this.levelNum < LEVELS_TOTAL - 1 ? this.levelNum + 1 : this.levelNum, true),
+            () =>
+                observer.notify({
+                    levelNum: this.levelNum < LEVELS_TOTAL - 1 ? this.levelNum + 1 : this.levelNum,
+                    isCompleted: true,
+                }),
             1000
         );
     }
 
-    private onWrongGuess() {
+    private onWrongGuess(): void {
         this.editor.addEditorAnimation();
+    }
+
+    private handleHelpButtonClick(): void {
+        observer.notify({ isHintUsed: true });
+        // this.editor.showAnswer(this.levelData.selector);
     }
 }
