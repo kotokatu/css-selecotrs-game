@@ -1,12 +1,8 @@
 export type LevelObject = {
-    helpTitle?: string;
-    selectorType?: string;
-    doThis: string;
+    id: number;
+    task: string;
     selector: string;
-    syntax: string;
-    help?: string;
-    examples?: string[];
-    markupElements: elemObject[];
+    markup: elemObject[];
 };
 
 export type elemObject = {
@@ -19,19 +15,10 @@ export type elemObject = {
 
 export const LEVELS_LIST: readonly LevelObject[] = [
     {
-        selectorType: 'Type Selector',
-        helpTitle: 'Select elements by their type',
-        doThis: 'Select the plates',
+        id: 1,
+        task: 'Select the plates',
         selector: 'plate',
-        syntax: 'A',
-        help: `Selects all elements of type <span class="highlight-dark">A</span>. Type refers to the type of tag,
-            so <span class="highlight-dark">&lt;div&gt;</span>, <span class="highlight-dark">&lt;p&gt;</span> and
-            <span class="highlight-dark">&lt;ul&gt;</span> are all different element types.`,
-        examples: [
-            '<span class="highlight-dark">div</span> selects all <span class="highlight-dark"><span class="highlight-dark">&lt;div&gt;</span></span> elements.',
-            '<span class="highlight-dark">p</span> selects all <span class="highlight-dark"><span class="highlight-dark">&lt;p&gt;</span></span> elements.',
-        ],
-        markupElements: [
+        markup: [
             {
                 tag: 'plate',
                 id: 'fancy',
@@ -41,32 +28,16 @@ export const LEVELS_LIST: readonly LevelObject[] = [
         ],
     },
     {
-        selectorType: 'Type Selector',
-        helpTitle: 'Select elements by their type',
-        doThis: 'Select the bento boxes',
+        id: 2,
+        task: 'Select the bento boxes',
         selector: 'bento',
-        syntax: 'A',
-        help:
-            'Selects all elements of type <span class="highlight-dark">A</span>. Type refers to the type of tag, so <span class="highlight-dark">&lt;div&gt;</span>, <span class="highlight-dark">&lt;p&gt;</span> and <span class="highlight-dark">&lt;ul&gt;</span> are all different element types.',
-        examples: [
-            '<span class="highlight-dark">div</span> selects all <span class="highlight-dark">&lt;div&gt;</span> elements.',
-            '<span class="highlight-dark">p</span> selects all <span class="highlight-dark">&lt;p&gt;</span> elements.',
-        ],
-        markupElements: [{ tag: 'bento' }, { tag: 'plate' }, { tag: 'bento' }],
+        markup: [{ tag: 'bento' }, { tag: 'plate' }, { tag: 'bento' }],
     },
     {
-        selectorType: 'ID Selector',
-        helpTitle: 'Select elements with an ID',
-        doThis: 'Select the fancy plate',
+        id: 3,
+        task: 'Select the fancy plate',
         selector: '#fancy',
-        syntax: '#id',
-        help:
-            'Selects the element with a specific <span class="highlight-dark">id</span>. You can also combine the ID selector with the type selector.',
-        examples: [
-            '<span class="highlight-dark">#cool</span> selects any element with <span class="highlight-dark">id="cool"</span>',
-            '<span class="highlight-dark">ul#long</span> selects <span class="highlight-dark">&lt;ul id="long"&gt;</span>',
-        ],
-        markupElements: [{ tag: 'plate', id: 'fancy' }, { tag: 'plate' }, { tag: 'bento' }],
+        markup: [{ tag: 'plate', id: 'fancy' }, { tag: 'plate' }, { tag: 'bento' }],
     },
     // {
     //     helpTitle: 'Select an element inside another element',

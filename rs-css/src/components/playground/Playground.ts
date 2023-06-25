@@ -1,8 +1,8 @@
 import { BaseComponent } from '../../common/base-component';
-import { Table } from '../table/Table';
-import { Editor } from '../editor/Editor';
+import { Table } from './table/Table';
+import { Editor } from './editor/Editor';
 import { observer } from '../../common/observer';
-import { LevelObject } from '../../data/levels-list';
+import { LevelObject } from '../../data/levelsData';
 import { LEVELS_TOTAL } from '../../app';
 import './playground.css';
 
@@ -17,7 +17,7 @@ export class Playground extends BaseComponent {
         new BaseComponent<HTMLHeadingElement>({
             tag: 'h2',
             parent: this.element,
-            content: `${levelData.doThis}`,
+            content: `${levelData.task}`,
             className: 'directions',
         });
         this.levelData = levelData;

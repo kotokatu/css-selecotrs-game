@@ -1,7 +1,7 @@
 import { Playground } from './components/playground/Playground';
-import { Levels } from './components/levels/levels';
+import { Menu } from './components/menu/levels-menu';
 import { observer } from './common/observer';
-import { LEVELS_LIST, LevelObject } from './data/levels-list';
+import { LEVELS_LIST, LevelObject } from './data/levelsData';
 import './css/style.css';
 
 export const LEVELS_TOTAL = LEVELS_LIST.length;
@@ -19,7 +19,7 @@ class App {
 
     public start() {
         new Playground(this.appRoot, this.levelData, this.levelNum);
-        new Levels(this.appRoot, this.levelNum, this.levelData, this.levelsCompleted);
+        new Menu(this.appRoot, this.levelNum, LEVELS_TOTAL, this.levelsCompleted);
     }
 
     private update(levelNum: number, levelCompleted?: boolean) {

@@ -1,5 +1,5 @@
-import { BaseComponent } from '../../common/base-component';
-import { elemObject, LevelObject } from '../../data/levels-list';
+import { BaseComponent } from '../../../common/base-component';
+import { elemObject, LevelObject } from '../../../data/levelsData';
 import './table.css';
 
 export class Table extends BaseComponent<HTMLDivElement> {
@@ -57,7 +57,7 @@ export class Table extends BaseComponent<HTMLDivElement> {
     }
 
     private renderTableElements(): void {
-        this.levelData.markupElements.forEach((elem) => this.tableContainer.append(this.createTableElement(elem)));
+        this.levelData.markup.forEach((elem: elemObject) => this.tableContainer.append(this.createTableElement(elem)));
     }
 
     public showTooltip(elem: HTMLElement, posLeft: number, posTop: number): void {

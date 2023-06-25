@@ -1,7 +1,7 @@
-import { BaseComponent } from '../../common/base-component';
+import { BaseComponent } from '../../../common/base-component';
 import { CssPane } from './css-pane';
 import { HtmlPane } from './html-pane';
-import { LevelObject } from '../../data/levels-list';
+import { LevelObject } from '../../../data/levelsData';
 import './editor.css';
 
 export class Editor extends BaseComponent {

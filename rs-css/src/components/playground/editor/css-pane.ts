@@ -1,7 +1,10 @@
-import { BaseComponent } from '../../common/base-component';
-import { Button } from '../button/button';
-import hljs from '../../../node_modules/highlight.js/lib/common';
-import '../../css/custom-hljs.css';
+import { BaseComponent } from '../../../common/base-component';
+import { Button } from '../../button/button';
+// import hljs from '../../../node_modules/highlight.js/lib/common';
+import hljs from 'highlight.js';
+import css from '../../../../node_modules/highlight.js/lib/languages/css.js';
+hljs.registerLanguage('css', css);
+import '../../../css/custom-hljs.css';
 
 export class CssPane extends BaseComponent {
     mockInputContent: HTMLElement;
