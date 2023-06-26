@@ -11,7 +11,7 @@ export type UpdateStateParams = {
     levelNum?: number;
     isCompleted?: boolean;
     isHintUsed?: boolean;
-    reset?: boolean;
+    isReset?: boolean;
 };
 
 export type LevelState = Pick<UpdateStateParams, 'isCompleted' | 'isHintUsed'>;
@@ -23,33 +23,33 @@ enum StorageKey {
 
 class App {
     currLevel: number;
-    state: LevelState[];
+    levelsState: LevelState[];
     appRoot: HTMLElement;
     constructor(appRoot: HTMLElement) {
         this.appRoot = appRoot;
         this.currLevel = Number(localStorage.getItem(StorageKey.Level));
         const storedState: string | null = localStorage.getItem(StorageKey.State);
-        this.state = typeof storedState === 'string' ? JSON.parse(storedState) : this.createInitialState();
+        this.levelsState = typeof storedState === 'string' ? JSON.parse(storedState) : this.createInitialState();
         observer.subscribe(this.updateState.bind(this));
         window.addEventListener('beforeunload', () =>
-            localStorage.setItem(StorageKey.State, JSON.stringify(this.state))
+            localStorage.setItem(StorageKey.State, JSON.stringify(this.levelsState))
         );
         window.addEventListener('beforeunload', () => localStorage.setItem(StorageKey.Level, `${this.currLevel}`));
     }
 
     public init(): void {
         new Playground(this.appRoot, LEVELS_LIST[this.currLevel], this.currLevel);
-        new Menu(this.appRoot, this.currLevel, LEVELS_TOTAL, this.state);
+        new Menu(this.appRoot, this.currLevel, LEVELS_TOTAL, this.levelsState);
     }
 
     private updateState(params: UpdateStateParams): void {
-        const { levelNum, isCompleted, isHintUsed, reset } = params;
+        const { levelNum, isCompleted, isHintUsed, isReset } = params;
         if (isCompleted) {
-            this.state[this.currLevel].isCompleted = params.isCompleted;
+            this.levelsState[this.currLevel].isCompleted = params.isCompleted;
         }
 
         if (isHintUsed) {
-            this.state[this.currLevel].isHintUsed = params.isHintUsed;
+            this.levelsState[this.currLevel].isHintUsed = params.isHintUsed;
         }
 
         if (levelNum !== undefined) {
@@ -57,7 +57,7 @@ class App {
             this.updateApp();
         }
 
-        if (reset) {
+        if (isReset) {
             this.createInitialState();
             this.updateApp();
         }
@@ -70,7 +70,7 @@ class App {
 
     private createInitialState(): void {
         this.currLevel = DEFAULT_LEVEL;
-        this.state = LEVELS_LIST.map((_) => {
+        this.levelsState = LEVELS_LIST.map(() => {
             return { isCompleted: false, isHintUsed: false };
         });
     }

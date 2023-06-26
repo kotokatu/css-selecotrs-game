@@ -73,15 +73,20 @@ export class Table extends BaseComponent<HTMLDivElement> {
     }
 
     private getTooltipContent(elem: HTMLElement): string {
-        // return Array.from(elem.childNodes)
-        //     .filter((item) => item.nodeType === Node.TEXT_NODE)
-        //     .map((item) => item.textContent)
-        //     .join('');
         const textElements = elem.textContent?.split('><');
         return textElements ? `${textElements[0]}><${textElements[textElements.length - 1]}` : '';
     }
 
     public animateElements(elements: HTMLElement[]) {
         elements.forEach((elem) => elem.classList.add('out'));
+    }
+
+    public displayWinMessage() {
+        const winMessage = new BaseComponent<HTMLHeadingElement>({
+            tag: 'h2',
+            className: 'win-message',
+            content: 'Hooray! You did it!',
+        }).element;
+        this.tableContainer.replaceChildren(winMessage);
     }
 }

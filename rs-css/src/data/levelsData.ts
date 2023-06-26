@@ -18,14 +18,7 @@ export const LEVELS_LIST: readonly LevelObject[] = [
         id: 1,
         task: 'Select the plates',
         selector: 'plate',
-        markup: [
-            {
-                tag: 'plate',
-                id: 'fancy',
-                child: { tag: 'apple', class: 'small', attribute: ['for', 'Ethan'] },
-            },
-            { tag: 'plate' },
-        ],
+        markup: [{ tag: 'plate' }, { tag: 'plate' }],
     },
     {
         id: 2,

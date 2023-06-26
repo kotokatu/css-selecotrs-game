@@ -1,16 +1,4 @@
-.editor-wrapper {
-  display: flex;
-  margin: 0 auto 20px;
-  width: 70%;
-  padding: 10px;
-  background-color: black;
-  font-family: monospace;
-  font-size: 14px;
-  border-radius: 4px;
-}
-
-.editor-pane,
-.viewer-pane {
+.editor-pane {
   flex: 1;
   display: grid;
   grid-template-rows: 30px 1fr;
@@ -43,7 +31,6 @@
   border-right: 1px solid rgba(255, 255, 255, .4);
 }
 
-.viewer-window,
 .editor-window {
   grid-row-start: 2;
   grid-column-start: 2;
@@ -59,27 +46,6 @@
 
 .editor-pane .line-numbers {
   background-color: rgb(206, 206, 206);
-}
-
-.viewer-window {
-  font-weight: 500;
-  background-color: rgb(24, 24, 24);
-  color: rgba(255, 255, 255, .4);
-  cursor: default;
-}
-
-.viewer-pane .line-numbers {
-  background-color: rgb(24, 24, 24);
-}
-
-.viewer-window div {
-  padding-left: 20px;
-}
-
-.viewer-window div.hover > span {
-  font-weight: 500;
-  text-shadow: 0 0 2px #fff78c;
-  color: #fff78c;
 }
 
 .filename {
@@ -116,27 +82,31 @@
 }
 
 .mock-input {
-  font-weight: 700;
+  overflow: hidden;
   background-color: rgba(0, 0, 0, .6);
 }
 
-.shake {
-  animation-name: shake;
-  animation-duration: .5s;
-  animation-fill-mode: both;
-  }
+.mock-input-content {
+  display: block;
+  font-weight: 700;
+  overflow: hidden;
+  white-space: nowrap;
+}
 
-  @keyframes shake {
-  0%, 100% {
-  transform: translate3d(0, 0, 0);
+.mock-input-content.typewriter {
+  animation-name: typing;
+  animation-duration: 7s;
+  animation-timing-function: steps(40, end);
+}
+
+@keyframes typing {
+  from {
+    width: 0;
   }
-  10%, 30%, 50%, 70%, 90% {
-  transform: translate3d(-10px, 0, 0);
+  to {
+    width: 40ch;
   }
-  20%, 40%, 60%, 80% {
-  transform: translate3d(10px, 0, 0);
-  }
-  }
+}
 
 .enter-button {
   width: 45px;
@@ -157,7 +127,6 @@
   box-shadow: 0 1px rgba(0, 0, 0, .3);
   transform: translateY(2px);
 }
-
 
 .editor-text {
   padding: 10px 0;

@@ -66,6 +66,10 @@ ul {
   border-color: rgb(45, 201, 91);
 }
 
+.levels-item.hint-used::before {
+  border-color: rgb(240, 217, 9);
+}
+
 .reset-btn {
   display: block;
   margin: 0 auto;

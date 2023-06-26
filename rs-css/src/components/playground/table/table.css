@@ -62,7 +62,7 @@ pickle {
   display: block;
 }
 
-.table * {
+.table > * {
   transition: transform 1s;
 }
 
@@ -73,15 +73,20 @@ pickle {
   }
 
   @keyframes bounceOut {
-  20% {
-  transform: translate3d(0, -10px, 0);
+    20% {
+    transform: translate3d(0, -10px, 0);
+    }
+    40%, 45% {
+    opacity: 1;
+    transform: translate3d(0, 20px, 0);
+    }
+    100% {
+    opacity: 0;
+    transform: translate3d(0, -2000px, 0);
+    }
   }
-  40%, 45% {
-  opacity: 1;
-  transform: translate3d(0, 20px, 0);
-  }
-  100% {
-  opacity: 0;
-  transform: translate3d(0, -2000px, 0);
-  }
+
+  .win-message {
+    font-size: 32px;
+    color: rgb(240, 217, 9);
   }

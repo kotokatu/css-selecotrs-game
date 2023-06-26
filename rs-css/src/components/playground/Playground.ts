@@ -5,9 +5,8 @@ import { Table } from './table/Table';
 import { observer } from '../../common/observer';
 import { LevelObject } from '../../data/levelsData';
 import { LEVELS_TOTAL } from '../../app';
-import { Button } from '../button/button';
+import { Button } from '../../common/button/button';
 import './playground.css';
-import './editor.css';
 
 export class Playground extends BaseComponent {
     table: Table;
@@ -97,6 +96,7 @@ export class Playground extends BaseComponent {
             );
 
             if (
+                testValue.length &&
                 guessValue.length === testValue.length &&
                 [...guessValue].every((elem, ind) => elem === testValue[ind])
             ) {
@@ -105,23 +105,23 @@ export class Playground extends BaseComponent {
             }
         } else input.value = '';
 
-        this.onWrongGuess();
+        this.addEditorAnimation();
     }
 
     private onCorrectGuess(elements: HTMLElement[]) {
         this.table.animateElements(elements);
-        setTimeout(
-            () =>
-                observer.notify({
-                    levelNum: this.levelNum < LEVELS_TOTAL - 1 ? this.levelNum + 1 : this.levelNum,
-                    isCompleted: true,
-                }),
-            1000
-        );
-    }
-
-    private onWrongGuess(): void {
-        this.addEditorAnimation();
+        if (this.checkForEndgame()) {
+            this.table.displayWinMessage();
+        } else {
+            setTimeout(
+                () =>
+                    observer.notify({
+                        levelNum: this.levelNum + 1,
+                        isCompleted: true,
+                    }),
+                1000
+            );
+        }
     }
 
     private handleHelpButtonClick(): void {
@@ -129,11 +129,15 @@ export class Playground extends BaseComponent {
         this.editor.showAnswer(this.levelData.selector);
     }
 
-    public addEditorAnimation() {
+    private addEditorAnimation() {
         this.editorWrapper.classList.add('shake');
     }
 
     private removeEditorAnimation() {
         this.editorWrapper.classList.remove('shake');
+    }
+
+    private checkForEndgame() {
+        return this.levelNum === LEVELS_TOTAL - 1;
     }
 }

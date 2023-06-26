@@ -3,6 +3,7 @@ import { LevelObject } from '../../../data/levelsData';
 import { elemObject } from '../../../data/levelsData';
 import { prettyPrint } from '../../../../node_modules/code-prettify/src/prettify.js';
 import '../../../css/custom-pr.css';
+import './viewer.css';
 
 export class Viewer extends BaseComponent {
     private viewer: HTMLElement;

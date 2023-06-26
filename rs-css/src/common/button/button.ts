@@ -1,5 +1,5 @@
-import { BaseComponent } from '../../common/base-component';
-import { ComponentParams } from '../../common/base-component';
+import { BaseComponent } from '../base-component';
+import { ComponentParams } from '../base-component';
 import './button.css';
 
 export interface ButtonParams extends ComponentParams {

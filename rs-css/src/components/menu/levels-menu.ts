@@ -1,17 +1,17 @@
 import { BaseComponent } from '../../common/base-component';
-import { Button } from '../button/button';
+import { Button } from '../../common/button/button';
 import { observer } from '../../common/observer';
 import { LevelState } from '../../app';
 import './levels-menu.css';
 
 export class Menu extends BaseComponent {
     levelNum: number;
-    state: LevelState[];
+    levelsState: LevelState[];
     levelsTotal: number;
-    constructor(parent: HTMLElement, levelNum: number, levelsTotal: number, state: LevelState[]) {
+    constructor(parent: HTMLElement, levelNum: number, levelsTotal: number, levelsState: LevelState[]) {
         super({ parent, className: 'levels-container' });
         this.levelNum = levelNum;
-        this.state = state;
+        this.levelsState = levelsState;
         this.levelsTotal = levelsTotal;
 
         new BaseComponent<HTMLHeadingElement>({
@@ -32,7 +32,7 @@ export class Menu extends BaseComponent {
             parent: this.element,
             className: 'reset-btn',
             content: `reset progress`,
-            onClick: () => observer.notify({ reset: true }),
+            onClick: () => observer.notify({ isReset: true }),
         }).element;
     }
 
@@ -63,9 +63,9 @@ export class Menu extends BaseComponent {
     }
 
     markCompleted(levelNum: number, elem: HTMLLIElement): void {
-        if (this.state[levelNum].isHintUsed && this.state[levelNum].isCompleted) {
+        if (this.levelsState[levelNum].isHintUsed && this.levelsState[levelNum].isCompleted) {
             elem.classList.add('hint-used');
-        } else if (this.state[levelNum].isCompleted) {
+        } else if (this.levelsState[levelNum].isCompleted) {
             elem.classList.add('completed');
         }
     }

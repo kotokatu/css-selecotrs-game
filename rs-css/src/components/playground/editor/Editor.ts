@@ -1,10 +1,11 @@
 import { BaseComponent } from '../../../common/base-component';
-import { Button } from '../../button/button';
+import { Button } from '../../../common/button/button';
 // import hljs from '../../../node_modules/highlight.js/lib/common';
 import hljs from 'highlight.js';
 import css from '../../../../node_modules/highlight.js/lib/languages/css.js';
-hljs.registerLanguage('css', css);
 import '../../../css/custom-hljs.css';
+import './editor.css';
+hljs.registerLanguage('css', css);
 
 export class Editor extends BaseComponent {
     mockInputContent: HTMLElement;
@@ -67,12 +68,13 @@ export class Editor extends BaseComponent {
     }
 
     setMockInputContent(text: string) {
-        this.mockInputContent.innerText = text;
+        this.mockInputContent.textContent = text;
         this.highlightCssSyntax();
     }
 
     showAnswer(selector: string) {
         this.input.value = selector;
         this.setMockInputContent(selector);
+        this.mockInputContent.classList.add('typewriter');
     }
 }

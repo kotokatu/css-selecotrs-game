@@ -7,6 +7,35 @@
   overflow: auto;
 }
 
+.editor-wrapper {
+  display: flex;
+  margin: 0 auto 20px;
+  width: 70%;
+  padding: 10px;
+  background-color: black;
+  font-family: monospace;
+  font-size: 14px;
+  border-radius: 4px;
+}
+
+.editor-wrapper.shake {
+  animation-name: shake;
+  animation-duration: .5s;
+  animation-fill-mode: both;
+  }
+
+  @keyframes shake {
+    0%, 100% {
+    transform: translate3d(0, 0, 0);
+    }
+    10%, 30%, 50%, 70%, 90% {
+    transform: translate3d(-10px, 0, 0);
+    }
+    20%, 40%, 60%, 80% {
+    transform: translate3d(10px, 0, 0);
+    }
+}
+
 .help-btn {
   display: block;
   margin: 0 auto;
