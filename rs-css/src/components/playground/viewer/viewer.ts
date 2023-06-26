@@ -4,7 +4,7 @@ import { elemObject } from '../../../data/levelsData';
 import { prettyPrint } from '../../../../node_modules/code-prettify/src/prettify.js';
 import '../../../css/custom-pr.css';
 
-export class HtmlPane extends BaseComponent {
+export class Viewer extends BaseComponent {
     private viewer: HTMLElement;
     public viewerElements: HTMLElement[];
     onMouseOver: (e: MouseEvent) => void;

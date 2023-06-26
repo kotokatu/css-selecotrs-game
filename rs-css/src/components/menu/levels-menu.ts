@@ -20,15 +20,20 @@ export class Menu extends BaseComponent {
             className: 'levels-heading',
             content: `Level`,
         }).element;
-        const menuBtn = new Button({
+        new Button({
             parent: this.element,
             className: 'menu-btn',
             content: `<span class="menu-btn-line"></span>
                 <span class="menu-btn-line"></span>
                 <span class="menu-btn-line"></span>`,
         }).element;
-
         this.renderList();
+        new Button({
+            parent: this.element,
+            className: 'reset-btn',
+            content: `reset progress`,
+            onClick: () => observer.notify({ reset: true }),
+        }).element;
     }
 
     renderList() {

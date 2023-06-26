@@ -1,16 +1,16 @@
-import { LevelState } from '../app';
+import { UpdateStateParams } from '../app';
 
 class Observer {
-    observers: ((params: Partial<LevelState>) => void)[];
+    observers: ((params: UpdateStateParams) => void)[];
     constructor() {
         this.observers = [];
     }
 
-    subscribe(fn: (params: Partial<LevelState>) => void) {
+    subscribe(fn: (params: UpdateStateParams) => void) {
         this.observers.push(fn);
     }
 
-    notify(params: Partial<LevelState>) {
+    notify(params: UpdateStateParams) {
         this.observers.forEach((subscriber) => subscriber(params));
     }
 }

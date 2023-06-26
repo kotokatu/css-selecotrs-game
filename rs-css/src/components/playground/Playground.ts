@@ -1,15 +1,19 @@
 import { BaseComponent } from '../../common/base-component';
+import { Editor } from './editor/editor';
+import { Viewer } from './viewer/viewer';
 import { Table } from './table/Table';
-import { Editor } from './editor/Editor';
 import { observer } from '../../common/observer';
 import { LevelObject } from '../../data/levelsData';
 import { LEVELS_TOTAL } from '../../app';
+import { Button } from '../button/button';
 import './playground.css';
+import './editor.css';
 
 export class Playground extends BaseComponent {
     table: Table;
     editor: Editor;
-    viewerElements: HTMLElement[];
+    viewer: Viewer;
+    editorWrapper: HTMLElement;
     levelNum: number;
     levelData: LevelObject;
     constructor(parent: HTMLElement, levelData: LevelObject, levelNum: number) {
@@ -23,14 +27,21 @@ export class Playground extends BaseComponent {
         this.levelData = levelData;
         this.levelNum = levelNum;
         this.table = new Table(this.element, this.levelData, this.onMouseOver.bind(this), this.onMouseOut.bind(this));
-        this.editor = new Editor(
-            this.element,
-            this.levelData,
+        this.editorWrapper = new BaseComponent({ parent: this.element, className: 'editor-wrapper' }).element;
+        this.editorWrapper.addEventListener('animationend', this.removeEditorAnimation.bind(this));
+        this.editor = new Editor(this.editorWrapper, this.checkGuess.bind(this));
+        this.viewer = new Viewer(
+            this.editorWrapper,
+            levelData,
             this.onMouseOver.bind(this),
-            this.onMouseOut.bind(this),
-            this.checkGuess.bind(this)
+            this.onMouseOut.bind(this)
         );
-        this.viewerElements = this.editor.viewerElements;
+        new Button({
+            parent: this.element,
+            className: 'help-btn',
+            content: 'show answer',
+            onClick: this.handleHelpButtonClick.bind(this),
+        });
     }
 
     public onMouseOver(e: MouseEvent): void {
@@ -67,13 +78,15 @@ export class Playground extends BaseComponent {
 
     private getElements(elem: HTMLElement): { tableElement: HTMLElement; viewerElement: HTMLElement } | null {
         let ind: number;
-        if (this.viewerElements.includes(elem)) {
-            ind = this.viewerElements.indexOf(elem);
-        } else if (this.table.tableElements.includes(elem)) {
-            ind = this.table.tableElements.indexOf(elem);
+        const viewerElements = this.viewer.viewerElements;
+        const tableElements = this.table.tableElements;
+        if (viewerElements.includes(elem)) {
+            ind = viewerElements.indexOf(elem);
+        } else if (tableElements.includes(elem)) {
+            ind = tableElements.indexOf(elem);
         } else return null;
 
-        return { tableElement: this.table.tableElements[ind], viewerElement: this.viewerElements[ind] };
+        return { tableElement: tableElements[ind], viewerElement: viewerElements[ind] };
     }
 
     public checkGuess(input: HTMLInputElement): void {
@@ -108,11 +121,19 @@ export class Playground extends BaseComponent {
     }
 
     private onWrongGuess(): void {
-        this.editor.addEditorAnimation();
+        this.addEditorAnimation();
     }
 
     private handleHelpButtonClick(): void {
         observer.notify({ isHintUsed: true });
-        // this.editor.showAnswer(this.levelData.selector);
+        this.editor.showAnswer(this.levelData.selector);
+    }
+
+    public addEditorAnimation() {
+        this.editorWrapper.classList.add('shake');
+    }
+
+    private removeEditorAnimation() {
+        this.editorWrapper.classList.remove('shake');
     }
 }

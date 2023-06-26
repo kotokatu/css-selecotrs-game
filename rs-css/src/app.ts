@@ -5,13 +5,16 @@ import { LEVELS_LIST } from './data/levelsData';
 import './css/style.css';
 
 export const LEVELS_TOTAL = LEVELS_LIST.length;
-// export const DEFAULT_LEVEL = 0;
+export const DEFAULT_LEVEL = 0;
 
-export type LevelState = {
-    levelNum: number;
-    isCompleted: boolean;
-    isHintUsed: boolean;
+export type UpdateStateParams = {
+    levelNum?: number;
+    isCompleted?: boolean;
+    isHintUsed?: boolean;
+    reset?: boolean;
 };
+
+export type LevelState = Pick<UpdateStateParams, 'isCompleted' | 'isHintUsed'>;
 
 enum StorageKey {
     State = 'state',
@@ -26,7 +29,7 @@ class App {
         this.appRoot = appRoot;
         this.currLevel = Number(localStorage.getItem(StorageKey.Level));
         const storedState: string | null = localStorage.getItem(StorageKey.State);
-        this.state = typeof storedState === 'string' ? JSON.parse(storedState) : this.createState();
+        this.state = typeof storedState === 'string' ? JSON.parse(storedState) : this.createInitialState();
         observer.subscribe(this.updateState.bind(this));
         window.addEventListener('beforeunload', () =>
             localStorage.setItem(StorageKey.State, JSON.stringify(this.state))
@@ -39,17 +42,23 @@ class App {
         new Menu(this.appRoot, this.currLevel, LEVELS_TOTAL, this.state);
     }
 
-    private updateState(params: Partial<LevelState>): void {
-        if (params.isCompleted) {
+    private updateState(params: UpdateStateParams): void {
+        const { levelNum, isCompleted, isHintUsed, reset } = params;
+        if (isCompleted) {
             this.state[this.currLevel].isCompleted = params.isCompleted;
         }
 
-        if (params.isHintUsed) {
+        if (isHintUsed) {
             this.state[this.currLevel].isHintUsed = params.isHintUsed;
         }
 
-        if (params.levelNum) {
-            this.currLevel = params.levelNum;
+        if (levelNum !== undefined) {
+            this.currLevel = levelNum;
+            this.updateApp();
+        }
+
+        if (reset) {
+            this.createInitialState();
             this.updateApp();
         }
     }
@@ -59,9 +68,10 @@ class App {
         this.init();
     }
 
-    private createState(): LevelState[] {
-        return LEVELS_LIST.map((_, idx) => {
-            return { levelNum: idx, isCompleted: false, isHintUsed: false };
+    private createInitialState(): void {
+        this.currLevel = DEFAULT_LEVEL;
+        this.state = LEVELS_LIST.map((_) => {
+            return { isCompleted: false, isHintUsed: false };
         });
     }
 }

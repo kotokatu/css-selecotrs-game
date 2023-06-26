@@ -9,8 +9,8 @@ pre .lit, code .lit { color: #3387CC; } /* literal - blue */
 pre .pun, code .pun { color: #fff; } /* punctuation - white */
 pre .pln, code .pln { color: #fff; } /* plaintext - white */
 pre .tag, code .tag { color: #81b8ff; } /* html/xml tag    - light blue */
-pre .atn, code .atn { color: #E28964; } /* html/xml attribute name  - khaki */
-pre .atv, code .atv { color: #63b83c; } /* html/xml attribute value - green */
+pre .atn, code .atn { color: #eca786; } /* html/xml attribute name  - khaki */
+pre .atv, code .atv { color: #1ab8a3; } /* html/xml attribute value - green */
 pre .dec, code .dec { color: #3387CC; } /* decimal - blue */
 
 pre.prettyprint {
