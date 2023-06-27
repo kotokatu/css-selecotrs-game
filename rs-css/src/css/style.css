@@ -9,14 +9,3 @@
   color: rgb(126, 124, 124);
   font-family: monospace;
 }
-
-.directions {
-  text-align: center;
-  padding: 20px 0;
-  font-size: 40px;
-}
-
-
-#editing {
-  z-index: 9999;
-}

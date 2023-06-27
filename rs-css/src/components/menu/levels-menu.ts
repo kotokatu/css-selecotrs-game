@@ -8,6 +8,7 @@ export class Menu extends BaseComponent {
     levelNum: number;
     levelsState: LevelState[];
     levelsTotal: number;
+    levelsList: HTMLUListElement;
     constructor(parent: HTMLElement, levelNum: number, levelsTotal: number, levelsState: LevelState[]) {
         super({ parent, className: 'levels-container' });
         this.levelNum = levelNum;
@@ -27,23 +28,25 @@ export class Menu extends BaseComponent {
                 <span class="menu-btn-line"></span>
                 <span class="menu-btn-line"></span>`,
         }).element;
-        this.renderList();
+        this.levelsList = new BaseComponent<HTMLUListElement>({
+            tag: 'ul',
+            parent: this.element,
+            className: 'levels-list',
+        }).element;
         new Button({
             parent: this.element,
             className: 'reset-btn',
             content: `reset progress`,
             onClick: () => observer.notify({ isReset: true }),
         }).element;
+
+        this.renderList();
     }
 
     renderList() {
-        const levelsList: HTMLUListElement = new BaseComponent<HTMLUListElement>({
-            tag: 'ul',
-            parent: this.element,
-            className: 'levels-list',
-        }).element;
+        this.levelsList.replaceChildren();
         for (let i = 0; i < this.levelsTotal; i++) {
-            this.createListElement(i, levelsList);
+            this.createListElement(i, this.levelsList);
         }
     }
 
@@ -74,5 +77,11 @@ export class Menu extends BaseComponent {
         if (this.levelNum === levelNum) {
             elem.classList.add('current');
         }
+    }
+
+    update(levelNum: number, levelsState: LevelState[]) {
+        this.levelNum = levelNum;
+        this.levelsState = levelsState;
+        this.renderList();
     }
 }

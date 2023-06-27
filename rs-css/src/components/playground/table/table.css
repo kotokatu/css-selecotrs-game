@@ -4,6 +4,7 @@
 }
 
 .table {
+  position: relative;
   display: flex;
   justify-content: space-around;
   align-items: center;
@@ -87,6 +88,7 @@ pickle {
   }
 
   .win-message {
+    background-color: brown;
     font-size: 32px;
     color: rgb(240, 217, 9);
   }

@@ -89,4 +89,10 @@ export class Table extends BaseComponent<HTMLDivElement> {
         }).element;
         this.tableContainer.replaceChildren(winMessage);
     }
+
+    public update(levelData: LevelObject) {
+        this.levelData = levelData;
+        this.tableContainer.replaceChildren();
+        this.renderTableElements();
+    }
 }

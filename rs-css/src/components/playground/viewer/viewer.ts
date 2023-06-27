@@ -77,4 +77,10 @@ export class Viewer extends BaseComponent {
         markupWrapper.insertAdjacentText('beforeend', '</div>');
         prettyPrint();
     }
+
+    update(levelData: LevelObject) {
+        this.levelData = levelData;
+        this.viewer.replaceChildren();
+        this.renderViewerElements();
+    }
 }

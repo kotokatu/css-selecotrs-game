@@ -1,6 +1,5 @@
 import { BaseComponent } from '../../../common/base-component';
 import { Button } from '../../../common/button/button';
-// import hljs from '../../../node_modules/highlight.js/lib/common';
 import hljs from 'highlight.js';
 import css from '../../../../node_modules/highlight.js/lib/languages/css.js';
 import '../../../css/custom-hljs.css';
@@ -76,5 +75,12 @@ export class Editor extends BaseComponent {
         this.input.value = selector;
         this.setMockInputContent(selector);
         this.mockInputContent.classList.add('typewriter');
+    }
+
+    public update() {
+        this.input.value = '';
+        this.input.focus();
+        this.mockInputContent.textContent = '';
+        this.mockInputContent.classList.remove('typewriter');
     }
 }

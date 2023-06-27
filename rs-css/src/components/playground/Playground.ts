@@ -1,10 +1,9 @@
 import { BaseComponent } from '../../common/base-component';
-import { Editor } from './editor/editor';
+import { Editor } from './editor/Editor';
 import { Viewer } from './viewer/viewer';
 import { Table } from './table/Table';
 import { observer } from '../../common/observer';
 import { LevelObject } from '../../data/levelsData';
-import { LEVELS_TOTAL } from '../../app';
 import { Button } from '../../common/button/button';
 import './playground.css';
 
@@ -13,18 +12,19 @@ export class Playground extends BaseComponent {
     editor: Editor;
     viewer: Viewer;
     editorWrapper: HTMLElement;
+    task: HTMLHeadingElement;
     levelNum: number;
     levelData: LevelObject;
     constructor(parent: HTMLElement, levelData: LevelObject, levelNum: number) {
         super({ parent, className: 'playground-container' });
-        new BaseComponent<HTMLHeadingElement>({
+        this.levelData = levelData;
+        this.levelNum = levelNum;
+        this.task = new BaseComponent<HTMLHeadingElement>({
             tag: 'h2',
             parent: this.element,
             content: `${levelData.task}`,
-            className: 'directions',
-        });
-        this.levelData = levelData;
-        this.levelNum = levelNum;
+            className: 'task',
+        }).element;
         this.table = new Table(this.element, this.levelData, this.onMouseOver.bind(this), this.onMouseOut.bind(this));
         this.editorWrapper = new BaseComponent({ parent: this.element, className: 'editor-wrapper' }).element;
         this.editorWrapper.addEventListener('animationend', this.removeEditorAnimation.bind(this));
@@ -110,18 +110,14 @@ export class Playground extends BaseComponent {
 
     private onCorrectGuess(elements: HTMLElement[]) {
         this.table.animateElements(elements);
-        if (this.checkForEndgame()) {
-            this.table.displayWinMessage();
-        } else {
-            setTimeout(
-                () =>
-                    observer.notify({
-                        levelNum: this.levelNum + 1,
-                        isCompleted: true,
-                    }),
-                1000
-            );
-        }
+        setTimeout(
+            () =>
+                observer.notify({
+                    levelNum: this.levelNum + 1,
+                    isCompleted: true,
+                }),
+            1000
+        );
     }
 
     private handleHelpButtonClick(): void {
@@ -137,7 +133,16 @@ export class Playground extends BaseComponent {
         this.editorWrapper.classList.remove('shake');
     }
 
-    private checkForEndgame() {
-        return this.levelNum === LEVELS_TOTAL - 1;
+    public update(levelData: LevelObject, levelNum: number, isWin?: boolean) {
+        this.editor.update();
+        if (isWin) {
+            this.table.displayWinMessage();
+        } else {
+            this.levelData = levelData;
+            this.levelNum = levelNum;
+            this.task.textContent = `${levelData.task}`;
+            this.viewer.update(levelData);
+            this.table.update(levelData);
+        }
     }
 }

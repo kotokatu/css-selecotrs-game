@@ -25,9 +25,11 @@ class App {
     currLevel: number;
     levelsState: LevelState[];
     appRoot: HTMLElement;
+    menu: Menu;
+    playground: Playground;
     constructor(appRoot: HTMLElement) {
         this.appRoot = appRoot;
-        this.currLevel = Number(localStorage.getItem(StorageKey.Level));
+        this.currLevel = Number(localStorage.getItem(StorageKey.Level)) || DEFAULT_LEVEL;
         const storedState: string | null = localStorage.getItem(StorageKey.State);
         this.levelsState = typeof storedState === 'string' ? JSON.parse(storedState) : this.createInitialState();
         observer.subscribe(this.updateState.bind(this));
@@ -35,11 +37,8 @@ class App {
             localStorage.setItem(StorageKey.State, JSON.stringify(this.levelsState))
         );
         window.addEventListener('beforeunload', () => localStorage.setItem(StorageKey.Level, `${this.currLevel}`));
-    }
-
-    public init(): void {
-        new Playground(this.appRoot, LEVELS_LIST[this.currLevel], this.currLevel);
-        new Menu(this.appRoot, this.currLevel, LEVELS_TOTAL, this.levelsState);
+        this.menu = new Menu(this.appRoot, this.currLevel, LEVELS_TOTAL, this.levelsState);
+        this.playground = new Playground(this.appRoot, LEVELS_LIST[this.currLevel], this.currLevel);
     }
 
     private updateState(params: UpdateStateParams): void {
@@ -53,8 +52,12 @@ class App {
         }
 
         if (levelNum !== undefined) {
-            this.currLevel = levelNum;
-            this.updateApp();
+            if (levelNum === LEVELS_TOTAL) {
+                this.updateApp(true);
+            } else {
+                this.currLevel = levelNum;
+                this.updateApp();
+            }
         }
 
         if (isReset) {
@@ -63,9 +66,9 @@ class App {
         }
     }
 
-    private updateApp(): void {
-        this.appRoot.replaceChildren();
-        this.init();
+    private updateApp(isWin?: boolean): void {
+        this.menu.update(this.currLevel, this.levelsState);
+        this.playground.update(LEVELS_LIST[this.currLevel], this.currLevel, isWin);
     }
 
     private createInitialState(): void {
@@ -76,5 +79,4 @@ class App {
     }
 }
 
-const app = new App(document.body);
-app.init();
+new App(document.body);
