@@ -73,21 +73,25 @@ export class Editor extends BaseComponent {
         this.highlightCssSyntax();
     }
 
-    public showAnswer(selector: string): void {
-        this.input.value = selector;
-        this.setMockInputContent(selector);
-        this.mockInputContent.classList.add('typewriter');
+    public showAnswer(selector: string, i: number): void {
+        if (i < selector.length) {
+            this.input.setAttribute('disabled', 'true');
+            this.setContent(selector.slice(0, i + 1));
+            i++;
+            setTimeout(() => this.showAnswer(selector, i), 150);
+        } else {
+            this.input.removeAttribute('disabled');
+        }
     }
 
-    printChar(char: string) {
-        this.input.value += char;
-        this.mockInputContent.textContent += char;
+    private setContent(text: string) {
+        this.input.value = text;
+        this.setMockInputContent(text);
     }
 
     public update(): void {
         this.input.value = '';
         this.input.focus();
         this.setMockInputContent('');
-        this.mockInputContent.classList.remove('typewriter');
     }
 }

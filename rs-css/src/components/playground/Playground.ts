@@ -122,7 +122,8 @@ export class Playground extends BaseComponent {
 
     public handleHelpButtonClick(): void {
         observer.notify({ isHintUsed: true });
-        this.editor.showAnswer(this.levelData.selector);
+        this.editor.update();
+        this.editor.showAnswer(this.levelData.selector, 0);
     }
 
     private addEditorAnimation() {
