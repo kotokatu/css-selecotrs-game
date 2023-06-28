@@ -7,11 +7,11 @@ import './editor.css';
 hljs.registerLanguage('css', css);
 
 export class Editor extends BaseComponent {
-    mockInputContent: HTMLElement;
-    input: HTMLInputElement;
+    private mockInputContent: HTMLElement;
+    private input: HTMLInputElement;
     constructor(parent: HTMLElement, onInput: (input: HTMLInputElement) => void) {
         super({ parent, className: 'pane editor-pane' });
-        const paneHeader = new BaseComponent({
+        const paneHeader: HTMLElement = new BaseComponent({
             parent: this.element,
             className: 'pane-header',
             content: `CSS Editor`,
@@ -22,11 +22,12 @@ export class Editor extends BaseComponent {
             className: 'gutter',
             content: '1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20',
         });
-        const editorWindow = new BaseComponent({
+        const editorWindow: HTMLElement = new BaseComponent({
             parent: this.element,
             className: 'editor-window',
         }).element;
-        const inputWrapper = new BaseComponent({ parent: editorWindow, className: 'input-wrapper' }).element;
+        const inputWrapper: HTMLElement = new BaseComponent({ parent: editorWindow, className: 'input-wrapper' })
+            .element;
         this.input = new BaseComponent<HTMLInputElement>({
             parent: inputWrapper,
             tag: 'input',
@@ -42,7 +43,8 @@ export class Editor extends BaseComponent {
             this.setMockInputContent(this.input.value);
         });
         this.input.focus();
-        const mockInput = new BaseComponent({ tag: 'pre', parent: inputWrapper, className: 'mock-input' }).element;
+        const mockInput: HTMLElement = new BaseComponent({ tag: 'pre', parent: inputWrapper, className: 'mock-input' })
+            .element;
         mockInput.setAttribute('aria-hidden', 'true');
         this.mockInputContent = new BaseComponent({
             tag: 'code',
@@ -62,25 +64,30 @@ export class Editor extends BaseComponent {
         });
     }
 
-    highlightCssSyntax() {
+    private highlightCssSyntax(): void {
         hljs.highlightElement(this.mockInputContent);
     }
 
-    setMockInputContent(text: string) {
+    private setMockInputContent(text: string): void {
         this.mockInputContent.textContent = text;
         this.highlightCssSyntax();
     }
 
-    showAnswer(selector: string) {
+    public showAnswer(selector: string): void {
         this.input.value = selector;
         this.setMockInputContent(selector);
         this.mockInputContent.classList.add('typewriter');
     }
 
-    public update() {
+    printChar(char: string) {
+        this.input.value += char;
+        this.mockInputContent.textContent += char;
+    }
+
+    public update(): void {
         this.input.value = '';
         this.input.focus();
-        this.mockInputContent.textContent = '';
+        this.setMockInputContent('');
         this.mockInputContent.classList.remove('typewriter');
     }
 }

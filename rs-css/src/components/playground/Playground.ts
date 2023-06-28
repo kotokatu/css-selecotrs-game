@@ -1,6 +1,6 @@
 import { BaseComponent } from '../../common/base-component';
 import { Editor } from './editor/Editor';
-import { Viewer } from './viewer/viewer';
+import { Viewer } from './viewer/Viewer';
 import { Table } from './table/Table';
 import { observer } from '../../common/observer';
 import { LevelObject } from '../../data/levelsData';
@@ -8,13 +8,13 @@ import { Button } from '../../common/button/button';
 import './playground.css';
 
 export class Playground extends BaseComponent {
-    table: Table;
-    editor: Editor;
-    viewer: Viewer;
-    editorWrapper: HTMLElement;
-    task: HTMLHeadingElement;
-    levelNum: number;
-    levelData: LevelObject;
+    private table: Table;
+    private editor: Editor;
+    private viewer: Viewer;
+    private editorWrapper: HTMLElement;
+    private task: HTMLHeadingElement;
+    private levelNum: number;
+    private levelData: LevelObject;
     constructor(parent: HTMLElement, levelData: LevelObject, levelNum: number) {
         super({ parent, className: 'playground-container' });
         this.levelData = levelData;
@@ -38,12 +38,12 @@ export class Playground extends BaseComponent {
         new Button({
             parent: this.element,
             className: 'help-btn',
-            content: 'show answer',
+            content: 'help',
             onClick: this.handleHelpButtonClick.bind(this),
         });
     }
 
-    public onMouseOver(e: MouseEvent): void {
+    private onMouseOver(e: MouseEvent): void {
         if (e.target instanceof HTMLElement) {
             const elem = e.target.closest('.viewer-window div') || e.target;
 
@@ -59,7 +59,7 @@ export class Playground extends BaseComponent {
         }
     }
 
-    public onMouseOut(e: MouseEvent): void {
+    private onMouseOut(e: MouseEvent): void {
         if (e.target instanceof HTMLElement) {
             const elem = e.target.closest('.viewer-window div') || e.target;
 
@@ -108,7 +108,7 @@ export class Playground extends BaseComponent {
         this.addEditorAnimation();
     }
 
-    private onCorrectGuess(elements: HTMLElement[]) {
+    public onCorrectGuess(elements: HTMLElement[]) {
         this.table.animateElements(elements);
         setTimeout(
             () =>
@@ -120,7 +120,7 @@ export class Playground extends BaseComponent {
         );
     }
 
-    private handleHelpButtonClick(): void {
+    public handleHelpButtonClick(): void {
         observer.notify({ isHintUsed: true });
         this.editor.showAnswer(this.levelData.selector);
     }
@@ -133,16 +133,12 @@ export class Playground extends BaseComponent {
         this.editorWrapper.classList.remove('shake');
     }
 
-    public update(levelData: LevelObject, levelNum: number, isWin?: boolean) {
+    public update(levelData: LevelObject, levelNum: number, isOver?: boolean) {
         this.editor.update();
-        if (isWin) {
-            this.table.displayWinMessage();
-        } else {
-            this.levelData = levelData;
-            this.levelNum = levelNum;
-            this.task.textContent = `${levelData.task}`;
-            this.viewer.update(levelData);
-            this.table.update(levelData);
-        }
+        this.levelData = levelData;
+        this.levelNum = levelNum;
+        this.task.textContent = `${levelData.task}`;
+        this.viewer.update(levelData, isOver);
+        this.table.update(levelData, isOver);
     }
 }

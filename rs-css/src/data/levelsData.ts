@@ -16,9 +16,9 @@ export type elemObject = {
 export const LEVELS_LIST: readonly LevelObject[] = [
     {
         id: 1,
-        task: 'Select the plates',
-        selector: 'plate',
-        markup: [{ tag: 'plate' }, { tag: 'plate' }],
+        task: 'Select the notebooks',
+        selector: 'notebook',
+        markup: [{ tag: 'notebook' }, { tag: 'notebook' }],
     },
     {
         id: 2,

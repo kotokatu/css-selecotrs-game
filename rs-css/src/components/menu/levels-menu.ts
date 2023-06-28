@@ -5,10 +5,10 @@ import { LevelState } from '../../app';
 import './levels-menu.css';
 
 export class Menu extends BaseComponent {
-    levelNum: number;
-    levelsState: LevelState[];
-    levelsTotal: number;
-    levelsList: HTMLUListElement;
+    private levelNum: number;
+    private levelsState: LevelState[];
+    private levelsTotal: number;
+    private levelsList: HTMLUListElement;
     constructor(parent: HTMLElement, levelNum: number, levelsTotal: number, levelsState: LevelState[]) {
         super({ parent, className: 'levels-container' });
         this.levelNum = levelNum;
@@ -43,7 +43,7 @@ export class Menu extends BaseComponent {
         this.renderList();
     }
 
-    renderList() {
+    private renderList(): void {
         this.levelsList.replaceChildren();
         for (let i = 0; i < this.levelsTotal; i++) {
             this.createListElement(i, this.levelsList);
@@ -60,7 +60,11 @@ export class Menu extends BaseComponent {
 
         this.highlightCurrent(levelNum, levelsItem);
         this.markCompleted(levelNum, levelsItem);
-        levelsItem.addEventListener('click', () => observer.notify({ levelNum }));
+        levelsItem.addEventListener('click', () => {
+            if (levelNum !== this.levelNum) {
+                observer.notify({ levelNum });
+            }
+        });
 
         return levelsItem;
     }

@@ -66,9 +66,9 @@ class App {
         }
     }
 
-    private updateApp(isWin?: boolean): void {
+    private updateApp(isOver?: boolean): void {
         this.menu.update(this.currLevel, this.levelsState);
-        this.playground.update(LEVELS_LIST[this.currLevel], this.currLevel, isWin);
+        this.playground.update(LEVELS_LIST[this.currLevel], this.currLevel, isOver);
     }
 
     private createInitialState(): void {

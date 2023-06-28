@@ -20,7 +20,11 @@ export class Table extends BaseComponent<HTMLDivElement> {
         this.onMouseOut = onMouseOut;
         this.levelData = levelData;
         this.tableElements = [];
-        this.tableContainer = new BaseComponent<HTMLDivElement>({ parent: this.element, className: 'table' }).element;
+        this.tableContainer = new BaseComponent<HTMLDivElement>({
+            parent: this.element,
+            className: 'table',
+        }).element;
+        new BaseComponent<HTMLDivElement>({ parent: this.element, className: 'table-edge' }).element;
         this.tooltip = new BaseComponent<HTMLSpanElement>({
             tag: 'span',
             parent: this.element,
@@ -64,7 +68,7 @@ export class Table extends BaseComponent<HTMLDivElement> {
         this.tooltip.classList.add('visible');
         this.tooltip.textContent = this.getTooltipContent(elem);
         this.tooltip.style.left = `${posLeft - 10}px`;
-        this.tooltip.style.top = `${posTop - 45}px`;
+        this.tooltip.style.top = `${posTop}px`;
     }
 
     public hideTooltip(): void {
@@ -90,9 +94,13 @@ export class Table extends BaseComponent<HTMLDivElement> {
         this.tableContainer.replaceChildren(winMessage);
     }
 
-    public update(levelData: LevelObject) {
-        this.levelData = levelData;
-        this.tableContainer.replaceChildren();
-        this.renderTableElements();
+    public update(levelData: LevelObject, isOver?: boolean) {
+        if (isOver) {
+            this.displayWinMessage();
+        } else {
+            this.levelData = levelData;
+            this.tableContainer.replaceChildren();
+            this.renderTableElements();
+        }
     }
 }

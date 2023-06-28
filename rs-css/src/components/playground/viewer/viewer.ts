@@ -78,9 +78,14 @@ export class Viewer extends BaseComponent {
         prettyPrint();
     }
 
-    update(levelData: LevelObject) {
-        this.levelData = levelData;
-        this.viewer.replaceChildren();
-        this.renderViewerElements();
+    update(levelData: LevelObject, isOver?: boolean) {
+        if (isOver) {
+            this.viewer.classList.add('hover-disabled');
+        } else {
+            this.levelData = levelData;
+            this.viewer.classList.remove('hover-disabled');
+            this.viewer.replaceChildren();
+            this.renderViewerElements();
+        }
     }
 }

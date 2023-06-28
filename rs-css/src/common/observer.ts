@@ -11,7 +11,7 @@ class Observer {
     }
 
     notify(params: UpdateStateParams) {
-        this.observers.forEach((subscriber) => subscriber(params));
+        this.observers.forEach((subscriber: (params: UpdateStateParams) => void) => subscriber(params));
     }
 }
 

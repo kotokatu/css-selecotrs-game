@@ -1,21 +1,37 @@
 .table-wrapper {
-  padding: 40px 0;
   position: relative;
+  width: 600px;
+  margin: 0 auto;
+  padding: 40px 0;
+  transform: translate3d(0,0,0);
+  perspective: 300px;
 }
 
 .table {
-  position: relative;
   display: flex;
   justify-content: space-around;
+  gap: 25px;
   align-items: center;
   margin: 0 auto;
-  width: 400px;
-  height: 200px;
-  background-color: brown;
+  padding: 0 30px;
+  width: 600px;
+  height: 170px;
+  background-color: rgb(233, 160, 64);
+  transform: rotateX(20deg);
+  transform-origin: bottom;
+}
+
+.table-edge {
+  width: 600px;
+  height: 15px;
+  margin: 0 auto;
+  background-color: rgb(165, 112, 42);
+  transform: rotateX(-20deg);
+  transform-origin: top;
 }
 
 .table .hover {
-  background-color: blueviolet;
+  filter: drop-shadow(0 0 15px rgb(255, 255, 255));
 }
 
 plate {
@@ -49,6 +65,13 @@ pickle {
   height: 70px;
   border-radius: 10px;
   background-color: darkgreen;
+}
+
+notebook {
+  width: 70px;
+  height: 90px;
+  background-size: cover;
+  background-image: url('../../../assets/img/notebook.svg');
 }
 
 .tooltip {

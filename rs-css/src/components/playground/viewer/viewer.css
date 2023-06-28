@@ -61,3 +61,7 @@
   color: rgba(255, 255, 255, .4);
 }
 
+.hover-disabled {
+  pointer-events: none;
+}
+
