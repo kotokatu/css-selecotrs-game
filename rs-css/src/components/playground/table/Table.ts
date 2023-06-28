@@ -9,12 +9,7 @@ export class Table extends BaseComponent<HTMLDivElement> {
     private levelData: LevelObject;
     onMouseOver: (e: MouseEvent) => void;
     onMouseOut: (e: MouseEvent) => void;
-    constructor(
-        parent: HTMLElement,
-        levelData: LevelObject,
-        onMouseOver: (e: MouseEvent) => void,
-        onMouseOut: (e: MouseEvent) => void
-    ) {
+    constructor(parent: HTMLElement, levelData: LevelObject, onMouseOver: (e: MouseEvent) => void, onMouseOut: (e: MouseEvent) => void) {
         super({ parent, className: 'table-wrapper' });
         this.onMouseOver = onMouseOver;
         this.onMouseOut = onMouseOut;

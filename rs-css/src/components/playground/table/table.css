@@ -4,37 +4,45 @@
   margin: 0 auto;
   padding: 40px 0;
   transform: translate3d(0,0,0);
-  perspective: 300px;
+  perspective: 400px;
 }
 
 .table {
+  position: relative;
   display: flex;
-  justify-content: space-around;
-  gap: 25px;
+  justify-content: center;
   align-items: center;
+  gap: 25px;
   margin: 0 auto;
   padding: 0 30px;
   width: 600px;
   height: 170px;
-  background-color: rgb(233, 160, 64);
+  background-color: rgb(240, 211, 175);
   transform: rotateX(20deg);
   transform-origin: bottom;
+  /* transform-style: preserve-3d; */
 }
 
 .table-edge {
   width: 600px;
   height: 15px;
   margin: 0 auto;
-  background-color: rgb(165, 112, 42);
+  background-color: rgb(206, 163, 111);
   transform: rotateX(-20deg);
   transform-origin: top;
 }
 
-.table .hover {
-  filter: drop-shadow(0 0 15px rgb(255, 255, 255));
+.table * {
+  filter: drop-shadow(0 5px 3px black);
+  background-repeat: no-repeat;
 }
 
-plate {
+.table .hover {
+  filter: drop-shadow(0 0 10px yellow);
+}
+
+
+/* plate {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -65,14 +73,205 @@ pickle {
   height: 70px;
   border-radius: 10px;
   background-color: darkgreen;
+} */
+
+plate {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 120px;
+  height: 120px;
+  border-radius: 100%;
+  background-size: 120px 120px;
+  background-position: center center;
+  background-image: url('../../../assets/img/plate-red.svg');
 }
 
-notebook {
-  width: 70px;
-  height: 90px;
-  background-size: cover;
-  background-image: url('../../../assets/img/notebook.svg');
+plate#green {
+  background-image: url('../../../assets/img/plate-green.svg');
 }
+
+pan {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 120px;
+  height: 120px;
+  background-size: 110px 110px;
+  background-position: center center;
+  background-image: url('../../../assets/img/frying-pan.svg');
+}
+
+board {
+  width: 120px;
+  height: 120px;
+  background-size: 120px 120px;
+  background-position: center center;
+  background-image: url('../../../assets/img/cutting-board.svg');
+}
+
+apple {
+  width: 55px;
+  height: 55px;
+  background-size: 55px 55px;
+  background-position: center center;
+  background-image: url('../../../assets/img/apple.svg');
+}
+
+napkin {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 65px;
+  height: 90px;
+  background-size: 65px 90px;
+  background-position: center center;
+  background-image: url('../../../assets/img/napkin-white.svg');
+}
+
+napkin.red {
+  background-image: url('../../../assets/img/napkin-red.svg');
+}
+
+plate napkin {
+  transform: translateX(5px);
+}
+
+fork {
+  width: 20px;
+  height: 90px;
+  background-size: 20px 90px;
+  background-position: center center;
+  background-image: url('../../../assets/img/fork.svg');
+}
+
+fish {
+  width: 65px;
+  height: 45px;
+  background-size: 80px 45px;
+  background-position: center center;
+  background-image: url('../../../assets/img/fish.svg');
+}
+
+fish.big {
+  width: 95px;
+  height: 70px;
+  background-size: 120px 70px;
+  background-position: center center;
+  background-image: url('../../../assets/img/fish.svg');
+}
+
+knife {
+  width: 25px;
+  height: 110px;
+  background-size: 80px 110px;
+  background-position: center center;
+  background-image: url('../../../assets/img/knife.svg');
+}
+
+knife.big {
+  width: 55px;
+  height: 130px;
+  background-size: 100px 130px;
+  background-position: -30px center;
+  background-image: url('../../../assets/img/knife-big.svg');
+}
+
+towel {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 120px;
+  height: 120px;
+  background-size: 150px 150px;
+  background-position: center center;
+  background-image: url('../../../assets/img/towel.svg');
+}
+
+
+/* notepad {
+  width: 80px;
+  height: 110px;
+  background-size: 80px 110px;
+  background-position: center center;
+  background-image: url('../../../assets/img/notepad.svg');
+}
+
+paperclip {
+  width: 24px;
+  height: 40px;
+  background-size: 24px 40px;
+  background-position: center center;
+  background-image: url('../../../assets/img/clip.svg');
+}
+
+box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 120px;
+  height: 120px;
+  background-size: 120px 120px;
+  background-position: center center;
+  background-image: url('../../../assets/img/box-empty.svg');
+}
+
+box > paperclip,
+box > eraser {
+  transform: translateY(-8px);
+}
+
+box.full {
+  width: 120px;
+  height: 120px;
+  background-size: 120px 120px;
+  background-position: center center;
+  background-image: url('../../../assets/img/box-full.svg');
+}
+
+box#narrow {
+width: 100px;
+  height: 100px;
+  background-size: 100px 100px;
+  background-position: center center;
+  background-image: url('../../../assets/img/box-narrow.svg');
+}
+
+file {
+  width: 90px;
+  height: 90px;
+  background-size: 90px 90px;
+  background-position: center center;
+  background-image: url('../../../assets/img/file.svg');
+}
+
+eraser {
+  width: 55px;
+  height: 26px;
+  background-size: 55px 26px;
+  background-position: center center;
+  background-image: url('../../../assets/img/eraser.svg');
+}
+
+eraser.hover {
+  filter: drop-shadow(0 0 7px yellow);
+}
+
+papers {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 90px;
+  height: 90px;
+  background-size: 90px 90px;
+  background-position: center center;
+  background-image: url('../../../assets/img/papers.svg');
+}
+
+box papers {
+  background-image: url('../../../assets/img/papers-in-box.svg');
+  transform: translateY(-26px);
+} */
 
 .tooltip {
   position: absolute;
@@ -111,7 +310,8 @@ notebook {
   }
 
   .win-message {
-    background-color: brown;
+    background-color: rgb(182, 108, 11);
+    filter: none;
     font-size: 32px;
     color: rgb(240, 217, 9);
   }

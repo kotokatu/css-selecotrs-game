@@ -26,8 +26,7 @@ export class Editor extends BaseComponent {
             parent: this.element,
             className: 'editor-window',
         }).element;
-        const inputWrapper: HTMLElement = new BaseComponent({ parent: editorWindow, className: 'input-wrapper' })
-            .element;
+        const inputWrapper: HTMLElement = new BaseComponent({ parent: editorWindow, className: 'input-wrapper' }).element;
         this.input = new BaseComponent<HTMLInputElement>({
             parent: inputWrapper,
             tag: 'input',
@@ -43,8 +42,7 @@ export class Editor extends BaseComponent {
             this.setMockInputContent(this.input.value);
         });
         this.input.focus();
-        const mockInput: HTMLElement = new BaseComponent({ tag: 'pre', parent: inputWrapper, className: 'mock-input' })
-            .element;
+        const mockInput: HTMLElement = new BaseComponent({ tag: 'pre', parent: inputWrapper, className: 'mock-input' }).element;
         mockInput.setAttribute('aria-hidden', 'true');
         this.mockInputContent = new BaseComponent({
             tag: 'code',

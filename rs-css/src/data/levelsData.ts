@@ -1,5 +1,4 @@
 export type LevelObject = {
-    id: number;
     task: string;
     selector: string;
     markup: elemObject[];
@@ -15,22 +14,61 @@ export type elemObject = {
 
 export const LEVELS_LIST: readonly LevelObject[] = [
     {
-        id: 1,
-        task: 'Select the notebooks',
-        selector: 'notebook',
-        markup: [{ tag: 'notebook' }, { tag: 'notebook' }],
+        task: 'Select the plates',
+        selector: 'plate',
+        markup: [{ tag: 'plate' }, { tag: 'plate' }],
     },
     {
-        id: 2,
-        task: 'Select the bento boxes',
-        selector: 'bento',
-        markup: [{ tag: 'bento' }, { tag: 'plate' }, { tag: 'bento' }],
+        task: 'Select the pan',
+        selector: 'pan',
+        markup: [{ tag: 'plate' }, { tag: 'pan' }, { tag: 'plate' }],
     },
     {
-        id: 3,
-        task: 'Select the fancy plate',
-        selector: '#fancy',
-        markup: [{ tag: 'plate', id: 'fancy' }, { tag: 'plate' }, { tag: 'bento' }],
+        task: 'Select the green plate',
+        selector: '#green',
+        markup: [{ tag: 'plate', id: 'green' }, { tag: 'plate' }, { tag: 'napkin' }],
+    },
+    {
+        task: 'Select the napkin on a plate',
+        selector: 'plate napkin',
+        markup: [{ tag: 'plate' }, { tag: 'plate', child: { tag: 'napkin' } }, { tag: 'plate', class: 'green' }],
+    },
+    {
+        task: 'Select the red napkins',
+        selector: '.red',
+        markup: [
+            { tag: 'plate', id: 'green', child: { tag: 'napkin', class: 'red' } },
+            { tag: 'plate', child: { tag: 'napkin' } },
+            { tag: 'plate', child: { tag: 'napkin', class: 'red' } },
+        ],
+    },
+    {
+        task: 'Select the red napkin on the green plate',
+        selector: 'plate#green napkin.red',
+        markup: [
+            { tag: 'plate', id: 'green', child: { tag: 'napkin', class: 'red' } },
+            { tag: 'plate', child: { tag: 'napkin' } },
+            { tag: 'plate', child: { tag: 'napkin', class: 'red' } },
+        ],
+    },
+    {
+        task: 'Select the fork on an empty plate',
+        selector: 'plate > fork',
+        markup: [
+            { tag: 'plate', child: { tag: 'fork' } },
+            { tag: 'plate', id: 'green', child: { tag: 'napkin' } },
+            { tag: 'plate', child: { tag: 'napkin', child: { tag: 'fork' } } },
+        ],
+    },
+    {
+        task: 'Select the big fish',
+        selector: 'fish.big',
+        markup: [
+            { tag: 'plate', child: { tag: 'knife' } },
+            { tag: 'plate', child: { tag: 'fish', class: 'big' } },
+            { tag: 'plate', child: { tag: 'fish' } },
+            { tag: 'plate', child: { tag: 'knife', class: 'big' } },
+        ],
     },
     // {
     //     helpTitle: 'Select an element inside another element',
