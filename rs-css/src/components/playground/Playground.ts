@@ -89,7 +89,7 @@ export class Playground extends BaseComponent {
     }
 
     public checkGuess(input: HTMLInputElement): void {
-        if (input.value.trim()) {
+        try {
             const guessValue: NodeListOf<HTMLElement> = this.table.tableContainer.querySelectorAll(input.value);
             const testValue: NodeListOf<HTMLElement> = this.table.tableContainer.querySelectorAll(
                 this.levelData.selector
@@ -101,11 +101,12 @@ export class Playground extends BaseComponent {
                 [...guessValue].every((elem, ind) => elem === testValue[ind])
             ) {
                 this.onCorrectGuess([...guessValue]);
-                return;
+            } else {
+                this.addEditorAnimation();
             }
-        } else input.value = '';
-
-        this.addEditorAnimation();
+        } catch (err) {
+            this.addEditorAnimation();
+        }
     }
 
     public onCorrectGuess(elements: HTMLElement[]) {
