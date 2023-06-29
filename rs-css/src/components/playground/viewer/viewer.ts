@@ -12,7 +12,7 @@ export class Viewer extends BaseComponent {
     onMouseOut: (e: MouseEvent) => void;
     private levelData: LevelObject;
     constructor(parent: HTMLElement, levelData: LevelObject, onMouseOver: (e: MouseEvent) => void, onMouseOut: (e: MouseEvent) => void) {
-        super({ parent, className: 'pane viewer-pane' });
+        super({ parent, className: 'viewer pane' });
         this.levelData = levelData;
         this.viewerElements = [];
         this.onMouseOver = onMouseOver;

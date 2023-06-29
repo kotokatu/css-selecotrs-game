@@ -1,6 +1,4 @@
 .table-wrapper {
-  position: relative;
-  width: 600px;
   margin: 0 auto;
   padding: 40px 0;
   perspective: 400px;
@@ -16,7 +14,7 @@
   padding: 0 30px;
   width: 600px;
   height: 170px;
-  background-color: rgb(240, 211, 175);
+  background-color: #dd3b12;
   transform: rotateX(20deg);
   transform-origin: bottom;
   transform-style: preserve-3d;
@@ -26,7 +24,7 @@
   width: 600px;
   height: 15px;
   margin: 0 auto;
-  background-color: rgb(206, 163, 111);
+  background-color: #8f2409;
   transform: rotateX(-20deg);
   transform-origin: top;
 }
@@ -40,13 +38,14 @@
 }
 
 .table .hover {
-  filter: drop-shadow(0 0 10px #ffff00);
+  filter: drop-shadow(0 0 10px rgb(255, 255, 0));
 }
 
 .tooltip {
   position: fixed;
   padding: 10px;
-  background-color: antiquewhite;
+  top: 15px;
+  background-color: rgb(250, 235, 215);
   border-radius: 15px;
   color: #311363;
   display: none;

@@ -1,4 +1,4 @@
-.viewer-pane {
+.viewer {
   flex: 1;
   display: grid;
   grid-template-rows: 30px 1fr;
@@ -7,7 +7,7 @@
   height: 100%;
 }
 
-.pane-header {
+.viewer .pane-header {
   grid-row-start: 1;
   grid-column-start: 1;
   grid-row-end: 2;
@@ -16,18 +16,18 @@
   justify-content: space-between;
   align-items: center;
   padding: 0 20px 0 5px;
-  background-color: rgb(51, 51, 51);
-  color: rgb(231, 231, 231);
+  background-color: rgb(129, 28, 2);
+  color: rgb(255, 255, 255);
 }
 
-.gutter {
+.viewer .gutter {
   grid-row-start: 2;
   grid-column-start: 1;
   grid-row-end: 3;
   grid-column-end: 2;
   padding: 5px;
   text-align: right;
-  color: rgb(126, 124, 124);
+  color: rgb(255, 255, 255);
   border-right: 1px solid rgba(255, 255, 255, .4);
 }
 
@@ -38,13 +38,8 @@
   grid-column-end: 3;
   padding: 10px;
   font-weight: 500;
-  background-color: rgb(24, 24, 24);
-  color: rgba(255, 255, 255, .4);
+  background-color: rgb(63, 3, 3);
   cursor: default;
-}
-
-.viewer-pane .line-numbers {
-  background-color: rgb(24, 24, 24);
 }
 
 .viewer-window div {
@@ -57,8 +52,8 @@
   color: #fff78c;
 }
 
-.filename {
-  color: rgba(255, 255, 255, .4);
+.viewer .filename {
+  color: rgba(255, 255, 255, 0.6);
 }
 
 .hover-disabled {

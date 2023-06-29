@@ -6,6 +6,13 @@
   left: 0;
   right: 400px;
   overflow: auto;
+  background-image: repeating-linear-gradient(
+    to right,
+    #f6ba52,
+    #f6ba52 20px,
+    #ffd180 20px,
+    #ffd180 40px
+  );
 }
 
 .task {
@@ -18,11 +25,11 @@
   display: flex;
   margin: 0 auto 20px;
   width: 70%;
-  padding: 10px;
-  background-color: black;
+  padding: 15px;
+  background-color: rgb(163, 15, 4);
   font-family: monospace;
   font-size: 14px;
-  border-radius: 4px;
+  border-radius: 10px;
 }
 
 .editor-wrapper.shake {

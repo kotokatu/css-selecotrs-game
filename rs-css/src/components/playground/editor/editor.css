@@ -1,13 +1,16 @@
-.editor-pane {
+.editor {
   flex: 1;
   display: grid;
   grid-template-rows: 30px 1fr;
   grid-template-columns: 30px 1fr;
   gap: 0px;
   height: 100%;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+  overflow: hidden;
 }
 
-.pane-header {
+.editor .pane-header {
   grid-row-start: 1;
   grid-column-start: 1;
   grid-row-end: 2;
@@ -16,19 +19,20 @@
   justify-content: space-between;
   align-items: center;
   padding: 0 20px 0 5px;
-  background-color: rgb(51, 51, 51);
-  color: rgb(231, 231, 231);
+  background-color: rgb(129, 28, 2);
+  color: rgb(255, 255, 255);
 }
 
-.gutter {
+.editor .gutter {
   grid-row-start: 2;
   grid-column-start: 1;
   grid-row-end: 3;
   grid-column-end: 2;
   padding: 5px;
   text-align: right;
-  color: rgb(126, 124, 124);
-  border-right: 1px solid rgba(255, 255, 255, .4);
+  background-color: rgb(226, 88, 54);
+  color: rgb(255, 255, 255);
+  border-right: 1px solid rgba(46, 2, 2, 0.4);
 }
 
 .editor-window {
@@ -37,19 +41,16 @@
   grid-row-end: 3;
   grid-column-end: 3;
   padding: 10px;
-}
-
-.editor-window {
-  background-color: rgb(247, 247, 247);
-  color: rgba(0, 0, 0, .4);
+  background-color: rgb(250, 213, 195);
+  color: rgba(56, 22, 2, 0.4);
 }
 
 .editor-pane .line-numbers {
   background-color: rgb(206, 206, 206);
 }
 
-.filename {
-  color: rgba(255, 255, 255, .4);
+.editor .filename {
+  color: rgba(255, 255, 255, 0.6);
 }
 
 .input-wrapper {
@@ -82,7 +83,7 @@
 }
 
 .mock-input {
-  background-color: rgba(0, 0, 0, .6);
+  background-color: rgba(63, 3, 3, 0.8);
 }
 
 .mock-input-content {
@@ -112,18 +113,18 @@
   padding: 3px 0;
   margin-left: auto;
   text-shadow: 0 1px 2px #949494;
-  background-color: rgba(0, 0, 0, .2);
+  background-color: rgba(63, 3, 3, 0.2);
   border-radius: 2px;
   cursor: pointer;
-  border: 1px solid rgba(0, 0, 0, .45);
-  color: rgba(0, 0, 0, .6);
-  box-shadow: 0 4px rgba(0, 0, 0, .3);
+  border: 1px solid rgba(63, 3, 3, 0.45);
+  color: rgba(63, 3, 3, .6);
+  box-shadow: 0 4px rgba(63, 3, 3, 0.3);
   transition: .3s;
 }
 
 .enter-button:active {
-  background-color: rgba(0, 0, 0, .4);
-  box-shadow: 0 1px rgba(0, 0, 0, .3);
+  background-color: rgba(63, 3, 3, 0.4);
+  box-shadow: 0 1px rgba(63, 3, 3, 0.3);
   transform: translateY(2px);
 }
 

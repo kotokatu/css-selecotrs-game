@@ -31,27 +31,22 @@ export class Table extends BaseComponent<HTMLDivElement> {
 
     private createTableElement(elemObject: elemObject): HTMLElement {
         const elem: HTMLElement = document.createElement(elemObject.tag);
-        // let tooltipContent = `<${elemObject.tag}>`;
         if (elemObject.class) {
             elem.className = elemObject.class;
-            // tooltipContent += ` class="${elemObject.class}"`;
         }
 
         if (elemObject.id) {
             elem.id = elemObject.id;
-            // tooltipContent += ` id="${elemObject.class}"`;
         }
 
         if (elemObject.attribute) {
             elem.setAttribute(elemObject.attribute[0], elemObject.attribute[1]);
-            // tooltipContent += ` ${elemObject.attribute[0]}="${elemObject.attribute[1]}"`;
         }
 
         if (elemObject.child) {
             elem.append(this.createTableElement(elemObject.child));
         }
 
-        // elem.setAttribute('data-tooltip', `${tooltipContent}</${elemObject.tag}>`);
         elem.addEventListener('mouseover', this.onMouseOver);
         elem.addEventListener('mouseout', this.onMouseOut);
         this.tableElements.push(elem);
@@ -63,11 +58,10 @@ export class Table extends BaseComponent<HTMLDivElement> {
         this.levelData.markup.forEach((elem: elemObject) => this.tableContainer.append(this.createTableElement(elem)));
     }
 
-    public showTooltip(elem: HTMLElement, posLeft: number, posTop: number): void {
+    public showTooltip(elem: HTMLElement, posLeft: number): void {
         this.tooltip.classList.add('visible');
         this.tooltip.textContent = this.getTooltipContent(elem);
-        this.tooltip.style.left = `${posLeft - 70}px`;
-        this.tooltip.style.top = `${posTop - 150}px`;
+        this.tooltip.style.left = `${posLeft}px`;
     }
 
     public hideTooltip(): void {

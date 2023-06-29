@@ -10,7 +10,7 @@ export class Editor extends BaseComponent {
     private mockInputContent: HTMLElement;
     private input: HTMLInputElement;
     constructor(parent: HTMLElement, onInput: (input: HTMLInputElement) => void) {
-        super({ parent, className: 'pane editor-pane' });
+        super({ parent, className: 'editor pane' });
         const paneHeader: HTMLElement = new BaseComponent({
             parent: this.element,
             className: 'pane-header',
