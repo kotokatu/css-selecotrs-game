@@ -80,11 +80,14 @@ export class Table extends BaseComponent<HTMLDivElement> {
     }
 
     public bounceElements(elements: HTMLElement[]): void {
-        elements.forEach((elem) => elem.classList.add('bounce'));
+        elements.forEach((elem: HTMLElement) => {
+            elem.classList.remove('pulsate');
+            elem.classList.add('bounce');
+        });
     }
 
     public animateElements(elements: HTMLElement[]): void {
-        elements.forEach((elem) => elem.classList.add('pulsate'));
+        elements.forEach((elem: HTMLElement) => elem.classList.add('pulsate'));
     }
 
     public displayWinMessage(): void {

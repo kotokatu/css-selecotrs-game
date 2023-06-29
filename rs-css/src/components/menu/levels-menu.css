@@ -89,18 +89,15 @@ ul {
   color: rgba(255, 255, 255, .8);
   background-color: rgb(226, 88, 54);
   border-radius: 8px;
-  border: 1px solid rgba(63, 3, 3, 0.3);
-  box-shadow: 0 8px rgba(63, 3, 3, 0.3);
+  border: 1px solid rgba(63, 3, 3, 0.5);
   transition: all .3s;
   cursor: pointer;
 }
 
 .reset-btn:hover {
-  color: rgba(250, 205, 3);
-  text-shadow: 0 0 5px rgb(255, 255, 0);
+  background-color: rgb(255, 136, 0);
 }
 
 .reset-btn:active {
   transform: translateY(3px);
-  box-shadow: 0 5px rgba(63, 3, 3, 0.3);
 }

@@ -81,11 +81,27 @@
 }
 
 .help-btn:hover {
-  color: rgba(250, 205, 3);
-  text-shadow: 0 0 5px rgb(255, 255, 0);
+  background-color: rgb(255, 136, 0);
+  animation: buttonpress 0.7s ease-in-out infinite both;
 }
 
 .help-btn:active {
-  transform: rotateX(30deg) translateY(3px);
-  box-shadow: 0 5px rgb(163, 15, 4);
+  transform: rotateX(30deg) translateY(10px);
+  animation: none;
+  box-shadow: none;
+}
+
+@keyframes buttonpress {
+  0% {
+    box-shadow: 0 10px rgb(163, 15, 4);
+    transform: rotateX(30deg) translateY(0);
+  }
+  50% {
+    box-shadow: 0 5px rgb(163, 15, 4);
+    transform: rotateX(30deg) translateY(5px);
+  }
+  100% {
+    box-shadow: 0 10px rgb(163, 15, 4);
+    transform: rotateX(30deg) translateY(0);
+  }
 }
