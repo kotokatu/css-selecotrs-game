@@ -53,8 +53,8 @@ export class Viewer extends BaseComponent {
 
         elem.insertAdjacentText('afterbegin', `${elemContent}>`);
 
-        if (elemObject.child) {
-            elem.insertAdjacentElement('beforeend', this.createViewerElement(elemObject.child));
+        if (elemObject.children) {
+            elemObject.children.forEach((child: elemObject) => elem.insertAdjacentElement('beforeend', this.createViewerElement(child)));
         }
 
         elem.insertAdjacentText('beforeend', `</${elemObject.tag}>`);

@@ -45,8 +45,8 @@ export class Table extends BaseComponent<HTMLDivElement> {
             elem.setAttribute(elemObject.attribute[0], elemObject.attribute[1]);
         }
 
-        if (elemObject.child) {
-            elem.append(this.createTableElement(elemObject.child));
+        if (elemObject.children) {
+            elemObject.children.forEach((child: elemObject) => elem.append(this.createTableElement(child)));
         }
 
         if (elemObject.isAnimated) {

@@ -16,6 +16,23 @@
   );
   background-repeat: no-repeat;
   background-position: top center;
+  overflow-y: auto;
+  scrollbar-gutter: stable both-edges;
+  scrollbar-width: thin;
+}
+
+.playground-container::-webkit-scrollbar {
+  width: 7px;
+}
+
+.playground-container::-webkit-scrollbar-track {
+  background-color: rgb(255, 209, 128);
+}
+
+.playground-container::-webkit-scrollbar-thumb {
+  background-color: rgb(245, 157, 64);
+  outline: 0;
+  border-radius: 3px;
 }
 
 .task {
@@ -24,7 +41,7 @@
   justify-content: center;
   margin: 0 auto;
   padding: 15px 0;
-  max-width: 480px;
+  max-width: 540px;
   height: 130px;
   font-family: "Cherry Soda", monospace, sans-serif;
   font-size: 40px;

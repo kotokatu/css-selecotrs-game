@@ -8,19 +8,37 @@ ul {
   bottom: 0;
   right: 0;
   width: 280px;
+  padding-bottom: 20px;
   font-family: "Cherry Soda", monospace, sans-serif;
   color: rgba(255, 255, 255, .8);
   text-align: center;
   background-color: rgb(163, 15, 4);
   border-left: 25px solid rgb(129, 28, 2);
-  border-right: 25px solid rgb(129, 28, 2);
-  overflow: auto;
+  border-right: 21px solid rgb(129, 28, 2);
+  overflow-y: scroll;
+  scrollbar-gutter: stable;
+  scrollbar-width: thin;
+  scrollbar-color: rgb(129, 28, 2) rgba(245, 146, 146, 0.1);
+}
+
+.levels-container::-webkit-scrollbar {
+  width: 4px;
+}
+
+.levels-container::-webkit-scrollbar-track {
+  background-color: rgb(129, 28, 2);
+}
+
+.levels-container::-webkit-scrollbar-thumb {
+  background-color: rgb(245, 146, 146, 0.1);
+  outline: 0;
+  /* border-radius: 3px; */
 }
 
 .levels-heading {
   padding: 10px;
   font-size: 26px;
-  border-bottom: 2px solid rgba(129, 28, 2);
+  border-bottom: 2px solid rgb(129, 28, 2);
 }
 
 .menu-btn {
@@ -46,9 +64,9 @@ ul {
 
 .levels-item {
   position: relative;
-  font-size: 20px;
+  font-size: 16px;
   font-weight: 700;
-  padding: 10px 10px 10px 50px;
+  padding: 10px;
   border-bottom: 2px solid rgba(129, 28, 2);
   cursor: pointer;
 }
@@ -56,10 +74,10 @@ ul {
 .levels-item::before {
   content: '';
   position: absolute;
-  margin: 0 15px 0 5px;
-  transform: translateX(-35px) translateY(-3px) rotate(45deg);
-  height: 18px;
+  left: 110px;
   width: 8px;
+  height: 18px;
+  transform: translateX(-35px) translateY(-3px) rotate(45deg);
   border-bottom: 5px solid rgba(255, 255, 255, 0.4);
   border-right: 5px solid rgba(255, 255, 255, 0.4);
   border-radius: 5px;

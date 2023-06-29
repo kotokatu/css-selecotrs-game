@@ -22,7 +22,6 @@
 
 .table-edge {
   position: relative;
-
   width: 600px;
   height: 15px;
   margin: 0 auto;
@@ -82,16 +81,42 @@ plate {
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-wrap: wrap;
   width: 120px;
   height: 120px;
   border-radius: 100%;
   background-size: 120px 120px;
   background-position: center center;
+  background-image: url('../../../assets/img/plate.svg');
+}
+
+plate:has(apple) {
+  flex-direction: column;
+}
+
+plate cookie:not(:last-child) {
+  transform: translateY(20px);
+  z-index: 2;
+}
+
+plate.red {
   background-image: url('../../../assets/img/plate-red.svg');
 }
 
-plate#green {
+plate.green {
   background-image: url('../../../assets/img/plate-green.svg');
+}
+
+plate#dessert {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 80px;
+  height: 80px;
+  border-radius: 100%;
+  background-size: 80px 80px;
+  background-position: center center;
+  background-image: url('../../../assets/img/plate-small.svg');
 }
 
 pan {
@@ -106,11 +131,18 @@ pan {
 }
 
 board {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 120px;
   height: 120px;
   background-size: 120px 120px;
   background-position: center center;
   background-image: url('../../../assets/img/cutting-board.svg');
+}
+
+board > * {
+  margin-left: 12px;
 }
 
 apple {
@@ -119,6 +151,28 @@ apple {
   background-size: 55px 55px;
   background-position: center center;
   background-image: url('../../../assets/img/apple.svg');
+}
+
+apple.green {
+  background-image: url('../../../assets/img/apple-green.svg');
+}
+
+apple.yellow {
+  background-image: url('../../../assets/img/apple-yellow.svg');
+}
+
+apple.big {
+  width: 70px;
+  height: 70px;
+  background-size: 70px 70px;
+}
+
+tomato {
+  width: 55px;
+  height: 55px;
+  background-size: 55px 55px;
+  background-position: center center;
+  background-image: url('../../../assets/img/tomato.svg');
 }
 
 napkin {
@@ -137,7 +191,7 @@ napkin.red {
 }
 
 plate napkin {
-  transform: translateX(5px);
+  margin-left: 5px;
 }
 
 fork {
@@ -153,21 +207,23 @@ fish {
   height: 45px;
   background-size: 80px 45px;
   background-position: center center;
-  background-image: url('../../../assets/img/fish.svg');
+  background-image: url('../../../assets/img/fish-red.svg');
 }
 
 fish.big {
-  width: 95px;
-  height: 70px;
-  background-size: 120px 70px;
-  background-position: center center;
-  background-image: url('../../../assets/img/fish.svg');
+  width: 105px;
+  height: 80px;
+  background-size: 130px 80px;
+}
+
+fish.green {
+  background-image: url('../../../assets/img/fish-green.svg');
 }
 
 knife {
-  width: 25px;
-  height: 110px;
-  background-size: 80px 110px;
+  width: 20px;
+  height: 90px;
+  background-size: 20px 90px;
   background-position: center center;
   background-image: url('../../../assets/img/knife.svg');
 }
@@ -178,6 +234,22 @@ knife.big {
   background-size: 100px 130px;
   background-position: -30px center;
   background-image: url('../../../assets/img/knife-big.svg');
+}
+
+knife.small {
+  width: 25px;
+  height: 130px;
+  background-size: 100px 130px;
+  background-position: -45px center;
+  background-image: url('../../../assets/img/knife-small.svg');
+}
+
+knife.butcher {
+  width: 45px;
+  height: 130px;
+  background-size: 100px 130px;
+  background-position: -35px center;
+  background-image: url('../../../assets/img/knife-biggest.svg');
 }
 
 towel {
@@ -191,6 +263,55 @@ towel {
   background-image: url('../../../assets/img/towel.svg');
 }
 
+towel > * {
+  margin-left: 10px;
+}
+
+towel:has(cookie) {
+  flex-direction: column;
+}
+
+spoon {
+  width: 20px;
+  height: 90px;
+  background-size: 20px 90px;
+  background-position: center center;
+  background-image: url('../../../assets/img/spoon.svg');
+}
+
+steak {
+  width: 90px;
+  height: 70px;
+  background-size: 90px 70px;
+  background-position: center center;
+  background-image: url('../../../assets/img/steak.svg');
+}
+
+broccoli {
+  width: 65px;
+  height: 90px;
+  background-size: 65px 90px;
+  background-position: center center;
+  background-image: url('../../../assets/img/broccoli.svg');
+}
+
+cookie {
+  width: 45px;
+  height: 45px;
+  background-size: 45px 45px;
+  border-radius: 100%;
+  background-position: center center;
+  background-image: url('../../../assets/img/cookie.svg');
+}
+
+cookie.big {
+  width: 75px;
+  height: 75px;
+  background-size: 75px 75px;
+  border-radius: 100%;
+  background-position: center center;
+  background-image: url('../../../assets/img/cookie.svg');
+}
 
 .bounce {
   animation-name: bounce;
@@ -213,7 +334,7 @@ towel {
 }
 
 .pulsate {
-    animation: pulsate 0.5s ease-in-out infinite both;
+    animation: pulsate 0.7s ease-in-out infinite both;
   }
 
 @keyframes pulsate {
@@ -221,7 +342,7 @@ towel {
     transform: scale(1);
   }
   50% {
-    transform: scale(0.9);
+    transform: scale(0.92);
   }
   100% {
     transform: scale(1);
