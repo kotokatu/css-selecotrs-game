@@ -49,8 +49,8 @@
   padding-left: 15px;
 }
 
-.viewer-window div.hover > code > span {
-  font-weight: 500;
+.viewer-window div.hover > code > span,
+.viewer-window div.hover > code > span > span {
   text-shadow: 0 0 2px #fff78c;
   color: #fff78c;
 }
