@@ -40,16 +40,16 @@
   grid-row-end: 3;
   grid-column-end: 3;
   padding: 10px;
-  font-weight: 500;
+  font-weight: 600;
   background-color: rgb(63, 3, 3);
   cursor: default;
 }
 
-.viewer-window div {
-  padding-left: 20px;
+.viewer-window div div {
+  padding-left: 15px;
 }
 
-.viewer-window div.hover > span {
+.viewer-window div.hover > code > span {
   font-weight: 500;
   text-shadow: 0 0 2px #fff78c;
   color: #fff78c;

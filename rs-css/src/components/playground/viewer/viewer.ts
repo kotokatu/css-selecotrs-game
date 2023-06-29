@@ -1,9 +1,9 @@
 import { BaseComponent } from '../../../common/base-component';
-import { LevelObject } from '../../../data/levelsData';
-import { elemObject } from '../../../data/levelsData';
-import { prettyPrint } from '../../../../node_modules/code-prettify/src/prettify.js';
-import '../../../css/custom-pr.css';
+import { LevelObject, elemObject } from '../../../data/levelsData';
+import hljs from 'highlight.js';
+import xml from '../../../../node_modules/highlight.js/lib/languages/xml.js';
 import './viewer.css';
+hljs.registerLanguage('xml', xml);
 
 export class Viewer extends BaseComponent {
     private viewer: HTMLElement;
@@ -36,41 +36,43 @@ export class Viewer extends BaseComponent {
     }
 
     createViewerElement(elemObject: elemObject): HTMLElement {
-        const elem = document.createElement('div');
-        let elemContent = `<${elemObject.tag}`;
+        const elem: HTMLElement = new BaseComponent({}).element;
+        const code: HTMLElement = new BaseComponent({ tag: 'code', parent: elem }).element;
+        let content = `<${elemObject.tag}`;
 
         if (elemObject.class) {
-            elemContent += ` class="${elemObject.class}"`;
+            content += ` class="${elemObject.class}"`;
         }
 
         if (elemObject.id) {
-            elemContent += ` id="${elemObject.id}"`;
+            content += ` id="${elemObject.id}"`;
         }
 
         if (elemObject.attribute) {
-            elemContent += ` ${elemObject.attribute[0]}="${elemObject.attribute[1]}"`;
+            content += ` ${elemObject.attribute[0]}="${elemObject.attribute[1]}"`;
         }
 
-        elem.insertAdjacentText('afterbegin', `${elemContent}>`);
+        code.insertAdjacentHTML('afterbegin', hljs.highlight(`${content}>`, { language: 'html' }).value);
 
         if (elemObject.children) {
-            elemObject.children.forEach((child: elemObject) => elem.insertAdjacentElement('beforeend', this.createViewerElement(child)));
+            elemObject.children.forEach((child: elemObject) => code.insertAdjacentElement('beforeend', this.createViewerElement(child)));
         }
 
-        elem.insertAdjacentText('beforeend', `</${elemObject.tag}>`);
+        code.insertAdjacentHTML('beforeend', hljs.highlight(`</${elemObject.tag}>`, { language: 'html' }).value);
 
         elem.addEventListener('mouseover', this.onMouseOver);
         elem.addEventListener('mouseout', this.onMouseOut);
+
         this.viewerElements.push(elem);
+
         return elem;
     }
 
     renderViewerElements() {
-        const markupWrapper = new BaseComponent({ tag: 'pre', parent: this.viewer, className: 'prettyprint' }).element;
-        markupWrapper.insertAdjacentText('afterbegin', '<div class="table">');
-        this.levelData.markup.forEach((elem) => markupWrapper.append(this.createViewerElement(elem)));
-        markupWrapper.insertAdjacentText('beforeend', '</div>');
-        prettyPrint();
+        const markupWrapper: HTMLElement = new BaseComponent({ tag: 'div', parent: this.viewer }).element;
+        markupWrapper.insertAdjacentHTML('afterbegin', hljs.highlight('<div class="table">', { language: 'html' }).value);
+        this.levelData.markup.forEach((elem: elemObject) => markupWrapper.insertAdjacentElement('beforeend', this.createViewerElement(elem)));
+        markupWrapper.insertAdjacentHTML('beforeend', hljs.highlight('</div>', { language: 'html' }).value);
     }
 
     update(levelData: LevelObject, isOver?: boolean) {

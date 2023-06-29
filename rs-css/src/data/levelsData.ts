@@ -135,7 +135,7 @@ export const LEVELS_LIST: readonly LevelObject[] = [
             {
                 tag: 'napkin',
                 children: [
-                    { tag: 'knife', class: 'dinner', isAnimated: true },
+                    { tag: 'knife', isAnimated: true },
                     { tag: 'fork', isAnimated: true },
                 ],
                 isAnimated: true,
