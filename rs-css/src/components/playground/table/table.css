@@ -1,6 +1,5 @@
 .table-wrapper {
-  margin: 0 auto;
-  padding: 40px 0;
+  margin: 0 auto 40px;
   perspective: 400px;
 }
 
@@ -15,18 +14,42 @@
   width: 600px;
   height: 170px;
   background-color: #dd3b12;
+  box-shadow: 0 30px 13px rgba(0, 0, 0, 0.7);
   transform: rotateX(20deg);
   transform-origin: bottom;
   transform-style: preserve-3d;
 }
 
 .table-edge {
+  position: relative;
+
   width: 600px;
   height: 15px;
   margin: 0 auto;
   background-color: #8f2409;
   transform: rotateX(-20deg);
   transform-origin: top;
+}
+
+.table-leg {
+  position: absolute;
+  display: inline-block;
+  width: 15px;
+  height: 20px;
+  transform-origin: top;
+  background: linear-gradient(90deg, rgb(167, 165, 165) 26%, rgba(4,0,11,0.8564814814814815) 100%);
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+
+.table-leg__left {
+  top: 100%;
+  left: 20px;
+}
+
+.table-leg__right {
+  top: 100%;
+  right: 20px;
 }
 
 .table * {
@@ -190,8 +213,8 @@ towel {
   }
 
   .win-message {
-    background-color: rgb(182, 108, 11);
-    filter: none;
+    font-family: "Cherry Soda", monospace, sans-serif;
     font-size: 32px;
     color: rgb(240, 217, 9);
+    filter: none;
   }

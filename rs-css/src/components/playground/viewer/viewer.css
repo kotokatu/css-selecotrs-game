@@ -5,6 +5,9 @@
   grid-template-columns: 30px 1fr;
   gap: 0px;
   height: 100%;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+  overflow: hidden;
 }
 
 .viewer .pane-header {

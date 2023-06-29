@@ -1,3 +1,11 @@
+@font-face {
+  font-family: "Cherry Soda";
+  src: url("../assets/fonts/CherrySoda.woff2") format("woff2");
+  src: url("../assets/fonts/CherrySoda.woff") format("woff");
+  font-weight: 400;
+  font-style: normal;
+}
+
 * {
   box-sizing: border-box;
   padding: 0;
@@ -5,7 +13,6 @@
 }
 
 .page {
-  /* background-color: rgb(208, 238, 124); */
   color: rgb(126, 124, 124);
   font-family: monospace;
 }

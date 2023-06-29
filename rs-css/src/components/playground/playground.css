@@ -4,21 +4,32 @@
   top: 0;
   bottom: 0;
   left: 0;
-  right: 400px;
+  right: 250px;
   overflow: auto;
-  background-image: repeating-linear-gradient(
+  background-image: url(../../assets/img/lamp.png), 
+    repeating-linear-gradient(
     to right,
-    #f6ba52,
-    #f6ba52 20px,
-    #ffd180 20px,
-    #ffd180 40px
+    rgb(246, 186, 82),
+    rgb(246, 186, 82) 20px,
+    rgb(255, 209, 128) 20px,
+    rgb(255, 209, 128) 40px
   );
+  background-repeat: no-repeat;
+  background-position: top center;
 }
 
 .task {
-  text-align: center;
-  padding: 20px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+  padding: 15px 0;
+  max-width: 480px;
+  height: 130px;
+  font-family: "Cherry Soda", monospace, sans-serif;
   font-size: 40px;
+  text-align: center;
+  color: rgb(184, 15, 3);
 }
 
 .editor-wrapper {

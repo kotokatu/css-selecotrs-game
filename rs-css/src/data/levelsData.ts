@@ -31,7 +31,7 @@ export const LEVELS_LIST: readonly LevelObject[] = [
     {
         task: 'Select the napkin on a plate',
         selector: 'plate napkin',
-        markup: [{ tag: 'plate' }, { tag: 'plate', child: { tag: 'napkin' } }, { tag: 'plate', class: 'green' }],
+        markup: [{ tag: 'napkin' }, { tag: 'plate', child: { tag: 'napkin' } }, { tag: 'plate', class: 'green' }],
     },
     {
         task: 'Select the red napkins',

@@ -52,7 +52,7 @@ export class Editor extends BaseComponent {
         new Button({
             parent: inputWrapper,
             className: 'enter-button',
-            content: 'Enter',
+            content: 'enter',
             onClick: () => onInput(this.input),
         });
         new BaseComponent({

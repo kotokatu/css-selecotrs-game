@@ -19,7 +19,9 @@ export class Table extends BaseComponent<HTMLDivElement> {
             parent: this.element,
             className: 'table',
         }).element;
-        new BaseComponent<HTMLDivElement>({ parent: this.element, className: 'table-edge' }).element;
+        const tableEdge = new BaseComponent<HTMLDivElement>({ parent: this.element, className: 'table-edge' }).element;
+        new BaseComponent<HTMLDivElement>({ parent: tableEdge, className: 'table-leg table-leg__left' });
+        new BaseComponent<HTMLDivElement>({ parent: tableEdge, className: 'table-leg table-leg__right' });
         this.tooltip = new BaseComponent<HTMLSpanElement>({
             tag: 'span',
             parent: this.element,

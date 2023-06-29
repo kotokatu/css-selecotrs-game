@@ -36,7 +36,7 @@ export class Menu extends BaseComponent {
         new Button({
             parent: this.element,
             className: 'reset-btn',
-            content: `reset progress`,
+            content: `reset`,
             onClick: () => observer.notify({ isReset: true }),
         }).element;
 
