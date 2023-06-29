@@ -3,7 +3,6 @@
   width: 600px;
   margin: 0 auto;
   padding: 40px 0;
-  transform: translate3d(0,0,0);
   perspective: 400px;
 }
 
@@ -20,7 +19,7 @@
   background-color: rgb(240, 211, 175);
   transform: rotateX(20deg);
   transform-origin: bottom;
-  /* transform-style: preserve-3d; */
+  transform-style: preserve-3d;
 }
 
 .table-edge {
@@ -33,47 +32,29 @@
 }
 
 .table * {
-  filter: drop-shadow(0 5px 3px black);
+  position: relative;
   background-repeat: no-repeat;
+  filter: drop-shadow(0 5px 3px black);
+  transition: transform 1s;
+  transform-style: preserve-3d;
 }
 
 .table .hover {
-  filter: drop-shadow(0 0 10px yellow);
+  filter: drop-shadow(0 0 10px #ffff00);
 }
 
-
-/* plate {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100px;
-  height: 100px;
-  border-radius: 100%;
-  background-color: #ffffff;
+.tooltip {
+  position: fixed;
+  padding: 10px;
+  background-color: antiquewhite;
+  border-radius: 15px;
+  color: #311363;
+  display: none;
 }
 
-bento {
+.tooltip.visible {
   display: block;
-  width: 100px;
-  height: 100px;
-  background-color: chocolate;
 }
-
-apple {
-  display: block;
-  width: 40px;
-  height: 40px;
-  border-radius: 100%;
-  background-color: crimson;
-}
-
-pickle {
-  display: block;
-  width: 20px;
-  height: 70px;
-  border-radius: 10px;
-  background-color: darkgreen;
-} */
 
 plate {
   display: flex;
@@ -188,106 +169,6 @@ towel {
   background-image: url('../../../assets/img/towel.svg');
 }
 
-
-/* notepad {
-  width: 80px;
-  height: 110px;
-  background-size: 80px 110px;
-  background-position: center center;
-  background-image: url('../../../assets/img/notepad.svg');
-}
-
-paperclip {
-  width: 24px;
-  height: 40px;
-  background-size: 24px 40px;
-  background-position: center center;
-  background-image: url('../../../assets/img/clip.svg');
-}
-
-box {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 120px;
-  height: 120px;
-  background-size: 120px 120px;
-  background-position: center center;
-  background-image: url('../../../assets/img/box-empty.svg');
-}
-
-box > paperclip,
-box > eraser {
-  transform: translateY(-8px);
-}
-
-box.full {
-  width: 120px;
-  height: 120px;
-  background-size: 120px 120px;
-  background-position: center center;
-  background-image: url('../../../assets/img/box-full.svg');
-}
-
-box#narrow {
-width: 100px;
-  height: 100px;
-  background-size: 100px 100px;
-  background-position: center center;
-  background-image: url('../../../assets/img/box-narrow.svg');
-}
-
-file {
-  width: 90px;
-  height: 90px;
-  background-size: 90px 90px;
-  background-position: center center;
-  background-image: url('../../../assets/img/file.svg');
-}
-
-eraser {
-  width: 55px;
-  height: 26px;
-  background-size: 55px 26px;
-  background-position: center center;
-  background-image: url('../../../assets/img/eraser.svg');
-}
-
-eraser.hover {
-  filter: drop-shadow(0 0 7px yellow);
-}
-
-papers {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 90px;
-  height: 90px;
-  background-size: 90px 90px;
-  background-position: center center;
-  background-image: url('../../../assets/img/papers.svg');
-}
-
-box papers {
-  background-image: url('../../../assets/img/papers-in-box.svg');
-  transform: translateY(-26px);
-} */
-
-.tooltip {
-  position: absolute;
-  padding: 10px;
-  width: fit-content;
-  background-color: aliceblue;
-  display: none;
-}
-
-.tooltip.visible {
-  display: block;
-}
-
-.table > * {
-  transition: transform 1s;
-}
 
 .out {
   animation-name: bounceOut;

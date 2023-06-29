@@ -48,7 +48,8 @@ export class Playground extends BaseComponent {
                 if (tableElement && viewerElement) {
                     tableElement.classList.add('hover');
                     viewerElement.classList.add('hover');
-                    this.table.showTooltip(viewerElement, tableElement.offsetLeft, tableElement.offsetTop);
+                    const coords = tableElement.getBoundingClientRect();
+                    this.table.showTooltip(viewerElement, coords.left, coords.top);
                 }
             }
         }
