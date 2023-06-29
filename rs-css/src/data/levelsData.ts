@@ -6,6 +6,7 @@ export type LevelObject = {
 
 export type elemObject = {
     tag: string;
+    isAnimated?: boolean;
     class?: string;
     id?: string;
     attribute?: [string, string];
@@ -16,38 +17,41 @@ export const LEVELS_LIST: readonly LevelObject[] = [
     {
         task: 'Select the plates',
         selector: 'plate',
-        markup: [{ tag: 'plate' }, { tag: 'plate' }],
+        markup: [
+            { tag: 'plate', isAnimated: true },
+            { tag: 'plate', isAnimated: true },
+        ],
     },
     {
         task: 'Select the pan',
         selector: 'pan',
-        markup: [{ tag: 'plate' }, { tag: 'pan' }, { tag: 'plate' }],
+        markup: [{ tag: 'plate' }, { tag: 'pan', isAnimated: true }, { tag: 'plate' }],
     },
     {
         task: 'Select the green plate',
         selector: '#green',
-        markup: [{ tag: 'plate', id: 'green' }, { tag: 'plate' }, { tag: 'napkin' }],
+        markup: [{ tag: 'plate', id: 'green', isAnimated: true }, { tag: 'plate' }, { tag: 'napkin' }],
     },
     {
         task: 'Select the napkin on a plate',
         selector: 'plate napkin',
-        markup: [{ tag: 'napkin' }, { tag: 'plate', child: { tag: 'napkin' } }, { tag: 'plate', class: 'green' }],
+        markup: [{ tag: 'napkin' }, { tag: 'plate', child: { tag: 'napkin', isAnimated: true } }, { tag: 'plate', class: 'green' }],
     },
     {
         task: 'Select the red napkins',
         selector: '.red',
         markup: [
-            { tag: 'plate', id: 'green', child: { tag: 'napkin', class: 'red' } },
+            { tag: 'plate', id: 'green', child: { tag: 'napkin', class: 'red', isAnimated: true } },
             { tag: 'plate', child: { tag: 'napkin' } },
-            { tag: 'plate', child: { tag: 'napkin', class: 'red' } },
+            { tag: 'plate', child: { tag: 'napkin', class: 'red', isAnimated: true } },
         ],
     },
     {
         task: 'Select the red napkin on the green plate',
-        selector: 'plate#green napkin.red',
+        selector: '#green .red',
         markup: [
-            { tag: 'plate', id: 'green', child: { tag: 'napkin', class: 'red' } },
             { tag: 'plate', child: { tag: 'napkin' } },
+            { tag: 'plate', id: 'green', child: { tag: 'napkin', class: 'red', isAnimated: true } },
             { tag: 'plate', child: { tag: 'napkin', class: 'red' } },
         ],
     },
@@ -55,9 +59,9 @@ export const LEVELS_LIST: readonly LevelObject[] = [
         task: 'Select the fork on an empty plate',
         selector: 'plate > fork',
         markup: [
-            { tag: 'plate', child: { tag: 'fork' } },
-            { tag: 'plate', id: 'green', child: { tag: 'napkin' } },
             { tag: 'plate', child: { tag: 'napkin', child: { tag: 'fork' } } },
+            { tag: 'plate', child: { tag: 'fork', isAnimated: true } },
+            { tag: 'plate', id: 'green', child: { tag: 'napkin' } },
         ],
     },
     {
@@ -65,8 +69,8 @@ export const LEVELS_LIST: readonly LevelObject[] = [
         selector: 'fish.big',
         markup: [
             { tag: 'plate', child: { tag: 'knife' } },
-            { tag: 'plate', child: { tag: 'fish', class: 'big' } },
             { tag: 'plate', child: { tag: 'fish' } },
+            { tag: 'plate', child: { tag: 'fish', class: 'big', isAnimated: true } },
             { tag: 'plate', child: { tag: 'knife', class: 'big' } },
         ],
     },

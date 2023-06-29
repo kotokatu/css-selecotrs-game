@@ -7,20 +7,20 @@ ul {
   top: 0;
   bottom: 0;
   right: 0;
-  width: 250px;
+  width: 280px;
   font-family: "Cherry Soda", monospace, sans-serif;
   color: rgba(255, 255, 255, .8);
   text-align: center;
   background-color: rgb(163, 15, 4);
-  border-left: 15px solid rgb(129, 28, 2);
-  border-right: 15px solid rgb(129, 28, 2);
+  border-left: 25px solid rgb(129, 28, 2);
+  border-right: 25px solid rgb(129, 28, 2);
   overflow: auto;
 }
 
 .levels-heading {
   padding: 10px;
   font-size: 26px;
-  border-bottom: 2px solid rgba(255, 255, 255, .4);
+  border-bottom: 2px solid rgba(129, 28, 2);
 }
 
 .menu-btn {
@@ -37,7 +37,7 @@ ul {
 }
 
 .menu-btn-line {
-  border: 1px solid rgba(255, 255, 255, .4);
+  border: 1px solid rgba(255, 255, 255, 0.4);
 }
 
 .levels-list {
@@ -49,7 +49,7 @@ ul {
   font-size: 20px;
   font-weight: 700;
   padding: 10px 10px 10px 50px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+  border-bottom: 2px solid rgba(129, 28, 2);
   cursor: pointer;
 }
 
@@ -65,37 +65,39 @@ ul {
   border-radius: 5px;
 }
 
-.levels-item.current {
-  background-color: rgba(255, 255, 255, .2);
+.levels-item.current,
+.levels-item:hover {
+  background-color: rgba(255, 106, 94, 0.2);
 }
 
 .levels-item.completed::before {
-  border-color: rgb(45, 201, 91);
+  border-color: rgb(5, 151, 49);
 }
 
 .levels-item.hint-used::before {
-  border-color: rgb(240, 217, 9);
+  border-color: rgb(250, 205, 3);
 }
 
 .reset-btn {
   display: block;
   margin: 0 auto;
-  padding: 5px 10px;
-  font-family: inherit;
-  font-size: 16px;
+  padding: 5px 15px;
+  font-family: monospace;
+  font-size: 18px;
   font-weight: 700;
   letter-spacing: 0.15em;
   color: rgba(255, 255, 255, .8);
-  background-color: rgba(255, 255, 255, .2);
-  border-radius: 4px;
+  background-color: rgb(226, 88, 54);
+  border-radius: 8px;
   border: 1px solid rgba(63, 3, 3, 0.3);
   box-shadow: 0 8px rgba(63, 3, 3, 0.3);
-  transition: .3s;
+  transition: all .3s;
   cursor: pointer;
 }
 
 .reset-btn:hover {
-  color: rgb(240, 217, 9);
+  color: rgba(250, 205, 3);
+  text-shadow: 0 0 5px rgb(255, 255, 0);
 }
 
 .reset-btn:active {

@@ -122,6 +122,10 @@
   transition: .3s;
 }
 
+.enter-button:hover {
+  background-color: rgba(63, 3, 3, 0.3);
+}
+
 .enter-button:active {
   background-color: rgba(63, 3, 3, 0.4);
   box-shadow: 0 1px rgba(63, 3, 3, 0.3);

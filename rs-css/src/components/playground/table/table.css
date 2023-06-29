@@ -1,5 +1,5 @@
 .table-wrapper {
-  margin: 0 auto 40px;
+  margin: 0 auto 20px;
   perspective: 400px;
 }
 
@@ -14,7 +14,7 @@
   width: 600px;
   height: 170px;
   background-color: #dd3b12;
-  box-shadow: 0 30px 13px rgba(0, 0, 0, 0.7);
+  box-shadow: 0 28px 10px rgba(0, 0, 0, 0.7);
   transform: rotateX(20deg);
   transform-origin: bottom;
   transform-style: preserve-3d;
@@ -67,7 +67,7 @@
 .tooltip {
   position: fixed;
   padding: 10px;
-  top: 15px;
+  top: -5px;
   background-color: rgb(250, 235, 215);
   border-radius: 15px;
   color: #311363;
@@ -192,29 +192,45 @@ towel {
 }
 
 
-.out {
-  animation-name: bounceOut;
+.bounce {
+  animation-name: bounce;
   animation-duration: 1s;
   animation-fill-mode: forwards;
   }
 
-  @keyframes bounceOut {
-    20% {
-    transform: translate3d(0, -10px, 0);
-    }
-    40%, 45% {
-    opacity: 1;
-    transform: translate3d(0, 20px, 0);
-    }
-    100% {
-    opacity: 0;
-    transform: translate3d(0, -2000px, 0);
-    }
+@keyframes bounce {
+  20% {
+  transform: translate3d(0, -10px, 0);
+  }
+  40%, 45% {
+  opacity: 1;
+  transform: translate3d(0, 20px, 0);
+  }
+  100% {
+  opacity: 0;
+  transform: translate3d(0, -2000px, 0);
+  }
+}
+
+.pulsate {
+    animation: pulsate 0.5s ease-in-out infinite both;
   }
 
-  .win-message {
-    font-family: "Cherry Soda", monospace, sans-serif;
-    font-size: 32px;
-    color: rgb(240, 217, 9);
-    filter: none;
+@keyframes pulsate {
+  0% {
+    transform: scale(1);
   }
+  50% {
+    transform: scale(0.9);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.win-message {
+  font-family: "Cherry Soda", monospace, sans-serif;
+  font-size: 32px;
+  color: rgb(240, 217, 9);
+  filter: none;
+}

@@ -49,10 +49,13 @@ export class Table extends BaseComponent<HTMLDivElement> {
             elem.append(this.createTableElement(elemObject.child));
         }
 
+        if (elemObject.isAnimated) {
+            elem.classList.add('pulsate');
+        }
+
         elem.addEventListener('mouseover', this.onMouseOver);
         elem.addEventListener('mouseout', this.onMouseOut);
         this.tableElements.push(elem);
-
         return elem;
     }
 
@@ -76,11 +79,15 @@ export class Table extends BaseComponent<HTMLDivElement> {
         return textElements ? `${textElements[0]}><${textElements[textElements.length - 1]}` : '';
     }
 
-    public animateElements(elements: HTMLElement[]) {
-        elements.forEach((elem) => elem.classList.add('out'));
+    public bounceElements(elements: HTMLElement[]): void {
+        elements.forEach((elem) => elem.classList.add('bounce'));
     }
 
-    public displayWinMessage() {
+    public animateElements(elements: HTMLElement[]): void {
+        elements.forEach((elem) => elem.classList.add('pulsate'));
+    }
+
+    public displayWinMessage(): void {
         const winMessage = new BaseComponent<HTMLHeadingElement>({
             tag: 'h2',
             className: 'win-message',
@@ -89,7 +96,7 @@ export class Table extends BaseComponent<HTMLDivElement> {
         this.tableContainer.replaceChildren(winMessage);
     }
 
-    public update(levelData: LevelObject, isOver?: boolean) {
+    public update(levelData: LevelObject, isOver?: boolean): void {
         if (isOver) {
             this.displayWinMessage();
         } else {

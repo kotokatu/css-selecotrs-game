@@ -4,7 +4,7 @@
   top: 0;
   bottom: 0;
   left: 0;
-  right: 250px;
+  right: 280px;
   overflow: auto;
   background-image: url(../../assets/img/lamp.png), 
     repeating-linear-gradient(
@@ -34,7 +34,7 @@
 
 .editor-wrapper {
   display: flex;
-  margin: 0 auto 20px;
+  margin: 20px auto 0;
   width: 70%;
   padding: 15px;
   background-color: rgb(163, 15, 4);
@@ -64,22 +64,28 @@
 .help-btn {
   display: block;
   margin: 0 auto;
-  padding: 5px 10px;
+  width: 70px;
+  height: 68px;
   font-family: inherit;
   font-size: 18px;
   font-weight: 700;
-  color: rgba(255, 255, 255, .5);
-  border-radius: 2px;
+  letter-spacing: 0.15em;
+  color: rgba(255, 255, 255, .8);
+  background-color: rgb(226, 88, 54);
+  border-radius: 100%;
+  border: 1px solid rgb(163, 15, 4);
+  box-shadow: 0 10px rgb(163, 15, 4);
+  transform: rotateX(30deg);
+  transition: all .3s;
   cursor: pointer;
-  border: 1px solid rgba(255, 255, 255, .3);
-  transition: .3s;
 }
 
 .help-btn:hover {
-  color: rgb(45, 201, 91);
-  box-shadow: 0 0 5px rgb(45, 201, 91);
+  color: rgba(250, 205, 3);
+  text-shadow: 0 0 5px rgb(255, 255, 0);
 }
 
 .help-btn:active {
-  transform: translateY(3px);
+  transform: rotateX(30deg) translateY(3px);
+  box-shadow: 0 5px rgb(163, 15, 4);
 }

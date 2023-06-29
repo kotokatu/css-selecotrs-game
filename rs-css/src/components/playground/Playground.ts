@@ -26,16 +26,16 @@ export class Playground extends BaseComponent {
             className: 'task',
         }).element;
         this.table = new Table(this.element, this.levelData, this.onMouseOver.bind(this), this.onMouseOut.bind(this));
-        this.editorWrapper = new BaseComponent({ parent: this.element, className: 'editor-wrapper' }).element;
-        this.editorWrapper.addEventListener('animationend', this.removeEditorAnimation.bind(this));
-        this.editor = new Editor(this.editorWrapper, this.checkGuess.bind(this));
-        this.viewer = new Viewer(this.editorWrapper, levelData, this.onMouseOver.bind(this), this.onMouseOut.bind(this));
         new Button({
             parent: this.element,
             className: 'help-btn',
             content: 'help',
             onClick: this.handleHelpButtonClick.bind(this),
         });
+        this.editorWrapper = new BaseComponent({ parent: this.element, className: 'editor-wrapper' }).element;
+        this.editorWrapper.addEventListener('animationend', this.removeEditorAnimation.bind(this));
+        this.editor = new Editor(this.editorWrapper, this.checkGuess.bind(this));
+        this.viewer = new Viewer(this.editorWrapper, levelData, this.onMouseOver.bind(this), this.onMouseOut.bind(this));
     }
 
     private onMouseOver(e: MouseEvent): void {
@@ -99,9 +99,9 @@ export class Playground extends BaseComponent {
     }
 
     public onCorrectGuess(elements: HTMLElement[]) {
-        this.table.animateElements(elements);
+        this.table.bounceElements(elements);
         setTimeout(
-            () =>
+            (): void =>
                 observer.notify({
                     levelNum: this.levelNum + 1,
                     isCompleted: true,
