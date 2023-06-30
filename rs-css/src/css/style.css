@@ -24,6 +24,7 @@
 
 html {
   font-size: 10px;
+
 }
 
 * {
@@ -37,30 +38,39 @@ html {
 .page {
   font-family: monospace;
   background-color: rgb(246, 186, 82);
-  overflow-x: hidden;
-  scrollbar-width: thin;
-  scrollbar-gutter: stable;
 }
 
-.page::-webkit-scrollbar {
-  width: 7px;
-}
 
-.page::-webkit-scrollbar-track {
-  background-color: rgb(255, 209, 128);
-}
+@media (max-width: 768px) {
 
-.page::-webkit-scrollbar-thumb {
-  background-color: rgb(245, 157, 64);
-  outline: 0;
-  border-radius: 3px;
-}
+  .page {
+    overflow-x: hidden;
+    scrollbar-width: thin;
+    /* scrollbar-gutter: stable; */
+  }
 
-html:has(.levels-wrapper.visible) {
-  overflow-y: hidden;
-}
+  .page::-webkit-scrollbar {
+    width: 7px;
+  }
 
-.page:has(.levels-wrapper.visible) {
-  overflow-y: hidden;
+  .page::-webkit-scrollbar-track {
+    background-color: rgb(255, 209, 128);
+  }
+
+  .page::-webkit-scrollbar-thumb {
+    background-color: rgb(245, 157, 64);
+    outline: 0;
+    border-radius: 3px;
+  }
+
+  
+  html:has(.levels-wrapper.visible) {
+    overflow-y: hidden;
+  }
+
+  .page:has(.levels-wrapper.visible) {
+    overflow-y: hidden;
+  }
+
 }
 

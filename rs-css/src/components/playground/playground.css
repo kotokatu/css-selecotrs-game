@@ -134,19 +134,23 @@
 @media (max-width: 1000px) {
 
   .playground-container {
-    background-image: repeating-linear-gradient(
+    background-image: url(../../assets/img/lamp2.png),
+    repeating-linear-gradient(
       to right,
       rgb(246, 186, 82),
       rgb(246, 186, 82) 20px,
       rgb(255, 209, 128) 20px,
       rgb(255, 209, 128) 40px
     );
-    background-attachment: unset;
    }
 
    .editor-wrapper {
-    flex-direction: column;
-    max-width: 545px
+      flex-direction: column;
+      max-width: 545px
+   }
+
+   .task {
+      max-width: 420px;
    }
 
 }
@@ -158,9 +162,21 @@
   }
 
   .task {
-    max-width: 80vw;
     font-size: 36px;
   }
 
+}
+
+@media (max-width: 650px) {
+
+  .playground-container {
+    background-image: repeating-linear-gradient(
+      to right,
+      rgb(246, 186, 82),
+      rgb(246, 186, 82) 20px,
+      rgb(255, 209, 128) 20px,
+      rgb(255, 209, 128) 40px
+    );
+   }
 
 }
