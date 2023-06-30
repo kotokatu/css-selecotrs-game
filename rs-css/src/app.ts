@@ -22,11 +22,11 @@ enum StorageKey {
 }
 
 class App {
-    currLevel: number;
-    levelsState: LevelState[];
-    appRoot: HTMLElement;
-    menu: Menu;
-    playground: Playground;
+    private currLevel: number;
+    private levelsState: LevelState[];
+    private appRoot: HTMLElement;
+    private menu: Menu;
+    private playground: Playground;
     constructor(appRoot: HTMLElement) {
         this.appRoot = appRoot;
         this.currLevel = Number(localStorage.getItem(StorageKey.Level)) || DEFAULT_LEVEL;
@@ -49,13 +49,11 @@ class App {
             this.levelsState[this.currLevel].isHintUsed = params.isHintUsed;
         }
 
-        if (levelNum !== undefined) {
-            if (levelNum === LEVELS_TOTAL) {
-                this.updateApp(true);
-            } else {
-                this.currLevel = levelNum;
-                this.updateApp();
-            }
+        if (levelNum === LEVELS_TOTAL) {
+            this.updateApp(true);
+        } else if (levelNum !== undefined) {
+            this.currLevel = levelNum;
+            this.updateApp();
         }
 
         if (isReset) {

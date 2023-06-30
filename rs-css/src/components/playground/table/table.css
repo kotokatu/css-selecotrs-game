@@ -12,7 +12,7 @@
   margin: 0 auto;
   padding: 0 30px;
   width: 600px;
-  height: 170px;
+  height: 190px;
   background-color: #dd3b12;
   box-shadow: 0 28px 10px rgba(0, 0, 0, 0.7);
   transform: rotateX(20deg);
@@ -52,14 +52,16 @@
 }
 
 .table * {
-  position: relative;
   background-repeat: no-repeat;
-  filter: drop-shadow(0 5px 3px black);
   transition: transform 1s;
   transform-style: preserve-3d;
 }
 
-.table .hover {
+.table :not(plate) {
+  filter: drop-shadow(0 5px 3px black);
+}
+
+.table :not(plate).hover {
   filter: drop-shadow(0 0 10px rgb(255, 255, 0));
 }
 
@@ -81,22 +83,45 @@ plate {
   display: flex;
   justify-content: center;
   align-items: center;
-  flex-wrap: wrap;
   width: 120px;
   height: 120px;
   border-radius: 100%;
   background-size: 120px 120px;
   background-position: center center;
   background-image: url('../../../assets/img/plate.svg');
+  box-shadow: 0 3px 10px black;
 }
 
-plate:has(apple) {
+plate.hover {
+  box-shadow: 0 0 20px rgb(255, 255, 0);
+}
+
+plate:not(#dessert):has(cookie),
+towel:has(cookie),
+plate:not(#dessert):has(apple),
+towel:has(apple),
+plate:not(#dessert):has(tomato),
+towel:has(tomato) {
   flex-direction: column;
 }
 
-plate cookie:not(:last-child) {
-  transform: translateY(20px);
+cookie:first-child,
+apple:first-child,
+tomato:first-child {
+  z-index: 3;
+}
+
+plate:not(#dessert) cookie:nth-child(2),
+plate:not(#dessert) tomato:nth-child(2),
+plate:not(#dessert) apple:nth-child(2) {
+  transform: translateY(-10px);
   z-index: 2;
+}
+
+plate:not(#dessert) cookie:nth-child(3),
+plate:not(#dessert) tomato:nth-child(3),
+plate:not(#dessert) apple:nth-child(3) {
+  transform: translateY(-20px);
 }
 
 plate.red {
@@ -120,14 +145,25 @@ plate#dessert {
 }
 
 pan {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  display: block;
+  position: relative;
   width: 120px;
   height: 120px;
   background-size: 110px 110px;
   background-position: center center;
   background-image: url('../../../assets/img/frying-pan.svg');
+}
+
+pan broccoli:nth-child(2) {
+  z-index: 2;
+  top: 30%
+}
+
+pan * {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateY(-50%) translateX(-50%);
 }
 
 board {
@@ -173,6 +209,7 @@ tomato {
   background-size: 55px 55px;
   background-position: center center;
   background-image: url('../../../assets/img/tomato.svg');
+  border-radius: 100%;
 }
 
 napkin {
@@ -289,19 +326,20 @@ steak {
 
 broccoli {
   width: 65px;
-  height: 90px;
-  background-size: 65px 90px;
+  height: 70px;
+  background-size: 65px 70px;
   background-position: center center;
   background-image: url('../../../assets/img/broccoli.svg');
+  border-radius: 45px;
 }
 
 cookie {
   width: 45px;
   height: 45px;
   background-size: 45px 45px;
-  border-radius: 100%;
   background-position: center center;
   background-image: url('../../../assets/img/cookie.svg');
+  border-radius: 100%;
 }
 
 cookie.big {
@@ -311,6 +349,49 @@ cookie.big {
   border-radius: 100%;
   background-position: center center;
   background-image: url('../../../assets/img/cookie.svg');
+}
+
+egg {
+  width: 90px;
+  height: 75px;
+  background-size: 70px 75px;
+  border-radius: 100%;
+  background-position: center center;
+  background-image: url('../../../assets/img/egg.svg');
+}
+
+cake {
+  width: 70px;
+  height: 70px;
+  background-size: 70px 70px;
+  background-position: center center;
+  background-image: url('../../../assets/img/cake.svg');
+}
+
+[for] {
+  position: relative;
+}
+
+[for]::after {
+  content: attr(for);
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 5px;
+  width: 150px;
+  height: 35px;
+  top: calc(100% - 7px);
+  transform: rotateX(-15deg) translateZ(12px);
+  font-family: "Dancing Script", monospace, sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  color: rgb(0, 0, 0);
+  background-image: url('../../../assets/img/nameplate1.png');
+  background-size: 120% 120%;
+  background-position: center center;
+  background-repeat: no-repeat;
+  z-index: -1;
 }
 
 .bounce {
@@ -350,8 +431,9 @@ cookie.big {
 }
 
 .win-message {
+  max-width: 390px;
   font-family: "Cherry Soda", monospace, sans-serif;
   font-size: 32px;
+  text-align: center;
   color: rgb(240, 217, 9);
-  filter: none;
 }

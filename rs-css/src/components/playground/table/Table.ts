@@ -63,10 +63,11 @@ export class Table extends BaseComponent<HTMLDivElement> {
         this.levelData.markup.forEach((elem: elemObject) => this.tableContainer.append(this.createTableElement(elem)));
     }
 
-    public showTooltip(elem: HTMLElement, posLeft: number): void {
+    public showTooltip(elem: HTMLElement, posLeft: number, posTop: number): void {
         this.tooltip.classList.add('visible');
         this.tooltip.textContent = this.getTooltipContent(elem);
         this.tooltip.style.left = `${posLeft}px`;
+        this.tooltip.style.top = `${posTop - this.tableContainer.getBoundingClientRect().height - 25}px`;
     }
 
     public hideTooltip(): void {
@@ -94,7 +95,7 @@ export class Table extends BaseComponent<HTMLDivElement> {
         const winMessage = new BaseComponent<HTMLHeadingElement>({
             tag: 'h2',
             className: 'win-message',
-            content: 'Hooray! You did it!',
+            content: 'Congratulations! You&nbsp;are a pro at CSS!',
         }).element;
         this.tableContainer.replaceChildren(winMessage);
     }

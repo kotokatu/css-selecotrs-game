@@ -36,7 +36,7 @@ export class Viewer extends BaseComponent {
     }
 
     createViewerElement(elemObject: elemObject): HTMLElement {
-        const elem: HTMLElement = new BaseComponent({}).element;
+        const elem: HTMLElement = new BaseComponent().element;
         const code: HTMLElement = new BaseComponent({ tag: 'code', parent: elem }).element;
         let content = `<${elemObject.tag}`;
 
