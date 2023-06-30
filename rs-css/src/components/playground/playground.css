@@ -5,7 +5,6 @@
   bottom: 0;
   left: 0;
   right: 18vw;
-  overflow: auto;
   background-image: url(../../assets/img/lamp1.png), 
     repeating-linear-gradient(
     to right,
@@ -18,7 +17,7 @@
   background-position: top center;
   background-attachment: local, scroll;
   overflow-y: auto;
-  scrollbar-gutter: stable both-edges;
+  scrollbar-gutter: stable;
   scrollbar-width: thin;
 }
 
@@ -148,8 +147,12 @@
 @media (max-width: 768px) {
 
   .playground-container {
-    position: relative;
-    /* width: 100vw; */
+    /* position: relative; */
+    width: 100vw;
+  }
+
+  .page:has(.levels-container.visible) .playground-container {
+    overflow-y: hidden;
   }
 
 

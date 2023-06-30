@@ -16,6 +16,9 @@ ul {
   border-left: 25px solid rgb(129, 28, 2);
   border-right: 20px solid rgb(129, 28, 2);
   z-index: 2;
+  scrollbar-gutter: stable;
+  scrollbar-width: thin;
+  scrollbar-color: rgb(129, 28, 2) rgba(245, 146, 146, 0.1);
 }
 
 .levels-heading {
@@ -24,6 +27,7 @@ ul {
 }
 
 .menu-btn {
+  display: none;
   position: absolute;
   width: 30px;
   height: 80px;
@@ -40,28 +44,22 @@ ul {
 }
 
 
-.levels-list {
+.levels-container {
   margin-bottom: 30px;
-  height: 100%;
   background-color: rgb(163, 15, 4);
-  overflow-y: scroll;
-  scrollbar-gutter: stable;
-  scrollbar-width: thin;
-  scrollbar-color: rgb(129, 28, 2) rgba(245, 146, 146, 0.1);
 }
 
-.levels-list::-webkit-scrollbar {
-  width: 5px;
+.levels-container::-webkit-scrollbar {
+  width: 9px;
 }
 
-.levels-list::-webkit-scrollbar-track {
-  background-color: rgb(129, 28, 2);
+.levels-container::-webkit-scrollbar-track {
+  background-color: rgb(170, 63, 36);
 }
 
-.levels-list::-webkit-scrollbar-thumb {
-  background-color: rgb(245, 146, 146, 0.1);
+.levels-container::-webkit-scrollbar-thumb {
+  background-color: rgba(129, 28, 2, 0.6);
   outline: 0;
-  border-radius: 3px;
 }
 
 .levels-item {
@@ -147,7 +145,6 @@ ul {
     width: 320px;
     height: 100vh;
     transition: 1s;
-    padding-bottom: 100px;
   }
 
   .levels-container.visible {

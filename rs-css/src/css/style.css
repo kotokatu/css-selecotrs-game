@@ -24,6 +24,7 @@
 
 html {
   font-size: 10px;
+  overflow-x: hidden;
 }
 
 * {
@@ -33,14 +34,12 @@ html {
 }
 
 .page {
-  color: rgb(126, 124, 124);
   font-family: monospace;
-  overflow-y: auto;
-  scrollbar-gutter: stable both-edges;
-  scrollbar-width: thin;
+  overflow-x: hidden;
+  /* scrollbar-width: thin; */
 }
 
-.page::-webkit-scrollbar {
+/* .page::-webkit-scrollbar {
   width: 7px;
 }
 
@@ -52,8 +51,4 @@ html {
   background-color: rgb(245, 157, 64);
   outline: 0;
   border-radius: 3px;
-}
-
-.page:has(.levels-container.visible) {
-  overflow: hidden;
-}
+} */
