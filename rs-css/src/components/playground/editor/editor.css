@@ -135,3 +135,13 @@
 .editor-text {
   padding: 10px 0;
 }
+
+@media (max-width: 1000px) {
+
+  .editor {
+    max-height: 145px;
+    border-top-right-radius: 5px;
+    border-bottom-left-radius: 0;
+  }
+
+}

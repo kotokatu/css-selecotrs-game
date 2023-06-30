@@ -31,6 +31,7 @@
   padding: 5px;
   text-align: right;
   color: rgb(255, 255, 255);
+  background-color: rgb(221, 59, 18);
   border-right: 1px solid rgba(255, 255, 255, .4);
 }
 
@@ -61,5 +62,16 @@
 
 .hover-disabled {
   pointer-events: none;
+}
+
+@media (max-width: 1000px) {
+
+  .viewer {
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    transform: translateY(-5px);
+    max-height: 325px;
+  }
+
 }
 

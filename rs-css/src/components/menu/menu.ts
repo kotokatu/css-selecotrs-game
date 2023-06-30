@@ -2,7 +2,7 @@ import { BaseComponent } from '../../common/base-component';
 import { Button } from '../../common/button/button';
 import { observer } from '../../common/observer';
 import { LevelState } from '../../app';
-import './levels-menu.css';
+import './menu.css';
 
 export class Menu extends BaseComponent {
     private levelNum: number;
@@ -24,9 +24,7 @@ export class Menu extends BaseComponent {
         new Button({
             parent: this.element,
             className: 'menu-btn',
-            content: `<span class="menu-btn-line"></span>
-                <span class="menu-btn-line"></span>
-                <span class="menu-btn-line"></span>`,
+            content: `levels`,
         }).element;
         this.levelsList = new BaseComponent<HTMLUListElement>({
             tag: 'ul',

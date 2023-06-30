@@ -11,18 +11,22 @@
   gap: 25px;
   margin: 0 auto;
   padding: 0 30px;
-  width: 600px;
+  width: 590px;
   height: 190px;
-  background-color: #dd3b12;
+  background-color: rgb(221, 59, 18);
   box-shadow: 0 28px 10px rgba(0, 0, 0, 0.7);
   transform: rotateX(20deg);
   transform-origin: bottom;
   transform-style: preserve-3d;
 }
 
+.table:has([for]) {
+  padding-bottom: 15px;
+}
+
 .table-edge {
   position: relative;
-  width: 600px;
+  width: 590px;
   height: 15px;
   margin: 0 auto;
   background-color: #8f2409;
@@ -387,7 +391,7 @@ cake {
   font-size: 20px;
   font-weight: 700;
   color: rgb(0, 0, 0);
-  background-image: url('../../../assets/img/nameplate1.png');
+  background-image: url('../../../assets/img/nameplate.png');
   background-size: 120% 120%;
   background-position: center center;
   background-repeat: no-repeat;
@@ -436,4 +440,9 @@ cake {
   font-size: 32px;
   text-align: center;
   color: rgb(240, 217, 9);
+}
+
+@media (max-width: 768px) {
+
+
 }

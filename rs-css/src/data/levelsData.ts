@@ -245,7 +245,7 @@ export const LEVELS_LIST: readonly LevelObject[] = [
         task: 'Select the plates for Nina and Nick',
         selector: '[for^=Ni]',
         markup: [
-            { tag: 'plate', attribute: ['for', 'Annie'], children: [{ tag: 'tomato' }] },
+            { tag: 'plate', attribute: ['for', 'Annie'], children: [{ tag: 'fish', class: 'green' }] },
             { tag: 'fork' },
             { tag: 'plate', class: 'red', attribute: ['for', 'Nina'], children: [{ tag: 'fish', class: 'green' }], isAnimated: true },
             { tag: 'plate', attribute: ['for', 'Nick'], children: [{ tag: 'cake' }], isAnimated: true },

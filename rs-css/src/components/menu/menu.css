@@ -7,66 +7,70 @@ ul {
   top: 0;
   bottom: 0;
   right: 0;
-  width: 280px;
+  width: 18vw;
   padding-bottom: 20px;
   font-family: "Cherry Soda", monospace, sans-serif;
   color: rgba(255, 255, 255, .8);
   text-align: center;
   background-color: rgb(163, 15, 4);
   border-left: 25px solid rgb(129, 28, 2);
-  border-right: 21px solid rgb(129, 28, 2);
-  overflow-y: scroll;
-  scrollbar-gutter: stable;
-  scrollbar-width: thin;
-  scrollbar-color: rgb(129, 28, 2) rgba(245, 146, 146, 0.1);
+  border-right: 20px solid rgb(129, 28, 2);
+
+  z-index: 999;
 }
 
-.levels-container::-webkit-scrollbar {
-  width: 4px;
+.levels-list::-webkit-scrollbar {
+  width: 5px;
 }
 
-.levels-container::-webkit-scrollbar-track {
+.levels-list::-webkit-scrollbar-track {
   background-color: rgb(129, 28, 2);
 }
 
-.levels-container::-webkit-scrollbar-thumb {
+.levels-list::-webkit-scrollbar-thumb {
   background-color: rgb(245, 146, 146, 0.1);
   outline: 0;
-  /* border-radius: 3px; */
+  border-radius: 3px;
 }
 
 .levels-heading {
   padding: 10px;
   font-size: 26px;
   border-bottom: 2px solid rgb(129, 28, 2);
+  border-right: 5px solid rgb(129, 28, 2);
 }
 
 .menu-btn {
-  display: none;
   position: absolute;
-  top: 0;
-  right: 0;
   width: 30px;
-  height: 25px;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: stretch;
-  margin-left: auto;
+  height: 80px;
+  top: 40%;
+  right: 100%;
+  background-color: rgb(129, 28, 2);
+  border-top-left-radius: 25px;
+  border-bottom-left-radius: 25px;
+  transform: translateX(-50%);
+  writing-mode: vertical-rl;
+  color: rgb(255, 255, 255);
+  z-index: 1;
+  cursor: pointer;
 }
 
-.menu-btn-line {
-  border: 1px solid rgba(255, 255, 255, 0.4);
-}
 
 .levels-list {
   margin-bottom: 30px;
+  height: 100%;
+  overflow-y: scroll;
+  scrollbar-gutter: stable;
+  scrollbar-width: thin;
+  scrollbar-color: rgb(129, 28, 2) rgba(245, 146, 146, 0.1);
 }
 
 .levels-item {
   position: relative;
   font-size: 16px;
   font-weight: 700;
-  padding: 10px;
+  padding: 10px 10px 10px 25px;
   border-bottom: 2px solid rgba(129, 28, 2);
   cursor: pointer;
 }
@@ -74,10 +78,10 @@ ul {
 .levels-item::before {
   content: '';
   position: absolute;
-  left: 110px;
+  left: calc(50% - 35px);
   width: 8px;
   height: 18px;
-  transform: translateX(-35px) translateY(-3px) rotate(45deg);
+  transform: translateY(-3px) rotate(45deg);
   border-bottom: 5px solid rgba(255, 255, 255, 0.4);
   border-right: 5px solid rgba(255, 255, 255, 0.4);
   border-radius: 5px;
@@ -118,4 +122,26 @@ ul {
 
 .reset-btn:active {
   transform: translateY(3px);
+}
+
+@media (max-width: 1000px) {
+
+  .levels-container {
+    border-left-width: 15px;
+    border-right-width: 10px;
+   }
+
+   .levels-item {
+    padding-left: 35px;
+   }
+
+}
+
+@media (max-width: 768px) {
+
+  .menu-btn {
+    display: block;
+
+  }
+
 }

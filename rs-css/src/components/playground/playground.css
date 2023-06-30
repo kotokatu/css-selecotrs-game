@@ -4,9 +4,9 @@
   top: 0;
   bottom: 0;
   left: 0;
-  right: 280px;
+  right: 18vw;
   overflow: auto;
-  background-image: url(../../assets/img/lamp.png), 
+  background-image: url(../../assets/img/lamp1.png), 
     repeating-linear-gradient(
     to right,
     rgb(246, 186, 82),
@@ -16,6 +16,7 @@
   );
   background-repeat: no-repeat;
   background-position: top center;
+  background-attachment: local, scroll;
   overflow-y: auto;
   scrollbar-gutter: stable both-edges;
   scrollbar-width: thin;
@@ -51,8 +52,9 @@
 
 .editor-wrapper {
   display: flex;
-  margin: 20px auto 0;
-  width: 70%;
+  margin: 20px auto 30px;
+  width: 85%;
+  max-width: 1100px;
   padding: 15px;
   background-color: rgb(163, 15, 4);
   font-family: monospace;
@@ -121,4 +123,33 @@
     box-shadow: 0 10px rgb(163, 15, 4);
     transform: rotateX(30deg) translateY(0);
   }
+}
+
+@media (max-width: 1000px) {
+
+  .playground-container {
+    background-image:repeating-linear-gradient(
+      to right,
+      rgb(246, 186, 82),
+      rgb(246, 186, 82) 20px,
+      rgb(255, 209, 128) 20px,
+      rgb(255, 209, 128) 40px
+    );
+    background-attachment: unset;
+   }
+
+   .editor-wrapper {
+    flex-direction: column;
+    max-width: 545px
+   }
+
+}
+
+@media (max-width: 768px) {
+
+  .playground-container {
+    position: relative;
+  }
+
+
 }
