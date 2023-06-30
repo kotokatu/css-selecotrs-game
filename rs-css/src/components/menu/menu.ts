@@ -25,6 +25,7 @@ export class Menu extends BaseComponent {
             parent: this.element,
             className: 'menu-btn',
             content: `levels`,
+            onClick: this.toggleMenu.bind(this),
         }).element;
         this.levelsList = new BaseComponent<HTMLUListElement>({
             tag: 'ul',
@@ -48,7 +49,7 @@ export class Menu extends BaseComponent {
         }
     }
 
-    createListElement(levelNum: number, parent: HTMLElement): HTMLLIElement {
+    private createListElement(levelNum: number, parent: HTMLElement): HTMLLIElement {
         const levelsItem: HTMLLIElement = new BaseComponent<HTMLLIElement>({
             tag: 'li',
             parent,
@@ -67,7 +68,7 @@ export class Menu extends BaseComponent {
         return levelsItem;
     }
 
-    markCompleted(levelNum: number, elem: HTMLLIElement): void {
+    private markCompleted(levelNum: number, elem: HTMLLIElement): void {
         if (this.levelsState[levelNum].isHintUsed && this.levelsState[levelNum].isCompleted) {
             elem.classList.add('hint-used');
         } else if (this.levelsState[levelNum].isCompleted) {
@@ -75,15 +76,32 @@ export class Menu extends BaseComponent {
         }
     }
 
-    highlightCurrent(levelNum: number, elem: HTMLLIElement): void {
+    private highlightCurrent(levelNum: number, elem: HTMLLIElement): void {
         if (this.levelNum === levelNum) {
             elem.classList.add('current');
         }
     }
 
-    update(levelNum: number, levelsState: LevelState[]) {
+    private toggleMenu() {
+        if (this.element.classList.contains('visible')) {
+            this.hideMenu();
+        } else {
+            this.showMenu();
+        }
+    }
+
+    private hideMenu() {
+        this.element.classList.remove('visible');
+    }
+
+    private showMenu() {
+        this.element.classList.add('visible');
+    }
+
+    public update(levelNum: number, levelsState: LevelState[]) {
         this.levelNum = levelNum;
         this.levelsState = levelsState;
+        this.hideMenu();
         this.renderList();
     }
 }
