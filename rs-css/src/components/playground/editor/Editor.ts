@@ -80,8 +80,10 @@ export class Editor extends BaseComponent {
 
     private async typewrite(selector: string, i: number): Promise<void> {
         if (i < selector.length) {
-            this.setContent(selector.slice(0, i + 1));
-            return delay().then(() => this.typewrite(selector, ++i));
+            const j = i + 1;
+            this.setContent(selector.slice(0, j));
+            await delay();
+            return this.typewrite(selector, j);
         }
     }
 

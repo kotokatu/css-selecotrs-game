@@ -24,21 +24,22 @@
 
 html {
   font-size: 10px;
-  overflow-x: hidden;
 }
 
 * {
   box-sizing: border-box;
   padding: 0;
   margin: 0;
-  
+
   -webkit-tap-highlight-color: transparent;
 }
 
 .page {
   font-family: monospace;
+  background-color: rgb(246, 186, 82);
   overflow-x: hidden;
   scrollbar-width: thin;
+  scrollbar-gutter: stable;
 }
 
 .page::-webkit-scrollbar {
@@ -56,6 +57,10 @@ html {
 }
 
 html:has(.levels-wrapper.visible) {
+  overflow-y: hidden;
+}
+
+.page:has(.levels-wrapper.visible) {
   overflow-y: hidden;
 }
 

@@ -5,8 +5,9 @@
   bottom: 0;
   left: 0;
   right: 18vw;
+  padding-top: 25px;
   background-image: url(../../assets/img/lamp1.png), 
-    repeating-linear-gradient(
+  repeating-linear-gradient(
     to right,
     rgb(246, 186, 82),
     rgb(246, 186, 82) 20px,
@@ -133,7 +134,7 @@
 @media (max-width: 1000px) {
 
   .playground-container {
-    background-image:repeating-linear-gradient(
+    background-image: repeating-linear-gradient(
       to right,
       rgb(246, 186, 82),
       rgb(246, 186, 82) 20px,
@@ -154,12 +155,12 @@
 
   .playground-container {
     position: relative;
-    /* width: 100vw; */
   }
 
-  /* .page:has(.levels-wrapper.visible) .playground-container {
-    overflow-y: hidden;
-  } */
+  .task {
+    max-width: 80vw;
+    font-size: 36px;
+  }
 
 
 }

@@ -11,7 +11,8 @@
   gap: 25px;
   margin: 0 auto;
   padding: 0 30px;
-  width: 590px;
+  width: 95vw;
+  max-width: 590px;
   height: 190px;
   background-color: rgb(221, 59, 18);
   box-shadow: 0 28px 10px rgba(0, 0, 0, 0.7);
@@ -26,7 +27,8 @@
 
 .table-edge {
   position: relative;
-  width: 590px;
+  width: 95vw;
+  max-width: 590px;
   height: 15px;
   margin: 0 auto;
   background-color: #8f2409;
@@ -75,6 +77,7 @@
   top: -5px;
   background-color: rgb(250, 235, 215);
   border-radius: 15px;
+  font-size: 14px;
   color: #311363;
   display: none;
 }
@@ -174,9 +177,9 @@ board {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 120px;
-  height: 120px;
-  background-size: 120px 120px;
+  width: 115px;
+  height: 115px;
+  background-size: 115px 115px;
   background-position: center center;
   background-image: url('../../../assets/img/cutting-board.svg');
 }
@@ -252,8 +255,8 @@ fish {
 }
 
 fish.big {
-  width: 105px;
-  height: 80px;
+  width: 80px;
+  height: 65px;
   background-size: 130px 80px;
 }
 
@@ -270,10 +273,10 @@ knife {
 }
 
 knife.big {
-  width: 55px;
+  width: 40px;
   height: 130px;
   background-size: 100px 130px;
-  background-position: -30px center;
+  background-position: -38px center;
   background-image: url('../../../assets/img/knife-big.svg');
 }
 
@@ -444,5 +447,9 @@ cake {
 
 @media (max-width: 768px) {
 
+  .table {
+    padding: 0 3px;
+    gap: 5px;
+  }
 
 }

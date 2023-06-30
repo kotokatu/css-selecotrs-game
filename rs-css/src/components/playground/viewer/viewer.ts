@@ -55,7 +55,7 @@ export class Viewer extends BaseComponent {
         code.insertAdjacentHTML('afterbegin', hljs.highlight(`${content}>`, { language: 'html' }).value);
 
         if (elemObject.children) {
-            elemObject.children.forEach((child: elemObject) => code.insertAdjacentElement('beforeend', this.createViewerElement(child)));
+            elemObject.children.forEach((child: elemObject) => code.append(this.createViewerElement(child)));
         }
 
         code.insertAdjacentHTML('beforeend', hljs.highlight(`</${elemObject.tag}>`, { language: 'html' }).value);
