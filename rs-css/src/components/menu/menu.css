@@ -2,23 +2,19 @@ ul {
   list-style: none;
 }
 
-.levels-container {
+.levels-wrapper {
   position: fixed;
   top: 0;
   bottom: 0;
   right: 0;
   width: 18vw;
-  padding-bottom: 20px;
   font-family: "Cherry Soda", monospace, sans-serif;
   color: rgba(255, 255, 255, .8);
   text-align: center;
-  background-color: rgb(129, 28, 2);
+  background-color: rgb(163, 15, 4);
   border-left: 25px solid rgb(129, 28, 2);
   border-right: 20px solid rgb(129, 28, 2);
   z-index: 2;
-  scrollbar-gutter: stable;
-  scrollbar-width: thin;
-  scrollbar-color: rgb(129, 28, 2) rgba(245, 146, 146, 0.1);
 }
 
 .levels-heading {
@@ -28,29 +24,20 @@ ul {
 
 .menu-btn {
   display: none;
-  position: absolute;
-  width: 30px;
-  height: 80px;
-  top: 42%;
-  right: 100%;
-  background-color: rgb(129, 28, 2);
-  border-top-left-radius: 25px;
-  border-bottom-left-radius: 25px;
-  transform: translateX(-50%);
-  writing-mode: vertical-rl;
-  color: rgb(255, 255, 255);
-  z-index: 1;
-  cursor: pointer;
 }
 
 
 .levels-container {
-  margin-bottom: 30px;
-  background-color: rgb(163, 15, 4);
+  height: 100%;
+  padding-bottom: 20px;
+  overflow-y: scroll;
+  scrollbar-gutter: stable;
+  scrollbar-width: thin;
+  scrollbar-color: rgb(129, 28, 2) rgba(245, 146, 146, 0.1);
 }
 
 .levels-container::-webkit-scrollbar {
-  width: 9px;
+  width: 6px;
 }
 
 .levels-container::-webkit-scrollbar-track {
@@ -60,6 +47,11 @@ ul {
 .levels-container::-webkit-scrollbar-thumb {
   background-color: rgba(129, 28, 2, 0.6);
   outline: 0;
+  border-radius: 3px;
+}
+
+.levels-list {
+  padding-bottom: 20px;
 }
 
 .levels-item {
@@ -83,8 +75,7 @@ ul {
   border-radius: 5px;
 }
 
-.levels-item.current,
-.levels-item:hover {
+.levels-item.current{
   background-color: rgba(255, 106, 94, 0.2);
 }
 
@@ -120,16 +111,31 @@ ul {
   transform: translateY(3px);
 }
 
+.overlay {
+  width: 0;
+  height: 0;
+  opacity: 0;
+}
+
 @media (max-width: 1000px) {
 
-  .levels-container {
-    border-left-width: 15px;
+  .levels-wrapper {
+    border-left-width: 10px;
     border-right-width: 10px;
    }
 
    .levels-item {
     padding-left: 35px;
+    font-size: 14px;
    }
+
+}
+
+@media (hover:hover) {
+
+  .levels-item:hover {
+    background-color: rgba(255, 106, 94, 0.2);
+  }
 
 }
 
@@ -137,19 +143,47 @@ ul {
 
   .menu-btn {
     display: block;
+    position: absolute;
+    width: 30px;
+    height: 90px;
+    top: 360px;
+    left: -10px;
+    transform: translateX(-100%);
+    padding-bottom: 5px;
+    font-family: monospace, sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    writing-mode: vertical-rl;
+    text-orientation: upright;
+    letter-spacing: -0.3em;
+    color: rgb(255, 255, 255, 0.8);
+    background-color: rgb(129, 28, 2);
+    border-top-left-radius: 22px;
+    border-bottom-left-radius: 22px;
+    z-index: 1;
+    cursor: pointer;
   }
 
-  .levels-container {
+  .levels-wrapper {
     top: 0;
     left: 100%;
-    width: 320px;
+    width: 30vw;
     height: 100vh;
     transition: 1s;
   }
 
-  .levels-container.visible {
+  .levels-wrapper.visible {
     transform: translateX(-100%);
   }
 
+  .page:has(.levels-wrapper.visible) .overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgb(0, 0, 0);
+    opacity: 0.3;
+  }
 
 }

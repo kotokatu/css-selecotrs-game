@@ -98,9 +98,13 @@
   cursor: pointer;
 }
 
-.help-btn:hover {
-  background-color: rgb(255, 136, 0);
-  animation: buttonpress 0.7s ease-in-out infinite both;
+@media (hover:hover) {
+
+  .help-btn:hover {
+    background-color: rgb(255, 136, 0);
+    animation: buttonpress 0.7s ease-in-out infinite both;
+  }
+
 }
 
 .help-btn:active {
@@ -110,6 +114,7 @@
 }
 
 @keyframes buttonpress {
+
   0% {
     box-shadow: 0 10px rgb(163, 15, 4);
     transform: rotateX(30deg) translateY(0);
@@ -122,6 +127,7 @@
     box-shadow: 0 10px rgb(163, 15, 4);
     transform: rotateX(30deg) translateY(0);
   }
+
 }
 
 @media (max-width: 1000px) {
@@ -147,13 +153,13 @@
 @media (max-width: 768px) {
 
   .playground-container {
-    /* position: relative; */
-    width: 100vw;
+    position: relative;
+    /* width: 100vw; */
   }
 
-  .page:has(.levels-container.visible) .playground-container {
+  /* .page:has(.levels-wrapper.visible) .playground-container {
     overflow-y: hidden;
-  }
+  } */
 
 
 }

@@ -1,5 +1,6 @@
 import { BaseComponent } from '../../../common/base-component';
 import { Button } from '../../../common/button/button';
+import { delay, disableElements, enableElements } from '../../../common/helpers';
 import hljs from 'highlight.js';
 import css from '../../../../node_modules/highlight.js/lib/languages/css.js';
 import '../../../css/custom-hljs.css';
@@ -71,14 +72,16 @@ export class Editor extends BaseComponent {
         this.highlightCssSyntax();
     }
 
-    public showAnswer(selector: string, i: number): void {
+    public async showAnswer(selector: string, elem: HTMLElement): Promise<void> {
+        disableElements(elem, this.input);
+        await this.typewrite(selector, 0);
+        enableElements(elem, this.input);
+    }
+
+    private async typewrite(selector: string, i: number): Promise<void> {
         if (i < selector.length) {
-            this.input.setAttribute('disabled', 'true');
             this.setContent(selector.slice(0, i + 1));
-            i++;
-            setTimeout(() => this.showAnswer(selector, i), 150);
-        } else {
-            this.input.removeAttribute('disabled');
+            return delay().then(() => this.typewrite(selector, ++i));
         }
     }
 
@@ -87,7 +90,7 @@ export class Editor extends BaseComponent {
         this.setMockInputContent(text);
     }
 
-    public update(): void {
+    public clear(): void {
         this.input.value = '';
         this.input.focus();
         this.setMockInputContent('');

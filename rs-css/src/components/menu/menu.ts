@@ -10,35 +10,40 @@ export class Menu extends BaseComponent {
     private levelsTotal: number;
     private levelsList: HTMLUListElement;
     constructor(parent: HTMLElement, levelNum: number, levelsTotal: number, levelsState: LevelState[]) {
-        super({ parent, className: 'levels-container' });
+        super({ parent, className: 'levels-wrapper' });
         this.levelNum = levelNum;
         this.levelsState = levelsState;
         this.levelsTotal = levelsTotal;
 
+        const overlay = new BaseComponent({ parent, className: 'overlay' }).element;
+        overlay.addEventListener('click', this.hideMenu.bind(this));
+        const levelsContainer = new BaseComponent<HTMLHeadingElement>({
+            parent: this.element,
+            className: 'levels-container',
+        }).element;
         new BaseComponent<HTMLHeadingElement>({
             tag: 'h2',
-            parent: this.element,
+            parent: levelsContainer,
             className: 'levels-heading',
             content: `Level`,
         }).element;
         new Button({
             parent: this.element,
             className: 'menu-btn',
-            content: `levels`,
+            content: `menu`,
             onClick: this.toggleMenu.bind(this),
         }).element;
         this.levelsList = new BaseComponent<HTMLUListElement>({
             tag: 'ul',
-            parent: this.element,
+            parent: levelsContainer,
             className: 'levels-list',
         }).element;
         new Button({
-            parent: this.element,
+            parent: levelsContainer,
             className: 'reset-btn',
             content: `reset`,
             onClick: () => observer.notify({ isReset: true }),
         }).element;
-
         this.renderList();
     }
 
@@ -98,10 +103,14 @@ export class Menu extends BaseComponent {
         this.element.classList.add('visible');
     }
 
+    private addOverlay() {
+        this.element.append;
+    }
+
     public update(levelNum: number, levelsState: LevelState[]) {
         this.levelNum = levelNum;
         this.levelsState = levelsState;
-        this.hideMenu();
         this.renderList();
+        this.hideMenu();
     }
 }

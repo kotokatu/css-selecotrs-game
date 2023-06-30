@@ -15,6 +15,7 @@ export class Playground extends BaseComponent {
     private task: HTMLHeadingElement;
     private levelNum: number;
     private levelData: LevelObject;
+    private helpButton: HTMLButtonElement;
     constructor(parent: HTMLElement, levelData: LevelObject, levelNum: number) {
         super({ parent, className: 'playground-container' });
         this.levelData = levelData;
@@ -26,12 +27,12 @@ export class Playground extends BaseComponent {
             className: 'task',
         }).element;
         this.table = new Table(this.element, this.levelData, this.onMouseOver.bind(this), this.onMouseOut.bind(this));
-        new Button({
+        this.helpButton = new Button({
             parent: this.element,
             className: 'help-btn',
             content: 'help',
             onClick: this.handleHelpButtonClick.bind(this),
-        });
+        }).element;
         this.editorWrapper = new BaseComponent({ parent: this.element, className: 'editor-wrapper' }).element;
         this.editorWrapper.addEventListener('animationend', this.removeEditorAnimation.bind(this));
         this.editor = new Editor(this.editorWrapper, this.checkGuess.bind(this));
@@ -112,8 +113,8 @@ export class Playground extends BaseComponent {
 
     public handleHelpButtonClick(): void {
         observer.notify({ isHintUsed: true });
-        this.editor.update();
-        this.editor.showAnswer(this.levelData.selector, 0);
+        this.editor.clear();
+        this.editor.showAnswer(this.levelData.selector, this.helpButton);
     }
 
     private addEditorAnimation() {
@@ -125,7 +126,7 @@ export class Playground extends BaseComponent {
     }
 
     public update(levelData: LevelObject, levelNum: number, isOver?: boolean) {
-        this.editor.update();
+        this.editor.clear();
         this.levelData = levelData;
         this.levelNum = levelNum;
         this.task.textContent = `${levelData.task}`;
