@@ -32,6 +32,10 @@ export class Table extends BaseComponent<HTMLDivElement> {
             if (e.animationName === AnimationName.OnCompleteLevel) {
                 this.onAnimationEnd();
             }
+            if (e.animationName === AnimationName.OnError) {
+                console.log(e.target);
+                this.update(this.levelData);
+            }
         });
         this.tooltip = new BaseComponent<HTMLSpanElement>({
             tag: 'span',
@@ -68,7 +72,7 @@ export class Table extends BaseComponent<HTMLDivElement> {
         }
 
         if (elemObject.isAnimated) {
-            elem.classList.add(AnimationName.ActiveElements);
+            elem.classList.add(AnimationName.ActiveItem);
         }
 
         elem.addEventListener('mouseover', this.onMouseOver);
@@ -101,8 +105,15 @@ export class Table extends BaseComponent<HTMLDivElement> {
 
     public removeActiveElements(elements: HTMLElement[]): void {
         elements.forEach((elem: HTMLElement) => {
-            elem.classList.remove(AnimationName.ActiveElements);
+            elem.classList.remove(AnimationName.ActiveItem);
             elem.classList.add(AnimationName.OnCompleteLevel);
+        });
+    }
+
+    public addWrongItemAnimation(elems: HTMLElement[]) {
+        elems.forEach((elem) => {
+            elem.classList.remove(AnimationName.ActiveItem);
+            elem.classList.add(AnimationName.OnError);
         });
     }
 
@@ -115,11 +126,12 @@ export class Table extends BaseComponent<HTMLDivElement> {
         this.tableContainer.replaceChildren(winMessage);
     }
 
-    public update(levelData: LevelObject, isGameOver?: boolean): void {
+    public update(levelData?: LevelObject, isGameOver?: boolean): void {
         if (isGameOver) {
             this.displayWinMessage();
         } else {
-            this.levelData = levelData;
+            if (levelData) this.levelData = levelData;
+            this.tableElements = [];
             this.tableContainer.replaceChildren();
             this.addElementsToTable();
         }

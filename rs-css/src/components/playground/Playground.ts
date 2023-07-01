@@ -118,6 +118,8 @@ export class Playground extends BaseComponent {
                 [...guessValue].every((elem, ind) => elem === testValue[ind])
             ) {
                 this.table.removeActiveElements([...guessValue]);
+            } else if (guessValue.length) {
+                this.table.addWrongItemAnimation([...guessValue]);
             } else {
                 this.addEditorAnimation();
             }

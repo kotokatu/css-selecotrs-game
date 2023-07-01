@@ -62,7 +62,7 @@
   border-radius: 10px;
 }
 
-.editor-wrapper.shake {
+.shake {
   animation-name: shake;
   animation-duration: .5s;
   animation-fill-mode: both;

@@ -20,12 +20,12 @@ export enum AnimationName {
     OnCompleteLevel = 'bounce',
     OnError = 'shake',
     HelpButton = 'press',
-    ActiveElements = 'pulsate',
+    ActiveItem = 'pulsate',
 }
 
 enum StorageKey {
-    State = 'state',
-    Level = 'level',
+    State = 'state-rs-css',
+    Level = 'level-rs-css',
 }
 
 class App {

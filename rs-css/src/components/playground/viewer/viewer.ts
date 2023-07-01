@@ -78,7 +78,6 @@ export class Viewer extends BaseComponent {
         elem.addEventListener('mouseout', this.onMouseOut);
 
         this.viewerElements.push(elem);
-
         return elem;
     }
 
@@ -94,11 +93,12 @@ export class Viewer extends BaseComponent {
         markupWrapper.insertAdjacentHTML('beforeend', hljs.highlight('</div>', { language: 'html' }).value);
     }
 
-    update(levelData: LevelObject, isGameOver?: boolean) {
+    update(levelData?: LevelObject, isGameOver?: boolean) {
         if (isGameOver) {
             this.viewer.classList.add('hover-disabled');
         } else {
-            this.levelData = levelData;
+            if (levelData) this.levelData = levelData;
+            this.viewerElements = [];
             this.viewer.classList.remove('hover-disabled');
             this.viewer.replaceChildren();
             this.addElementsToViewer();
