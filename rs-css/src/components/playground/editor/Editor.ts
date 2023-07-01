@@ -18,6 +18,7 @@ export class Editor extends BaseComponent {
             tag: 'input',
             className: 'editor-input',
         }).element;
+        this.input.setAttribute('placeholder', 'Type in a CSS selector');
         this.mockInput = new BaseComponent({
             tag: 'code',
             className: 'language-css mock-input',
@@ -64,7 +65,6 @@ export class Editor extends BaseComponent {
     }
 
     private addListeners(): void {
-        this.input.setAttribute('placeholder', 'Type in a CSS selector');
         this.input.addEventListener('keydown', (e) => {
             if (e.code === 'Enter') {
                 this.onInput(this.input);
@@ -78,7 +78,7 @@ export class Editor extends BaseComponent {
         });
     }
 
-    private highlightCssSyntax(): void {
+    private highlightCss(): void {
         hljs.highlightElement(this.mockInput);
     }
 
@@ -104,7 +104,7 @@ export class Editor extends BaseComponent {
 
     private setMockInputContent(text: string): void {
         this.mockInput.textContent = text;
-        this.highlightCssSyntax();
+        this.highlightCss();
     }
 
     private syncScroll(): void {

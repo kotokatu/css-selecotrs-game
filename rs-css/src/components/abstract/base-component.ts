@@ -22,7 +22,7 @@ export class BaseComponent<T extends HTMLElement = HTMLElement> {
         }
     }
 
-    destroy(): void {
+    public destroy(): void {
         this.element.remove();
     }
 }

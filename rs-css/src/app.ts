@@ -87,4 +87,4 @@ class App {
     }
 }
 
-window.onload = () => new App(document.body);
+new App(document.body);
