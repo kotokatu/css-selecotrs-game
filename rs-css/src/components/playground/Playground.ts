@@ -5,7 +5,13 @@ import { Table } from './table/Table';
 import { observer } from '../../common/observer';
 import { LevelObject } from '../../data/levelsData';
 import { Button } from '../abstract/button/button';
+import { AnimationName } from '../../app';
 import './playground.css';
+
+type ElementPair = {
+    tableElement: HTMLElement;
+    viewerElement: HTMLElement;
+};
 
 export class Playground extends BaseComponent {
     private table: Table;
@@ -55,7 +61,7 @@ export class Playground extends BaseComponent {
             const elem: HTMLElement = e.target.closest('.viewer-window div') || e.target;
 
             if (elem instanceof HTMLElement) {
-                const { tableElement, viewerElement } = this.getElements(elem) || {};
+                const { tableElement, viewerElement }: ElementPair = this.getElements(elem);
 
                 if (tableElement && viewerElement) {
                     tableElement.classList.add('hover');
@@ -75,7 +81,7 @@ export class Playground extends BaseComponent {
             const elem: HTMLElement = e.target.closest('.viewer-window div') || e.target;
 
             if (elem instanceof HTMLElement) {
-                const { tableElement, viewerElement } = this.getElements(elem) || {};
+                const { tableElement, viewerElement }: ElementPair = this.getElements(elem);
 
                 if (tableElement && viewerElement) {
                     tableElement.classList.remove('hover');
@@ -86,15 +92,15 @@ export class Playground extends BaseComponent {
         }
     }
 
-    private getElements(elem: HTMLElement): { tableElement: HTMLElement; viewerElement: HTMLElement } | null {
+    private getElements(elem: HTMLElement): ElementPair {
         let ind: number;
         const viewerElements: HTMLElement[] = this.viewer.viewerElements;
         const tableElements: HTMLElement[] = this.table.tableElements;
         if (viewerElements.includes(elem)) {
             ind = viewerElements.indexOf(elem);
-        } else if (tableElements.includes(elem)) {
+        } else {
             ind = tableElements.indexOf(elem);
-        } else return null;
+        }
 
         return { tableElement: tableElements[ind], viewerElement: viewerElements[ind] };
     }
@@ -111,7 +117,7 @@ export class Playground extends BaseComponent {
                 guessValue.length === testValue.length &&
                 [...guessValue].every((elem, ind) => elem === testValue[ind])
             ) {
-                this.table.bounceElements([...guessValue]);
+                this.table.removeActiveElements([...guessValue]);
             } else {
                 this.addEditorAnimation();
             }
@@ -134,19 +140,19 @@ export class Playground extends BaseComponent {
     }
 
     private addEditorAnimation() {
-        this.editorWrapper.classList.add('shake');
+        this.editorWrapper.classList.add(AnimationName.OnError);
     }
 
     private removeEditorAnimation() {
-        this.editorWrapper.classList.remove('shake');
+        this.editorWrapper.classList.remove(AnimationName.OnError);
     }
 
-    public update(levelData: LevelObject, levelNum: number, isOver?: boolean) {
+    public update(levelData: LevelObject, levelNum: number, isGameOver?: boolean) {
         this.editor.clear();
         this.levelData = levelData;
         this.levelNum = levelNum;
         this.task.textContent = `${levelData.task}`;
-        this.viewer.update(levelData, isOver);
-        this.table.update(levelData, isOver);
+        this.viewer.update(levelData, isGameOver);
+        this.table.update(levelData, isGameOver);
     }
 }

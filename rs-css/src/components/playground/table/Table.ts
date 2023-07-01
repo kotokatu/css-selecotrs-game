@@ -1,6 +1,7 @@
 import { BaseComponent } from '../../abstract/base-component';
 import { elemObject, LevelObject } from '../../../data/levelsData';
 import './table.css';
+import { AnimationName } from '../../../app';
 
 export class Table extends BaseComponent<HTMLDivElement> {
     public tableContainer: HTMLElement;
@@ -28,7 +29,7 @@ export class Table extends BaseComponent<HTMLDivElement> {
             className: 'table',
         }).element;
         this.tableContainer.addEventListener('animationend', (e: AnimationEvent) => {
-            if (e.animationName === 'bounce') {
+            if (e.animationName === AnimationName.OnCompleteLevel) {
                 this.onAnimationEnd();
             }
         });
@@ -67,7 +68,7 @@ export class Table extends BaseComponent<HTMLDivElement> {
         }
 
         if (elemObject.isAnimated) {
-            elem.classList.add('pulsate');
+            elem.classList.add(AnimationName.ActiveElements);
         }
 
         elem.addEventListener('mouseover', this.onMouseOver);
@@ -98,15 +99,11 @@ export class Table extends BaseComponent<HTMLDivElement> {
         return textElements ? `${textElements[0]}><${textElements[textElements.length - 1]}` : '';
     }
 
-    public bounceElements(elements: HTMLElement[]): void {
+    public removeActiveElements(elements: HTMLElement[]): void {
         elements.forEach((elem: HTMLElement) => {
-            elem.classList.remove('pulsate');
-            elem.classList.add('bounce');
+            elem.classList.remove(AnimationName.ActiveElements);
+            elem.classList.add(AnimationName.OnCompleteLevel);
         });
-    }
-
-    public animateElements(elements: HTMLElement[]): void {
-        elements.forEach((elem: HTMLElement) => elem.classList.add('pulsate'));
     }
 
     public displayWinMessage(): void {
@@ -118,8 +115,8 @@ export class Table extends BaseComponent<HTMLDivElement> {
         this.tableContainer.replaceChildren(winMessage);
     }
 
-    public update(levelData: LevelObject, isOver?: boolean): void {
-        if (isOver) {
+    public update(levelData: LevelObject, isGameOver?: boolean): void {
+        if (isGameOver) {
             this.displayWinMessage();
         } else {
             this.levelData = levelData;

@@ -58,16 +58,6 @@ export const LEVELS_LIST: readonly LevelObject[] = [
             { tag: 'plate', class: 'green' },
         ],
     },
-    // {
-    //     task: 'Select the yellow apple',
-    //     selector: '.yellow',
-    //     markup: [
-    //         { tag: 'apple', class: 'green' },
-    //         { tag: 'plate', children: [{ tag: 'apple', class: 'green' }, { tag: 'apple' }] },
-    //         { tag: 'apple', class: 'yellow', isAnimated: true },
-    //         { tag: 'apple' },
-    //     ],
-    // },
     {
         task: 'Select the red napkins',
         selector: 'napkin.red',
@@ -136,8 +126,8 @@ export const LEVELS_LIST: readonly LevelObject[] = [
         task: 'Select the empty pan',
         selector: 'pan:empty',
         markup: [
-            { tag: 'pan', children: [{ tag: 'broccoli' }] },
-            { tag: 'plate', class: 'green' },
+            { tag: 'pan', children: [{ tag: 'sausage' }] },
+            { tag: 'plate', class: 'green', children: [{ tag: 'broccoli' }] },
             { tag: 'pan', isAnimated: true },
             { tag: 'napkin' },
         ],
@@ -236,7 +226,13 @@ export const LEVELS_LIST: readonly LevelObject[] = [
         selector: '[for]',
         markup: [
             { tag: 'plate', class: 'red', attribute: ['for', 'Nina'], children: [{ tag: 'egg' }], isAnimated: true },
-            { tag: 'plate', class: 'green', attribute: ['for', 'Clive'], children: [{ tag: 'steak' }], isAnimated: true },
+            {
+                tag: 'plate',
+                class: 'green',
+                attribute: ['for', 'Clive'],
+                children: [{ tag: 'steak' }],
+                isAnimated: true,
+            },
             { tag: 'plate', class: 'red', children: [{ tag: 'fish', class: 'big green' }] },
             { tag: 'plate', attribute: ['for', 'Alex'], children: [{ tag: 'broccoli' }], isAnimated: true },
         ],
@@ -247,7 +243,13 @@ export const LEVELS_LIST: readonly LevelObject[] = [
         markup: [
             { tag: 'plate', attribute: ['for', 'Annie'], children: [{ tag: 'fish', class: 'green' }] },
             { tag: 'fork' },
-            { tag: 'plate', class: 'red', attribute: ['for', 'Nina'], children: [{ tag: 'fish', class: 'green' }], isAnimated: true },
+            {
+                tag: 'plate',
+                class: 'red',
+                attribute: ['for', 'Nina'],
+                children: [{ tag: 'fish', class: 'green' }],
+                isAnimated: true,
+            },
             { tag: 'plate', attribute: ['for', 'Nick'], children: [{ tag: 'cake' }], isAnimated: true },
             { tag: 'napkin', children: [{ tag: 'knife' }] },
         ],

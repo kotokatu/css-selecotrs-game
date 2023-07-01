@@ -103,7 +103,7 @@
 
   .help-btn:hover {
     background-color: rgb(255, 136, 0);
-    animation: buttonpress 0.7s ease-in-out infinite both;
+    animation: press 0.7s ease-in-out infinite both;
   }
 
 }
@@ -114,7 +114,7 @@
   box-shadow: none;
 }
 
-@keyframes buttonpress {
+@keyframes press {
 
   0% {
     box-shadow: 0 10px rgb(163, 15, 4);

@@ -16,6 +16,13 @@ export type UpdateStateParams = {
 
 export type LevelState = Pick<UpdateStateParams, 'isCompleted' | 'isHintUsed'>;
 
+export enum AnimationName {
+    OnCompleteLevel = 'bounce',
+    OnError = 'shake',
+    HelpButton = 'press',
+    ActiveElements = 'pulsate',
+}
+
 enum StorageKey {
     State = 'state',
     Level = 'level',
@@ -65,9 +72,9 @@ class App {
         this.updateApp();
     }
 
-    private updateApp(isOver?: boolean): void {
+    private updateApp(isGameOver?: boolean): void {
         this.menu.update(this.currLevel, this.levelsState);
-        this.playground.update(LEVELS_LIST[this.currLevel], this.currLevel, isOver);
+        this.playground.update(LEVELS_LIST[this.currLevel], this.currLevel, isGameOver);
     }
 
     private setDefaultState(): void {

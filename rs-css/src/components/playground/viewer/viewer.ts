@@ -11,7 +11,12 @@ export class Viewer extends BaseComponent {
     onMouseOver: (e: MouseEvent) => void;
     onMouseOut: (e: MouseEvent) => void;
     private levelData: LevelObject;
-    constructor(parent: HTMLElement, levelData: LevelObject, onMouseOver: (e: MouseEvent) => void, onMouseOut: (e: MouseEvent) => void) {
+    constructor(
+        parent: HTMLElement,
+        levelData: LevelObject,
+        onMouseOver: (e: MouseEvent) => void,
+        onMouseOut: (e: MouseEvent) => void
+    ) {
         super({ parent, className: 'viewer pane' });
         this.levelData = levelData;
         this.viewerElements = [];
@@ -74,13 +79,18 @@ export class Viewer extends BaseComponent {
 
     addElementsToViewer() {
         const markupWrapper: HTMLElement = new BaseComponent({ tag: 'div', parent: this.viewer }).element;
-        markupWrapper.insertAdjacentHTML('afterbegin', hljs.highlight('<div class="table">', { language: 'html' }).value);
-        this.levelData.markup.forEach((elem: elemObject) => markupWrapper.insertAdjacentElement('beforeend', this.createViewerElement(elem)));
+        markupWrapper.insertAdjacentHTML(
+            'afterbegin',
+            hljs.highlight('<div class="table">', { language: 'html' }).value
+        );
+        this.levelData.markup.forEach((elem: elemObject) =>
+            markupWrapper.insertAdjacentElement('beforeend', this.createViewerElement(elem))
+        );
         markupWrapper.insertAdjacentHTML('beforeend', hljs.highlight('</div>', { language: 'html' }).value);
     }
 
-    update(levelData: LevelObject, isOver?: boolean) {
-        if (isOver) {
+    update(levelData: LevelObject, isGameOver?: boolean) {
+        if (isGameOver) {
             this.viewer.classList.add('hover-disabled');
         } else {
             this.levelData = levelData;
