@@ -26,7 +26,13 @@ export class Playground extends BaseComponent {
             content: `${levelData.task}`,
             className: 'task',
         }).element;
-        this.table = new Table(this.element, this.levelData, this.onMouseOver.bind(this), this.onMouseOut.bind(this));
+        this.table = new Table(
+            this.element,
+            this.levelData,
+            this.onMouseOver.bind(this),
+            this.onMouseOut.bind(this),
+            this.onCompletedLevel.bind(this)
+        );
         this.helpButton = new Button({
             parent: this.element,
             className: 'help-btn',
@@ -36,12 +42,17 @@ export class Playground extends BaseComponent {
         this.editorWrapper = new BaseComponent({ parent: this.element, className: 'editor-wrapper' }).element;
         this.editorWrapper.addEventListener('animationend', this.removeEditorAnimation.bind(this));
         this.editor = new Editor(this.editorWrapper, this.checkGuess.bind(this));
-        this.viewer = new Viewer(this.editorWrapper, levelData, this.onMouseOver.bind(this), this.onMouseOut.bind(this));
+        this.viewer = new Viewer(
+            this.editorWrapper,
+            levelData,
+            this.onMouseOver.bind(this),
+            this.onMouseOut.bind(this)
+        );
     }
 
     private onMouseOver(e: MouseEvent): void {
         if (e.target instanceof HTMLElement) {
-            const elem = e.target.closest('.viewer-window div') || e.target;
+            const elem: HTMLElement = e.target.closest('.viewer-window div') || e.target;
 
             if (elem instanceof HTMLElement) {
                 const { tableElement, viewerElement } = this.getElements(elem) || {};
@@ -49,7 +60,11 @@ export class Playground extends BaseComponent {
                 if (tableElement && viewerElement) {
                     tableElement.classList.add('hover');
                     viewerElement.classList.add('hover');
-                    this.table.showTooltip(viewerElement, tableElement.getBoundingClientRect().left, tableElement.getBoundingClientRect().top);
+                    this.table.showTooltip(
+                        viewerElement,
+                        tableElement.getBoundingClientRect().left,
+                        tableElement.getBoundingClientRect().top
+                    );
                 }
             }
         }
@@ -57,7 +72,7 @@ export class Playground extends BaseComponent {
 
     private onMouseOut(e: MouseEvent): void {
         if (e.target instanceof HTMLElement) {
-            const elem = e.target.closest('.viewer-window div') || e.target;
+            const elem: HTMLElement = e.target.closest('.viewer-window div') || e.target;
 
             if (elem instanceof HTMLElement) {
                 const { tableElement, viewerElement } = this.getElements(elem) || {};
@@ -73,8 +88,8 @@ export class Playground extends BaseComponent {
 
     private getElements(elem: HTMLElement): { tableElement: HTMLElement; viewerElement: HTMLElement } | null {
         let ind: number;
-        const viewerElements = this.viewer.viewerElements;
-        const tableElements = this.table.tableElements;
+        const viewerElements: HTMLElement[] = this.viewer.viewerElements;
+        const tableElements: HTMLElement[] = this.table.tableElements;
         if (viewerElements.includes(elem)) {
             ind = viewerElements.indexOf(elem);
         } else if (tableElements.includes(elem)) {
@@ -87,10 +102,16 @@ export class Playground extends BaseComponent {
     public checkGuess(input: HTMLInputElement): void {
         try {
             const guessValue: NodeListOf<HTMLElement> = this.table.tableContainer.querySelectorAll(input.value);
-            const testValue: NodeListOf<HTMLElement> = this.table.tableContainer.querySelectorAll(this.levelData.selector);
+            const testValue: NodeListOf<HTMLElement> = this.table.tableContainer.querySelectorAll(
+                this.levelData.selector
+            );
 
-            if (testValue.length && guessValue.length === testValue.length && [...guessValue].every((elem, ind) => elem === testValue[ind])) {
-                this.onCorrectGuess([...guessValue]);
+            if (
+                testValue.length &&
+                guessValue.length === testValue.length &&
+                [...guessValue].every((elem, ind) => elem === testValue[ind])
+            ) {
+                this.table.bounceElements([...guessValue]);
             } else {
                 this.addEditorAnimation();
             }
@@ -99,16 +120,11 @@ export class Playground extends BaseComponent {
         }
     }
 
-    public onCorrectGuess(elements: HTMLElement[]) {
-        this.table.bounceElements(elements);
-        setTimeout(
-            (): void =>
-                observer.notify({
-                    levelNum: this.levelNum + 1,
-                    isCompleted: true,
-                }),
-            1000
-        );
+    public onCompletedLevel(): void {
+        observer.notify({
+            levelNum: this.levelNum + 1,
+            isCompleted: true,
+        });
     }
 
     public handleHelpButtonClick(): void {

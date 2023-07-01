@@ -84,7 +84,7 @@ export class Editor extends BaseComponent {
         if (i < selector.length) {
             const j = i + 1;
             this.setInputContent(selector.slice(0, j));
-            await delay();
+            await delay(150);
             return this.typewrite(selector, j);
         }
     }

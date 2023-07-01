@@ -9,16 +9,29 @@ export class Table extends BaseComponent<HTMLDivElement> {
     private levelData: LevelObject;
     onMouseOver: (e: MouseEvent) => void;
     onMouseOut: (e: MouseEvent) => void;
-    constructor(parent: HTMLElement, levelData: LevelObject, onMouseOver: (e: MouseEvent) => void, onMouseOut: (e: MouseEvent) => void) {
+    onAnimationEnd: () => void;
+    constructor(
+        parent: HTMLElement,
+        levelData: LevelObject,
+        onMouseOver: (e: MouseEvent) => void,
+        onMouseOut: (e: MouseEvent) => void,
+        onAnimationEnd: () => void
+    ) {
         super({ parent, className: 'table-wrapper' });
         this.onMouseOver = onMouseOver;
         this.onMouseOut = onMouseOut;
+        this.onAnimationEnd = onAnimationEnd;
         this.levelData = levelData;
         this.tableElements = [];
         this.tableContainer = new BaseComponent<HTMLDivElement>({
             parent: this.element,
             className: 'table',
         }).element;
+        this.tableContainer.addEventListener('animationend', (e: AnimationEvent) => {
+            if (e.animationName === 'bounce') {
+                this.onAnimationEnd();
+            }
+        });
         this.tooltip = new BaseComponent<HTMLSpanElement>({
             tag: 'span',
             parent: this.element,
@@ -59,6 +72,7 @@ export class Table extends BaseComponent<HTMLDivElement> {
 
         elem.addEventListener('mouseover', this.onMouseOver);
         elem.addEventListener('mouseout', this.onMouseOut);
+
         this.tableElements.push(elem);
         return elem;
     }
