@@ -25,18 +25,18 @@ export class Menu extends BaseComponent {
         this.render();
     }
 
-    render() {
+    private render(): void {
         const menuContainer = new BaseComponent<HTMLHeadingElement>({
             parent: this.element,
             className: 'levels-container',
         }).element;
-        menuContainer.append(this.menuList);
         new BaseComponent<HTMLHeadingElement>({
             tag: 'h2',
             parent: menuContainer,
             className: 'levels-heading',
             content: `Level`,
         }).element;
+        menuContainer.append(this.menuList);
         new Button({
             parent: this.element,
             className: 'menu-btn',
@@ -92,7 +92,7 @@ export class Menu extends BaseComponent {
         }
     }
 
-    private toggleMenu() {
+    private toggleMenu(): void {
         if (this.element.classList.contains('visible')) {
             this.hideMenu();
         } else {
@@ -100,16 +100,12 @@ export class Menu extends BaseComponent {
         }
     }
 
-    private hideMenu() {
+    private hideMenu(): void {
         this.element.classList.remove('visible');
     }
 
-    private showMenu() {
+    private showMenu(): void {
         this.element.classList.add('visible');
-    }
-
-    private addOverlay() {
-        this.element.append;
     }
 
     public update(levelNum: number, levelsState: LevelState[]) {
