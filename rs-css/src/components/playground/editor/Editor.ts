@@ -8,7 +8,7 @@ import './editor.css';
 hljs.registerLanguage('css', css);
 
 export class Editor extends BaseComponent {
-    private mockInputContent: HTMLElement;
+    private mockInput: HTMLElement;
     private input: HTMLInputElement;
     private onInput: (input: HTMLInputElement) => void;
     constructor(parent: HTMLElement, onInput: (input: HTMLInputElement) => void) {
@@ -18,12 +18,14 @@ export class Editor extends BaseComponent {
             tag: 'input',
             className: 'editor-input',
         }).element;
-        this.mockInputContent = new BaseComponent({
+        this.mockInput = new BaseComponent({
             tag: 'code',
-            className: 'language-css mock-input-content',
+            className: 'language-css mock-input',
         }).element;
+        this.mockInput.setAttribute('aria-hidden', 'true');
 
         this.render();
+        this.addListeners();
     }
 
     private render(): void {
@@ -42,21 +44,10 @@ export class Editor extends BaseComponent {
             parent: this.element,
             className: 'editor-window',
         }).element;
-        const inputWrapper: HTMLElement = new BaseComponent({ parent: editorWindow, className: 'input-wrapper' }).element;
+        const inputWrapper: HTMLElement = new BaseComponent({ parent: editorWindow, className: 'input-wrapper' })
+            .element;
         inputWrapper.append(this.input);
-        this.input.setAttribute('placeholder', 'Type in a CSS selector');
-        this.input.addEventListener('keydown', (e) => {
-            if (e.code === 'Enter') {
-                this.onInput(this.input);
-            }
-        });
-        this.input.addEventListener('input', () => {
-            this.setMockInputContent(this.input.value);
-        });
-        this.input.focus();
-        const mockInput: HTMLElement = new BaseComponent({ tag: 'pre', parent: inputWrapper, className: 'mock-input' }).element;
-        mockInput.setAttribute('aria-hidden', 'true');
-        mockInput.append(this.mockInputContent);
+        inputWrapper.append(this.mockInput);
         new Button({
             parent: inputWrapper,
             className: 'enter-button',
@@ -68,10 +59,27 @@ export class Editor extends BaseComponent {
             className: 'editor-text',
             content: '{<br/>/* Styles would go here. */<br/>}',
         });
+
+        this.input.focus();
+    }
+
+    private addListeners(): void {
+        this.input.setAttribute('placeholder', 'Type in a CSS selector');
+        this.input.addEventListener('keydown', (e) => {
+            if (e.code === 'Enter') {
+                this.onInput(this.input);
+            }
+        });
+        this.input.addEventListener('input', () => {
+            this.setMockInputContent(this.input.value);
+        });
+        this.input.addEventListener('scroll', () => {
+            this.syncScroll();
+        });
     }
 
     private highlightCssSyntax(): void {
-        hljs.highlightElement(this.mockInputContent);
+        hljs.highlightElement(this.mockInput);
     }
 
     public async showAnswer(selector: string, elem: HTMLElement): Promise<void> {
@@ -95,8 +103,12 @@ export class Editor extends BaseComponent {
     }
 
     private setMockInputContent(text: string): void {
-        this.mockInputContent.textContent = text;
+        this.mockInput.textContent = text;
         this.highlightCssSyntax();
+    }
+
+    private syncScroll(): void {
+        this.mockInput.scrollLeft = this.input.scrollLeft;
     }
 
     public clear(): void {

@@ -35,7 +35,7 @@ export class Viewer extends BaseComponent {
             className: 'pane-header',
             content: `HTML Viewer`,
         }).element;
-        new BaseComponent({ tag: 'span', parent: paneHeader, className: 'filename', content: 'table.html' });
+        new BaseComponent({ tag: 'span', parent: paneHeader, className: 'filename', content: 'index.html' });
         new BaseComponent({
             parent: this.element,
             className: 'gutter',
