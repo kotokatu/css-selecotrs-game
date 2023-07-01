@@ -26,7 +26,7 @@ export class Editor extends BaseComponent {
         this.render();
     }
 
-    private render() {
+    private render(): void {
         const paneHeader: HTMLElement = new BaseComponent({
             parent: this.element,
             className: 'pane-header',
@@ -74,11 +74,6 @@ export class Editor extends BaseComponent {
         hljs.highlightElement(this.mockInputContent);
     }
 
-    private setMockInputContent(text: string): void {
-        this.mockInputContent.textContent = text;
-        this.highlightCssSyntax();
-    }
-
     public async showAnswer(selector: string, elem: HTMLElement): Promise<void> {
         disableElements(elem, this.input);
         await this.typewrite(selector, 0);
@@ -88,19 +83,24 @@ export class Editor extends BaseComponent {
     private async typewrite(selector: string, i: number): Promise<void> {
         if (i < selector.length) {
             const j = i + 1;
-            this.setContent(selector.slice(0, j));
+            this.setInputContent(selector.slice(0, j));
             await delay();
             return this.typewrite(selector, j);
         }
     }
 
-    private setContent(text: string) {
+    private setInputContent(text: string): void {
         this.input.value = text;
         this.setMockInputContent(text);
     }
 
+    private setMockInputContent(text: string): void {
+        this.mockInputContent.textContent = text;
+        this.highlightCssSyntax();
+    }
+
     public clear(): void {
-        this.setContent('');
+        this.setInputContent('');
         this.input.focus();
     }
 }

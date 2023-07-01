@@ -72,14 +72,14 @@
 }
 
 .tooltip {
-  position: fixed;
+  display: none;
+  position: absolute;
   padding: 10px;
-  top: -5px;
-  background-color: rgb(250, 235, 215);
-  border-radius: 15px;
   font-size: 14px;
   color: #311363;
-  display: none;
+  transform: translateY(-10px);
+  border-radius: 15px;
+  background-color: rgb(250, 235, 215);
 }
 
 .tooltip.visible {

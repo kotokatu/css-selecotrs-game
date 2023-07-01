@@ -4,7 +4,7 @@ import { observer } from './common/observer';
 import { LEVELS_LIST } from './data/levelsData';
 import './css/style.css';
 
-export const LEVELS_TOTAL = LEVELS_LIST.length;
+export const LEVELS_TOTAL: number = LEVELS_LIST.length;
 export const DEFAULT_LEVEL = 0;
 
 export type UpdateStateParams = {
@@ -33,8 +33,10 @@ class App {
         this.playground = new Playground(appRoot, LEVELS_LIST[this.currLevel], this.currLevel);
         this.menu = new Menu(appRoot, this.currLevel, LEVELS_TOTAL, this.levelsState);
         observer.subscribe(this.updateState.bind(this));
-        window.addEventListener('beforeunload', () => localStorage.setItem(StorageKey.State, JSON.stringify(this.levelsState)));
-        window.addEventListener('beforeunload', () => localStorage.setItem(StorageKey.Level, `${this.currLevel}`));
+        window.addEventListener('beforeunload', () => {
+            localStorage.setItem(StorageKey.State, JSON.stringify(this.levelsState));
+            localStorage.setItem(StorageKey.Level, `${this.currLevel}`);
+        });
     }
 
     private updateState(params: UpdateStateParams): void {
@@ -78,4 +80,4 @@ class App {
     }
 }
 
-new App(document.body);
+window.onload = () => new App(document.body);

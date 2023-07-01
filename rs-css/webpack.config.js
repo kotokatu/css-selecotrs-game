@@ -5,45 +5,46 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const EslingPlugin = require('eslint-webpack-plugin');
 
 const baseConfig = {
-  entry: path.resolve(__dirname, './src/app'),
-  mode: 'development',
-  module: {
-    rules: [
-      {
-        test: /\.(?:ico|gif|png|jpg|jpeg|svg|webp)$/i,
-        type: 'asset/resource',
-      },
-      {
-        test: /\.(woff(2)?|eot|ttf|otf)$/i,
-        type: 'asset/resource',
-      },
-      {
-        test: /\.css$/i,
-        use: ['style-loader', 'css-loader'],
-      },
-      { test: /\.ts$/i, use: 'ts-loader' },
+    entry: path.resolve(__dirname, './src/app'),
+    mode: 'development',
+    module: {
+        rules: [
+            {
+                test: /\.(?:ico|gif|png|jpg|jpeg|svg|webp)$/i,
+                type: 'asset/resource',
+            },
+            {
+                test: /\.(woff(2)?|eot|ttf|otf)$/i,
+                type: 'asset/resource',
+            },
+            {
+                test: /\.css$/i,
+                use: ['style-loader', 'css-loader'],
+            },
+            { test: /\.ts$/i, use: 'ts-loader' },
+        ],
+    },
+    resolve: {
+        extensions: ['.ts', '.js'],
+    },
+    output: {
+        filename: 'app.js',
+        path: path.resolve(__dirname, './dist'),
+    },
+    plugins: [
+        new HtmlWebpackPlugin({
+            template: path.resolve(__dirname, './src/index.html'),
+            favicon: path.resolve(__dirname, './src/favicon.ico'),
+            filename: 'index.html',
+        }),
+        new CleanWebpackPlugin(),
+        new EslingPlugin({ extensions: 'ts' }),
     ],
-  },
-  resolve: {
-    extensions: ['.ts', '.js'],
-  },
-  output: {
-    filename: 'app.js',
-    path: path.resolve(__dirname, './dist'),
-  },
-  plugins: [
-    new HtmlWebpackPlugin({
-      template: path.resolve(__dirname, './src/index.html'),
-      filename: 'index.html',
-    }),
-    new CleanWebpackPlugin(),
-    new EslingPlugin({ extensions: 'ts' }),
-  ],
 };
 
 module.exports = ({ mode }) => {
-  const isProductionMode = mode === 'prod';
-  const envConfig = isProductionMode ? require('./webpack.prod.config') : require('./webpack.dev.config');
+    const isProductionMode = mode === 'prod';
+    const envConfig = isProductionMode ? require('./webpack.prod.config') : require('./webpack.dev.config');
 
-  return merge(baseConfig, envConfig);
+    return merge(baseConfig, envConfig);
 };
