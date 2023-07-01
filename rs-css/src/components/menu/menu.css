@@ -20,18 +20,17 @@ ul {
 .levels-heading {
   padding: 10px;
   font-size: 26px;
+  border-bottom: 2px solid rgba(129, 28, 2);
 }
 
 .menu-btn {
   display: none;
 }
 
-
 .levels-container {
   height: 100%;
   padding-bottom: 20px;
-  overflow-y: scroll;
-  scrollbar-gutter: stable;
+  overflow-y: auto;
   scrollbar-width: thin;
   scrollbar-color: rgb(129, 28, 2) rgba(245, 146, 146, 0.1);
 }
@@ -69,7 +68,7 @@ ul {
   left: calc(50% - 35px);
   width: 8px;
   height: 18px;
-  transform: translateY(-3px) rotate(45deg);
+  transform: translateY(-5px) rotate(45deg);
   border-bottom: 5px solid rgba(255, 255, 255, 0.4);
   border-right: 5px solid rgba(255, 255, 255, 0.4);
   border-radius: 5px;
@@ -180,4 +179,13 @@ ul {
     opacity: 0.3;
   }
 
+}
+
+@media (max-height: 860px) {
+
+  .levels-item {
+    font-size: 14px;
+    padding-top: 6px;
+    padding-bottom: 6px;
+  }
 }

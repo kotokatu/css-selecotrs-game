@@ -1,5 +1,6 @@
 .table-wrapper {
-  margin: 0 auto 20px;
+  width: 100%;
+  margin: 0 auto 15px;
   perspective: 400px;
 }
 
@@ -10,9 +11,9 @@
   align-items: center;
   gap: 25px;
   margin: 0 auto;
-  padding: 0 30px;
-  width: 95%;
-  max-width: 700px;
+  padding: 0 15px;
+  width: 98%;
+  max-width: 680px;
   height: 190px;
   background-color: rgb(221, 59, 18);
   box-shadow: 0 28px 10px rgba(0, 0, 0, 0.7);
@@ -22,16 +23,16 @@
 }
 
 .table:has([for]) {
-  padding-bottom: 15px;
+  padding-bottom: 32px;
 }
 
 .table-edge {
   position: relative;
-  width: 95%;
-  max-width: 700px;
+  width: 98%;
+  max-width: 680px;
   height: 15px;
   margin: 0 auto;
-  background-color: #8f2409;
+  background-color: rgb(143, 36, 9);
   transform: rotateX(-20deg);
   transform-origin: top;
 }
@@ -76,8 +77,8 @@
   position: absolute;
   padding: 10px;
   font-size: 14px;
-  color: #311363;
-  transform: translateY(-10px);
+  color: rgb(49, 19, 99);
+  transform: translateY(-35px);
   border-radius: 15px;
   background-color: rgb(250, 235, 215);
 }
@@ -458,6 +459,18 @@ sausage {
   .table {
     padding: 0 3px;
     gap: 5px;
+  }
+
+}
+
+@media (max-height: 860px) {
+
+  .table-wrapper {
+    margin: 0 auto 15px;
+  }
+
+  .table {
+    height: 160px;
   }
 
 }

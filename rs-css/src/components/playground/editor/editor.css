@@ -28,7 +28,7 @@
   grid-column-start: 1;
   grid-row-end: 3;
   grid-column-end: 2;
-  padding: 5px;
+  padding: 10px;
   text-align: right;
   background-color: rgb(226, 88, 54);
   color: rgb(255, 255, 255);
@@ -128,9 +128,12 @@
 @media (max-width: 1000px) {
 
   .editor {
-    max-height: 145px;
+    max-height: 150px;
     border-top-right-radius: 5px;
     border-bottom-left-radius: 0;
   }
 
 }
+
+
+

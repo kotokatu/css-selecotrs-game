@@ -86,7 +86,7 @@ export class Table extends BaseComponent<HTMLDivElement> {
         this.tooltip.classList.add('visible');
         this.tooltip.textContent = this.getTooltipContent(elem);
         this.tooltip.style.left = `${posLeft}px`;
-        this.tooltip.style.top = `${posTop - this.tableContainer.getBoundingClientRect().height - 25}px`;
+        this.tooltip.style.top = `${posTop - this.tableContainer.getBoundingClientRect().height}px`;
     }
 
     public hideTooltip(): void {
