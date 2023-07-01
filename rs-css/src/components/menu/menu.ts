@@ -1,5 +1,5 @@
-import { BaseComponent } from '../../common/base-component';
-import { Button } from '../../common/button/button';
+import { BaseComponent } from '../abstract/base-component';
+import { Button } from '../abstract/button/button';
 import { observer } from '../../common/observer';
 import { LevelState } from '../../app';
 import './menu.css';
@@ -8,22 +8,32 @@ export class Menu extends BaseComponent {
     private levelNum: number;
     private levelsState: LevelState[];
     private levelsTotal: number;
-    private levelsList: HTMLUListElement;
+    private menuList: HTMLUListElement;
     constructor(parent: HTMLElement, levelNum: number, levelsTotal: number, levelsState: LevelState[]) {
         super({ parent, className: 'levels-wrapper' });
         this.levelNum = levelNum;
         this.levelsState = levelsState;
         this.levelsTotal = levelsTotal;
+        this.menuList = new BaseComponent<HTMLUListElement>({
+            tag: 'ul',
+            className: 'levels-list',
+        }).element;
 
         const overlay = new BaseComponent({ parent, className: 'overlay' }).element;
         overlay.addEventListener('click', this.hideMenu.bind(this));
-        const levelsContainer = new BaseComponent<HTMLHeadingElement>({
+
+        this.render();
+    }
+
+    render() {
+        const menuContainer = new BaseComponent<HTMLHeadingElement>({
             parent: this.element,
             className: 'levels-container',
         }).element;
+        menuContainer.append(this.menuList);
         new BaseComponent<HTMLHeadingElement>({
             tag: 'h2',
-            parent: levelsContainer,
+            parent: menuContainer,
             className: 'levels-heading',
             content: `Level`,
         }).element;
@@ -33,13 +43,8 @@ export class Menu extends BaseComponent {
             content: `menu`,
             onClick: this.toggleMenu.bind(this),
         }).element;
-        this.levelsList = new BaseComponent<HTMLUListElement>({
-            tag: 'ul',
-            parent: levelsContainer,
-            className: 'levels-list',
-        }).element;
         new Button({
-            parent: levelsContainer,
+            parent: menuContainer,
             className: 'reset-btn',
             content: `reset`,
             onClick: () => observer.notify({ isReset: true }),
@@ -48,29 +53,29 @@ export class Menu extends BaseComponent {
     }
 
     private renderList(): void {
-        this.levelsList.replaceChildren();
+        this.menuList.replaceChildren();
         for (let i = 0; i < this.levelsTotal; i++) {
-            this.createListElement(i, this.levelsList);
+            this.createListItem(i, this.menuList);
         }
     }
 
-    private createListElement(levelNum: number, parent: HTMLElement): HTMLLIElement {
-        const levelsItem: HTMLLIElement = new BaseComponent<HTMLLIElement>({
+    private createListItem(levelNum: number, parent: HTMLElement): HTMLLIElement {
+        const listItem: HTMLLIElement = new BaseComponent<HTMLLIElement>({
             tag: 'li',
             parent,
             className: 'levels-item',
             content: `${levelNum + 1}`,
         }).element;
 
-        this.highlightCurrent(levelNum, levelsItem);
-        this.markCompleted(levelNum, levelsItem);
-        levelsItem.addEventListener('click', () => {
+        this.highlightCurrent(levelNum, listItem);
+        this.markCompleted(levelNum, listItem);
+        listItem.addEventListener('click', () => {
             if (levelNum !== this.levelNum) {
                 observer.notify({ levelNum });
             }
         });
 
-        return levelsItem;
+        return listItem;
     }
 
     private markCompleted(levelNum: number, elem: HTMLLIElement): void {

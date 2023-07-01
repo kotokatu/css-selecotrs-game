@@ -1,5 +1,5 @@
 import { Playground } from './components/playground/Playground';
-import { Menu } from './components/menu/menu';
+import { Menu } from './components/menu/Menu';
 import { observer } from './common/observer';
 import { LEVELS_LIST } from './data/levelsData';
 import './css/style.css';
@@ -32,11 +32,11 @@ class App {
         this.currLevel = Number(localStorage.getItem(StorageKey.Level)) || DEFAULT_LEVEL;
         const storedState: string | null = localStorage.getItem(StorageKey.State);
         this.levelsState = typeof storedState === 'string' ? JSON.parse(storedState) : this.createInitialState();
+        this.playground = new Playground(this.appRoot, LEVELS_LIST[this.currLevel], this.currLevel);
+        this.menu = new Menu(this.appRoot, this.currLevel, LEVELS_TOTAL, this.levelsState);
         observer.subscribe(this.updateState.bind(this));
         window.addEventListener('beforeunload', () => localStorage.setItem(StorageKey.State, JSON.stringify(this.levelsState)));
         window.addEventListener('beforeunload', () => localStorage.setItem(StorageKey.Level, `${this.currLevel}`));
-        this.playground = new Playground(this.appRoot, LEVELS_LIST[this.currLevel], this.currLevel);
-        this.menu = new Menu(this.appRoot, this.currLevel, LEVELS_TOTAL, this.levelsState);
     }
 
     private updateState(params: UpdateStateParams): void {

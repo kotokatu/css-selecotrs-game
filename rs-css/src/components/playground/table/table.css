@@ -11,8 +11,8 @@
   gap: 25px;
   margin: 0 auto;
   padding: 0 30px;
-  width: 95vw;
-  max-width: 590px;
+  width: 95%;
+  max-width: 700px;
   height: 190px;
   background-color: rgb(221, 59, 18);
   box-shadow: 0 28px 10px rgba(0, 0, 0, 0.7);
@@ -27,8 +27,8 @@
 
 .table-edge {
   position: relative;
-  width: 95vw;
-  max-width: 590px;
+  width: 95%;
+  max-width: 700px;
   height: 15px;
   margin: 0 auto;
   background-color: #8f2409;

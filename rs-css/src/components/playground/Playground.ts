@@ -1,10 +1,10 @@
-import { BaseComponent } from '../../common/base-component';
+import { BaseComponent } from '../abstract/base-component';
 import { Editor } from './editor/Editor';
 import { Viewer } from './viewer/Viewer';
 import { Table } from './table/Table';
 import { observer } from '../../common/observer';
 import { LevelObject } from '../../data/levelsData';
-import { Button } from '../../common/button/button';
+import { Button } from '../abstract/button/button';
 import './playground.css';
 
 export class Playground extends BaseComponent {

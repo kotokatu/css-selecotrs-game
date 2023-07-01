@@ -1,4 +1,4 @@
-import { BaseComponent } from '../../../common/base-component';
+import { BaseComponent } from '../../abstract/base-component';
 import { LevelObject, elemObject } from '../../../data/levelsData';
 import hljs from 'highlight.js';
 import xml from '../../../../node_modules/highlight.js/lib/languages/xml.js';
@@ -17,6 +17,14 @@ export class Viewer extends BaseComponent {
         this.viewerElements = [];
         this.onMouseOver = onMouseOver;
         this.onMouseOut = onMouseOut;
+        this.viewer = new BaseComponent({
+            parent: this.element,
+            className: 'viewer-window',
+        }).element;
+        this.render();
+    }
+
+    render() {
         const paneHeader = new BaseComponent({
             parent: this.element,
             className: 'pane-header',
@@ -28,11 +36,7 @@ export class Viewer extends BaseComponent {
             className: 'gutter',
             content: '1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20',
         });
-        this.viewer = new BaseComponent({
-            parent: this.element,
-            className: 'viewer-window',
-        }).element;
-        this.renderViewerElements();
+        this.addElementsToViewer();
     }
 
     createViewerElement(elemObject: elemObject): HTMLElement {
@@ -68,7 +72,7 @@ export class Viewer extends BaseComponent {
         return elem;
     }
 
-    renderViewerElements() {
+    addElementsToViewer() {
         const markupWrapper: HTMLElement = new BaseComponent({ tag: 'div', parent: this.viewer }).element;
         markupWrapper.insertAdjacentHTML('afterbegin', hljs.highlight('<div class="table">', { language: 'html' }).value);
         this.levelData.markup.forEach((elem: elemObject) => markupWrapper.insertAdjacentElement('beforeend', this.createViewerElement(elem)));
@@ -82,7 +86,7 @@ export class Viewer extends BaseComponent {
             this.levelData = levelData;
             this.viewer.classList.remove('hover-disabled');
             this.viewer.replaceChildren();
-            this.renderViewerElements();
+            this.addElementsToViewer();
         }
     }
 }

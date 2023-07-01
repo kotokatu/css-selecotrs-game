@@ -1,4 +1,4 @@
-import { BaseComponent } from '../../../common/base-component';
+import { BaseComponent } from '../../abstract/base-component';
 import { elemObject, LevelObject } from '../../../data/levelsData';
 import './table.css';
 
@@ -19,16 +19,20 @@ export class Table extends BaseComponent<HTMLDivElement> {
             parent: this.element,
             className: 'table',
         }).element;
-        const tableEdge = new BaseComponent<HTMLDivElement>({ parent: this.element, className: 'table-edge' }).element;
-        new BaseComponent<HTMLDivElement>({ parent: tableEdge, className: 'table-leg table-leg__left' });
-        new BaseComponent<HTMLDivElement>({ parent: tableEdge, className: 'table-leg table-leg__right' });
         this.tooltip = new BaseComponent<HTMLSpanElement>({
             tag: 'span',
             parent: this.element,
             className: 'tooltip',
         }).element;
 
-        this.renderTableElements();
+        this.render();
+    }
+
+    private render() {
+        const tableEdge = new BaseComponent<HTMLDivElement>({ parent: this.element, className: 'table-edge' }).element;
+        new BaseComponent<HTMLDivElement>({ parent: tableEdge, className: 'table-leg table-leg__left' });
+        new BaseComponent<HTMLDivElement>({ parent: tableEdge, className: 'table-leg table-leg__right' });
+        this.addElementsToTable();
     }
 
     private createTableElement(elemObject: elemObject): HTMLElement {
@@ -59,7 +63,7 @@ export class Table extends BaseComponent<HTMLDivElement> {
         return elem;
     }
 
-    private renderTableElements(): void {
+    private addElementsToTable(): void {
         this.levelData.markup.forEach((elem: elemObject) => this.tableContainer.append(this.createTableElement(elem)));
     }
 
@@ -106,7 +110,7 @@ export class Table extends BaseComponent<HTMLDivElement> {
         } else {
             this.levelData = levelData;
             this.tableContainer.replaceChildren();
-            this.renderTableElements();
+            this.addElementsToTable();
         }
     }
 }
