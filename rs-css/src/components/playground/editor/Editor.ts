@@ -86,6 +86,7 @@ export class Editor extends BaseComponent {
         disableElements(elem, this.input);
         await this.typewrite(selector, 0);
         enableElements(elem, this.input);
+        this.input.focus();
     }
 
     private async typewrite(selector: string, i: number): Promise<void> {

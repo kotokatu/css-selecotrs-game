@@ -122,14 +122,14 @@ tomato:first-child {
 plate:not(#dessert) cookie:nth-child(2),
 plate:not(#dessert) tomato:nth-child(2),
 plate:not(#dessert) apple:nth-child(2) {
-  transform: translateY(-10px);
+  margin-top: -20px;
   z-index: 2;
 }
 
 plate:not(#dessert) cookie:nth-child(3),
 plate:not(#dessert) tomato:nth-child(3),
 plate:not(#dessert) apple:nth-child(3) {
-  transform: translateY(-20px);
+  margin-top: -20px;
 }
 
 plate.red {
@@ -141,9 +141,6 @@ plate.green {
 }
 
 plate#dessert {
-  display: flex;
-  justify-content: center;
-  align-items: center;
   width: 80px;
   height: 80px;
   border-radius: 100%;
@@ -153,8 +150,9 @@ plate#dessert {
 }
 
 pan {
-  display: block;
-  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 120px;
   height: 120px;
   background-size: 110px 110px;
@@ -162,17 +160,24 @@ pan {
   background-image: url('../../../assets/img/frying-pan.svg');
 }
 
-pan broccoli:nth-child(2) {
-  z-index: 2;
-  top: 30%
+pan:has(broccoli) {
+  flex-direction: column;
 }
 
-pan * {
+pan steak:nth-child(2) {
+  margin-top: -50px;
+}
+
+pan broccoli {
+  z-index: 2;
+}
+
+/* pan * {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translateY(-50%) translateX(-50%);
-}
+} */
 
 board {
   display: flex;

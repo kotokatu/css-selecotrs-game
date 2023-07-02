@@ -158,7 +158,7 @@ export const LEVELS_LIST: readonly LevelObject[] = [
         task: 'Select the pans with no steak',
         selector: 'pan:not(:has(steak))',
         markup: [
-            { tag: 'pan', children: [{ tag: 'steak' }, { tag: 'broccoli' }] },
+            { tag: 'pan', children: [{ tag: 'broccoli' }, { tag: 'steak' }] },
             { tag: 'pan', children: [{ tag: 'fish' }], isAnimated: true },
             { tag: 'pan', children: [{ tag: 'egg' }], isAnimated: true },
             { tag: 'pan', children: [{ tag: 'steak' }] },
