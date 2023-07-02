@@ -1,6 +1,6 @@
 import { BaseComponent } from '../abstract/base-component';
 import { Button } from '../abstract/button/button';
-import { observer } from '../../common/observer';
+import { observer } from '../../app';
 import { LevelState } from '../../app';
 import './menu.css';
 

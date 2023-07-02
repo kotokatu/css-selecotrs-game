@@ -2,10 +2,11 @@ import { BaseComponent } from '../abstract/base-component';
 import { Editor } from './editor/Editor';
 import { Viewer } from './viewer/Viewer';
 import { Table } from './table/Table';
-import { observer } from '../../common/observer';
+import { observer } from '../../app';
 import { LevelObject } from '../../data/levelsData';
 import { Button } from '../abstract/button/button';
 import { AnimationName } from '../../app';
+import { disableElement, enableElement } from '../../common/helpers';
 import './playground.css';
 
 type ElementPair = {
@@ -128,17 +129,19 @@ export class Playground extends BaseComponent {
         }
     }
 
-    public onCompletedLevel(): void {
+    private onCompletedLevel(): void {
         observer.notify({
             levelNum: this.levelNum + 1,
             isCompleted: true,
         });
     }
 
-    public handleHelpButtonClick(): void {
+    private async handleHelpButtonClick(): Promise<void> {
         observer.notify({ isHintUsed: true });
         this.editor.clear();
-        this.editor.showAnswer(this.levelData.selector, this.helpButton);
+        disableElement(this.helpButton);
+        await this.editor.showAnswer(this.levelData.selector);
+        enableElement(this.helpButton);
     }
 
     private addEditorAnimation() {

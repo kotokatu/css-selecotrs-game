@@ -1,7 +1,7 @@
 import { BaseComponent } from '../../abstract/base-component';
 import { elemObject, LevelObject } from '../../../data/levelsData';
-import './table.css';
 import { AnimationName } from '../../../app';
+import './table.css';
 
 export class Table extends BaseComponent<HTMLDivElement> {
     public tableContainer: HTMLElement;
@@ -120,7 +120,7 @@ export class Table extends BaseComponent<HTMLDivElement> {
         const winMessage = new BaseComponent<HTMLHeadingElement>({
             tag: 'h2',
             className: 'win-message',
-            content: 'Congratulations! You&nbsp;are a pro at CSS!',
+            content: 'Congratulations! You are a pro at CSS!',
         }).element;
         this.tableContainer.replaceChildren(winMessage);
     }

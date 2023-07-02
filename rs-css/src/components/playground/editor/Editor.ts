@@ -1,6 +1,6 @@
 import { BaseComponent } from '../../abstract/base-component';
 import { Button } from '../../abstract/button/button';
-import { delay, disableElements, enableElements } from '../../../common/helpers';
+import { delay, disableElement, enableElement } from '../../../common/helpers';
 import hljs from 'highlight.js';
 import css from '../../../../node_modules/highlight.js/lib/languages/css.js';
 import '../../../css/custom-hljs.css';
@@ -8,8 +8,8 @@ import './editor.css';
 hljs.registerLanguage('css', css);
 
 export class Editor extends BaseComponent {
-    private mockInput: HTMLElement;
-    private input: HTMLInputElement;
+    public mockInput: HTMLElement;
+    public input: HTMLInputElement;
     private onInput: (input: HTMLInputElement) => void;
     constructor(parent: HTMLElement, onInput: (input: HTMLInputElement) => void) {
         super({ parent, className: 'editor pane' });
@@ -82,10 +82,10 @@ export class Editor extends BaseComponent {
         hljs.highlightElement(this.mockInput);
     }
 
-    public async showAnswer(selector: string, elem: HTMLElement): Promise<void> {
-        disableElements(elem, this.input);
+    public async showAnswer(selector: string): Promise<void> {
+        disableElement(this.input);
         await this.typewrite(selector, 0);
-        enableElements(elem, this.input);
+        enableElement(this.input);
         this.input.focus();
     }
 

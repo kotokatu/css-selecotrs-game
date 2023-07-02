@@ -29,7 +29,7 @@ export class Viewer extends BaseComponent {
         this.render();
     }
 
-    render() {
+    private render() {
         const paneHeader = new BaseComponent({
             parent: this.element,
             className: 'pane-header',
@@ -49,7 +49,7 @@ export class Viewer extends BaseComponent {
         this.addElementsToViewer();
     }
 
-    createViewerElement(elemObject: elemObject): HTMLElement {
+    private createViewerElement(elemObject: elemObject): HTMLElement {
         const elem: HTMLElement = new BaseComponent().element;
         const code: HTMLElement = new BaseComponent({ tag: 'code', parent: elem }).element;
         let content = `<${elemObject.tag}`;
@@ -81,7 +81,7 @@ export class Viewer extends BaseComponent {
         return elem;
     }
 
-    addElementsToViewer() {
+    private addElementsToViewer() {
         const markupWrapper: HTMLElement = new BaseComponent({ tag: 'div', parent: this.viewer }).element;
         markupWrapper.insertAdjacentHTML(
             'afterbegin',
@@ -93,7 +93,7 @@ export class Viewer extends BaseComponent {
         markupWrapper.insertAdjacentHTML('beforeend', hljs.highlight('</div>', { language: 'html' }).value);
     }
 
-    update(levelData?: LevelObject, isGameOver?: boolean) {
+    public update(levelData?: LevelObject, isGameOver?: boolean) {
         if (isGameOver) {
             this.viewer.classList.add('hover-disabled');
         } else {
