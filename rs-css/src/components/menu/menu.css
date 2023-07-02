@@ -60,6 +60,7 @@ ul {
   padding: 9px 10px 9px 25px;
   border-bottom: 2px solid rgba(129, 28, 2);
   cursor: pointer;
+  transition: .3s;
 }
 
 .levels-item::before {
