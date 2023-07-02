@@ -48,12 +48,7 @@ export class Playground extends BaseComponent {
         this.editorWrapper = new BaseComponent({ parent: this.element, className: 'editor-wrapper' }).element;
         this.editorWrapper.addEventListener('animationend', this.removeEditorAnimation.bind(this));
         this.editor = new Editor(this.editorWrapper, this.checkGuess.bind(this));
-        this.viewer = new Viewer(
-            this.editorWrapper,
-            levelData,
-            this.onMouseOver.bind(this),
-            this.onMouseOut.bind(this)
-        );
+        this.viewer = new Viewer(this.editorWrapper, levelData, this.onMouseOver.bind(this), this.onMouseOut.bind(this));
     }
 
     private onMouseOver(e: MouseEvent): void {
@@ -66,11 +61,7 @@ export class Playground extends BaseComponent {
                 if (tableElement && viewerElement) {
                     tableElement.classList.add('hover');
                     viewerElement.classList.add('hover');
-                    this.table.showTooltip(
-                        viewerElement,
-                        tableElement.getBoundingClientRect().left,
-                        tableElement.getBoundingClientRect().top
-                    );
+                    this.table.showTooltip(viewerElement, tableElement.getBoundingClientRect().left, tableElement.getBoundingClientRect().top);
                 }
             }
         }
@@ -108,15 +99,9 @@ export class Playground extends BaseComponent {
     public checkGuess(input: HTMLInputElement): void {
         try {
             const guessValue: NodeListOf<HTMLElement> = this.table.tableContainer.querySelectorAll(input.value);
-            const testValue: NodeListOf<HTMLElement> = this.table.tableContainer.querySelectorAll(
-                this.levelData.selector
-            );
+            const testValue: NodeListOf<HTMLElement> = this.table.tableContainer.querySelectorAll(this.levelData.selector);
 
-            if (
-                testValue.length &&
-                guessValue.length === testValue.length &&
-                [...guessValue].every((elem, ind) => elem === testValue[ind])
-            ) {
+            if (testValue.length && guessValue.length === testValue.length && [...guessValue].every((elem, ind) => elem === testValue[ind])) {
                 this.table.removeActiveElements([...guessValue]);
             } else if (guessValue.length) {
                 this.table.addWrongItemAnimation([...guessValue]);

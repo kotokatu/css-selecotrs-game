@@ -45,8 +45,7 @@ export class Editor extends BaseComponent {
             parent: this.element,
             className: 'editor-window',
         }).element;
-        const inputWrapper: HTMLElement = new BaseComponent({ parent: editorWindow, className: 'input-wrapper' })
-            .element;
+        const inputWrapper: HTMLElement = new BaseComponent({ parent: editorWindow, className: 'input-wrapper' }).element;
         inputWrapper.append(this.input);
         inputWrapper.append(this.mockInput);
         new Button({
