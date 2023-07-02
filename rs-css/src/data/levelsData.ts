@@ -101,7 +101,7 @@ export const LEVELS_LIST: readonly LevelObject[] = [
         markup: [
             { tag: 'board', children: [{ tag: 'fish', class: 'green' }] },
             { tag: 'board', children: [{ tag: 'apple', class: 'big green' }] },
-            { tag: 'board', children: [{ tag: 'fish' }] },
+            { tag: 'board', children: [{ tag: 'fish', class: 'big' }] },
             { tag: 'board', children: [{ tag: 'fish', class: 'big green', isAnimated: true }] },
         ],
     },
@@ -254,13 +254,4 @@ export const LEVELS_LIST: readonly LevelObject[] = [
             { tag: 'napkin', children: [{ tag: 'knife' }] },
         ],
     },
-    // {
-    //     task: 'Select the plates for Nina and her ',
-    //     selector: '[for]',
-    //     markup: [
-    //         { tag: 'plate', class: 'red', attribute: ['for', 'Nina'], children: [{ tag: 'egg' }], isAnimated: true },
-    //         { tag: 'plate', class: 'green', attribute: ['for', 'Clive'], children: [{ tag: 'steak' }], isAnimated: true },
-    //         { tag: 'plate', id: 'dessert', children: [{ tag: 'cookie' }] },
-    //     ],
-    // },
 ];
