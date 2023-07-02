@@ -33,7 +33,6 @@ export class Table extends BaseComponent<HTMLDivElement> {
                 this.onAnimationEnd();
             }
             if (e.animationName === AnimationName.OnError) {
-                console.log(e.target);
                 this.update(this.levelData);
             }
         });
