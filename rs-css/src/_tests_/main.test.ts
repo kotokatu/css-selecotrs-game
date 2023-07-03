@@ -7,8 +7,8 @@ import { BaseComponent } from '../components/abstract/base-component';
 import { App } from '../app';
 import { Table } from '../components/playground/table/Table';
 import { Editor } from '../components/playground/editor/Editor';
-import { Viewer } from '../components/playground/viewer/Viewer';
-import { Menu } from '../components/menu/Menu';
+import { Viewer } from '../components/playground/viewer/viewer';
+import { Menu } from '../components/menu/menu';
 import { LevelData } from '../data/levelsData';
 
 afterEach(() => {
