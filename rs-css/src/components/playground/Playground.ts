@@ -70,11 +70,7 @@ export class Playground extends BaseComponent {
                 if (tableItem && viewerItem) {
                     tableItem.classList.add('hover');
                     viewerItem.classList.add('hover');
-                    this.table.showTooltip(
-                        viewerItem,
-                        tableItem.getBoundingClientRect().left,
-                        tableItem.getBoundingClientRect().top
-                    );
+                    this.table.showTooltip(viewerItem, tableItem.getBoundingClientRect().left);
                 }
             }
         }

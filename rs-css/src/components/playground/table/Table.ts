@@ -88,11 +88,10 @@ export class Table extends BaseComponent<HTMLDivElement> {
         this.levelData.markup.forEach((item: ItemData) => this.tableContainer.append(this.createTableItem(item)));
     }
 
-    public showTooltip(elem: HTMLElement, posLeft: number, posTop: number): void {
+    public showTooltip(elem: HTMLElement, posLeft: number): void {
         this.tooltip.classList.add('visible');
         this.tooltip.textContent = this.getTooltipContent(elem);
         this.tooltip.style.left = `${posLeft}px`;
-        this.tooltip.style.top = `${posTop - this.tableContainer.getBoundingClientRect().height}px`;
     }
 
     public hideTooltip(): void {

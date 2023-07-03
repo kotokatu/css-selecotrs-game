@@ -79,7 +79,7 @@
   padding: 10px;
   font-size: 14px;
   color: rgb(49, 19, 99);
-  transform: translateY(-35px);
+  top: 0;
   border-radius: 15px;
   background-color: rgb(250, 235, 215);
 }
