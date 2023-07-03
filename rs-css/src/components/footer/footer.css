@@ -1,7 +1,7 @@
 .footer {
   width: 55px;
-  padding-left: 7px;
-  margin-top: -40px;
+  padding: 0 0 7px 7px;
+  z-index: 3;
 }
 
 .footer-link__github {
@@ -29,8 +29,8 @@
   }
 }
 
-@media (max-width: 800px) {
+@media (max-width: 768px) {
   .footer {
-    margin-top: unset;
+    margin-top: -45px;
   }
 }

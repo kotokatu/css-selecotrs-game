@@ -1,5 +1,6 @@
 import { Playground } from './components/playground/Playground';
 import { Menu } from './components/menu/menu';
+import { Footer } from './components/footer/footer';
 import { observer } from './common/observer';
 import { LEVELS_LIST } from './data/levelsData';
 import './css/style.css';
@@ -44,6 +45,7 @@ export class App {
             localStorage.setItem(StorageKey.State, JSON.stringify(this.levelsState));
             localStorage.setItem(StorageKey.Level, `${this.currLevel}`);
         });
+        new Footer(appRoot);
     }
 
     private updateState(params: UpdateStateParams): void {

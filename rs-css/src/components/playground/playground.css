@@ -5,18 +5,8 @@
   bottom: 0;
   left: 0;
   right: 18vw;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  padding: 30px 0;
-  background-image: url(../../assets/img/lamp1.png), 
-  repeating-linear-gradient(
-    to right,
-    rgb(246, 186, 82),
-    rgb(246, 186, 82) 20px,
-    rgb(255, 209, 128) 20px,
-    rgb(255, 209, 128) 40px
-  );
+  padding: 30px 0 30px;
+  background-image: url(../../assets/img/lamp1.png);
   background-repeat: no-repeat;
   background-position: top center;
   background-attachment: local, scroll;
@@ -142,14 +132,7 @@
 @media (max-width: 1000px) {
 
   .playground-container {
-    background-image: url(../../assets/img/lamp2.png),
-    repeating-linear-gradient(
-      to right,
-      rgb(246, 186, 82),
-      rgb(246, 186, 82) 20px,
-      rgb(255, 209, 128) 20px,
-      rgb(255, 209, 128) 40px
-    );
+    background-image: url(../../assets/img/lamp2.png)
    }
 
    .editor-wrapper {
@@ -178,13 +161,7 @@
 @media (max-width: 650px) {
 
   .playground-container {
-    background-image: repeating-linear-gradient(
-      to right,
-      rgb(246, 186, 82),
-      rgb(246, 186, 82) 20px,
-      rgb(255, 209, 128) 20px,
-      rgb(255, 209, 128) 40px
-    );
+    background-image: none;
    }
 
 }

@@ -24,7 +24,7 @@
 
 html {
   font-size: 10px;
-
+  min-height: 100vh;
 }
 
 * {
@@ -36,8 +36,18 @@ html {
 }
 
 .page {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
   font-family: monospace;
   background-color: rgb(246, 186, 82);
+  min-height: 100vh;
+  background-image: repeating-linear-gradient(
+    to right,
+    rgb(246, 186, 82),
+    rgb(246, 186, 82) 20px,
+    rgb(255, 209, 128) 20px,
+    rgb(255, 209, 128) 40px);
 }
 
 
@@ -46,7 +56,6 @@ html {
   .page {
     overflow-x: hidden;
     scrollbar-width: thin;
-    /* scrollbar-gutter: stable; */
   }
 
   .page::-webkit-scrollbar {
