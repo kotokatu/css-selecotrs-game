@@ -2,6 +2,7 @@ import { BaseComponent } from '../abstract/base-component';
 import { Editor } from './editor/Editor';
 import { Viewer } from './viewer/Viewer';
 import { Table } from './table/Table';
+import { Footer } from '../footer/footer';
 import { LevelData } from '../../data/levelsData';
 import { Button } from '../abstract/button/button';
 import { AnimationName } from '../../app';
@@ -58,6 +59,7 @@ export class Playground extends BaseComponent {
             this.onMouseOver.bind(this),
             this.onMouseOut.bind(this)
         );
+        new Footer(this.element);
     }
 
     private onMouseOver(e: MouseEvent): void {

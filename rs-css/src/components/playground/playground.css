@@ -5,6 +5,9 @@
   bottom: 0;
   left: 0;
   right: 18vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   padding: 30px 0;
   background-image: url(../../assets/img/lamp1.png), 
   repeating-linear-gradient(
@@ -20,6 +23,10 @@
   overflow-y: auto;
   scrollbar-gutter: stable;
   scrollbar-width: thin;
+}
+
+.playground > * {
+  flex-shrink: 0;
 }
 
 .playground-container::-webkit-scrollbar {
@@ -53,7 +60,7 @@
 .editor-wrapper {
   display: flex;
   margin: 15px auto;
-  width: 85%;
+  width: 80%;
   max-width: 1100px;
   padding: 15px;
   background-color: rgb(163, 15, 4);
