@@ -54,8 +54,8 @@ export class Menu extends BaseComponent {
 
     private renderList(): void {
         this.menuList.replaceChildren();
-        for (let i = 0; i < this.levelsTotal; i++) {
-            this.createListItem(i, this.menuList);
+        for (let levelNum = 0; levelNum < this.levelsTotal; levelNum++) {
+            this.createListItem(levelNum, this.menuList);
         }
     }
 
