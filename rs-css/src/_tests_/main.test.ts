@@ -9,10 +9,9 @@ import { Table } from '../components/playground/table/Table';
 import { Editor } from '../components/playground/editor/Editor';
 import { Viewer } from '../components/playground/viewer/Viewer';
 import { Menu } from '../components/menu/Menu';
-import { LevelObject } from '../data/levelsData';
+import { LevelData } from '../data/levelsData';
 
 afterEach(() => {
-    //  mockedMenu.mockClear();
     jest.clearAllMocks();
 });
 
@@ -88,7 +87,7 @@ describe('Editor', () => {
 
 describe('Viewer', () => {
     let viewer: Viewer;
-    let levelData: LevelObject;
+    let levelData: LevelData;
     beforeEach(() => {
         levelData = {
             task: 'task1',

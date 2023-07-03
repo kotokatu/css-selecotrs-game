@@ -1,5 +1,5 @@
 import { BaseComponent } from '../../abstract/base-component';
-import { ElemObject, LevelObject } from '../../../data/levelsData';
+import { LevelData, ItemData } from '../../../data/levelsData';
 import { AnimationName } from '../../../app';
 import './table.css';
 
@@ -7,13 +7,13 @@ export class Table extends BaseComponent<HTMLDivElement> {
     public tableContainer: HTMLElement;
     public tableItems: HTMLElement[];
     private tooltip: HTMLElement;
-    private levelData: LevelObject;
+    private levelData: LevelData;
     onMouseOver: (e: MouseEvent) => void;
     onMouseOut: (e: MouseEvent) => void;
     onAnimationEnd: () => void;
     constructor(
         parent: HTMLElement,
-        levelData: LevelObject,
+        levelData: LevelData,
         onMouseOver: (e: MouseEvent) => void,
         onMouseOut: (e: MouseEvent) => void,
         onAnimationEnd: () => void
@@ -55,7 +55,7 @@ export class Table extends BaseComponent<HTMLDivElement> {
         this.addItemsToTable();
     }
 
-    private createTableItem(itemData: ElemObject): HTMLElement {
+    private createTableItem(itemData: ItemData): HTMLElement {
         const item: HTMLElement = document.createElement(itemData.tag);
         if (itemData.class) {
             item.className = itemData.class;
@@ -70,7 +70,7 @@ export class Table extends BaseComponent<HTMLDivElement> {
         }
 
         if (itemData.children) {
-            itemData.children.forEach((child: ElemObject) => item.append(this.createTableItem(child)));
+            itemData.children.forEach((child: ItemData) => item.append(this.createTableItem(child)));
         }
 
         if (itemData.isAnimated) {
@@ -85,7 +85,7 @@ export class Table extends BaseComponent<HTMLDivElement> {
     }
 
     private addItemsToTable(): void {
-        this.levelData.markup.forEach((item: ElemObject) => this.tableContainer.append(this.createTableItem(item)));
+        this.levelData.markup.forEach((item: ItemData) => this.tableContainer.append(this.createTableItem(item)));
     }
 
     public showTooltip(elem: HTMLElement, posLeft: number, posTop: number): void {
@@ -105,8 +105,8 @@ export class Table extends BaseComponent<HTMLDivElement> {
         return strings ? `${strings[0]}><${strings[strings.length - 1]}` : '';
     }
 
-    public removeActiveElements(elements: HTMLElement[]): void {
-        elements.forEach((elem: HTMLElement) => {
+    public removeActiveElements(elems: HTMLElement[]): void {
+        elems.forEach((elem: HTMLElement) => {
             elem.classList.remove(AnimationName.ActiveItem);
             elem.classList.add(AnimationName.OnCompleteLevel);
         });
@@ -128,7 +128,7 @@ export class Table extends BaseComponent<HTMLDivElement> {
         this.tableContainer.replaceChildren(winMessage);
     }
 
-    public update(levelData?: LevelObject, isGameOver?: boolean): void {
+    public update(levelData?: LevelData, isGameOver?: boolean): void {
         if (isGameOver) {
             this.displayWinMessage();
         } else {

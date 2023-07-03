@@ -1,19 +1,19 @@
-export type LevelObject = {
+export type LevelData = {
     task: string;
     selector: string;
-    markup: ElemObject[];
+    markup: ItemData[];
 };
 
-export type ElemObject = {
+export type ItemData = {
     tag: string;
     isAnimated?: boolean;
     class?: string;
     id?: string;
     attribute?: [string, string];
-    children?: ElemObject[];
+    children?: ItemData[];
 };
 
-export const LEVELS_LIST: readonly LevelObject[] = [
+export const LEVELS_LIST: readonly LevelData[] = [
     {
         task: 'Select the pan',
         selector: 'pan',

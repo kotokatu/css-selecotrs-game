@@ -2,7 +2,7 @@ import { BaseComponent } from '../abstract/base-component';
 import { Editor } from './editor/Editor';
 import { Viewer } from './viewer/Viewer';
 import { Table } from './table/Table';
-import { LevelObject } from '../../data/levelsData';
+import { LevelData } from '../../data/levelsData';
 import { Button } from '../abstract/button/button';
 import { AnimationName } from '../../app';
 import { disableElement, enableElement } from '../../common/helpers';
@@ -21,9 +21,9 @@ export class Playground extends BaseComponent {
     private editorWrapper: HTMLDivElement;
     private task: HTMLHeadingElement;
     private levelNum: number;
-    private levelData: LevelObject;
+    private levelData: LevelData;
     private helpButton: HTMLButtonElement;
-    constructor(parent: HTMLElement, levelData: LevelObject, levelNum: number) {
+    constructor(parent: HTMLElement, levelData: LevelData, levelNum: number) {
         super({ parent, className: 'playground-container' });
         this.levelData = levelData;
         this.levelNum = levelNum;
@@ -62,10 +62,10 @@ export class Playground extends BaseComponent {
 
     private onMouseOver(e: MouseEvent): void {
         if (e.target instanceof HTMLElement) {
-            const elem: HTMLElement = e.target.closest('.viewer-window div') || e.target;
+            const item: HTMLElement = e.target.closest('.viewer-window div') || e.target;
 
-            if (elem instanceof HTMLElement) {
-                const { tableItem, viewerItem }: ItemPair = this.getElements(elem);
+            if (item instanceof HTMLElement) {
+                const { tableItem, viewerItem }: ItemPair = this.getItems(item);
 
                 if (tableItem && viewerItem) {
                     tableItem.classList.add('hover');
@@ -82,10 +82,10 @@ export class Playground extends BaseComponent {
 
     public onMouseOut(e: MouseEvent): void {
         if (e.target instanceof HTMLElement) {
-            const elem: HTMLElement = e.target.closest('.viewer-window div') || e.target;
+            const item: HTMLElement = e.target.closest('.viewer-window div') || e.target;
 
-            if (elem instanceof HTMLElement) {
-                const { tableItem, viewerItem }: ItemPair = this.getElements(elem);
+            if (item instanceof HTMLElement) {
+                const { tableItem, viewerItem }: ItemPair = this.getItems(item);
 
                 if (tableItem && viewerItem) {
                     tableItem.classList.remove('hover');
@@ -96,22 +96,22 @@ export class Playground extends BaseComponent {
         }
     }
 
-    private getElements(elem: HTMLElement): ItemPair {
+    private getItems(item: HTMLElement): ItemPair {
         let ind: number;
         const viewerItems: HTMLElement[] = this.viewer.viewerItems;
         const tableItems: HTMLElement[] = this.table.tableItems;
-        if (viewerItems.includes(elem)) {
-            ind = viewerItems.indexOf(elem);
+        if (viewerItems.includes(item)) {
+            ind = viewerItems.indexOf(item);
         } else {
-            ind = tableItems.indexOf(elem);
+            ind = tableItems.indexOf(item);
         }
 
         return { tableItem: tableItems[ind], viewerItem: viewerItems[ind] };
     }
 
-    public checkGuess(input: HTMLInputElement): void {
+    public checkGuess(inputText: string): void {
         try {
-            const guessValue: NodeListOf<HTMLElement> = this.table.tableContainer.querySelectorAll(input.value);
+            const guessValue: NodeListOf<HTMLElement> = this.table.tableContainer.querySelectorAll(inputText);
             const testValue: NodeListOf<HTMLElement> = this.table.tableContainer.querySelectorAll(
                 this.levelData.selector
             );
@@ -119,7 +119,7 @@ export class Playground extends BaseComponent {
             if (
                 testValue.length &&
                 guessValue.length === testValue.length &&
-                [...guessValue].every((elem, ind) => elem === testValue[ind])
+                [...guessValue].every((item, ind) => item === testValue[ind])
             ) {
                 this.table.removeActiveElements([...guessValue]);
             } else if (guessValue.length) {
@@ -127,7 +127,7 @@ export class Playground extends BaseComponent {
             } else {
                 this.addEditorAnimation();
             }
-        } catch (err) {
+        } catch {
             this.addEditorAnimation();
         }
     }
@@ -141,25 +141,24 @@ export class Playground extends BaseComponent {
 
     private async handleHelpButtonClick(): Promise<void> {
         observer.notify({ isHintUsed: true });
-        this.editor.clear();
         disableElement(this.helpButton);
         await this.editor.showAnswer(this.levelData.selector);
         enableElement(this.helpButton);
     }
 
-    private addEditorAnimation() {
+    private addEditorAnimation(): void {
         this.editorWrapper.classList.add(AnimationName.OnError);
     }
 
-    private removeEditorAnimation() {
+    private removeEditorAnimation(): void {
         this.editorWrapper.classList.remove(AnimationName.OnError);
     }
 
-    public update(levelData: LevelObject, levelNum: number, isGameOver?: boolean): void {
-        this.editor.clear();
+    public update(levelData: LevelData, levelNum: number, isGameOver?: boolean): void {
         this.levelData = levelData;
         this.levelNum = levelNum;
         this.task.textContent = `${levelData.task}`;
+        this.editor.clear();
         this.viewer.update(levelData, isGameOver);
         this.table.update(levelData, isGameOver);
     }

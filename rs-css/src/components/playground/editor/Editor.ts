@@ -10,9 +10,9 @@ hljs.registerLanguage('css', css);
 export class Editor extends BaseComponent {
     private mockInput: HTMLDivElement;
     private input: HTMLInputElement;
-    private onInput: (input: HTMLInputElement) => void;
+    private onInput: (inputText: string) => void;
     private isCleared = false;
-    constructor(parent: HTMLDivElement, onInput: (input: HTMLInputElement) => void) {
+    constructor(parent: HTMLDivElement, onInput: (inputText: string) => void) {
         super({ parent, className: 'editor pane' });
         this.onInput = onInput;
         this.input = new BaseComponent<HTMLInputElement>({
@@ -61,7 +61,7 @@ export class Editor extends BaseComponent {
             parent: inputWrapper,
             className: 'enter-button',
             content: 'enter',
-            onClick: () => this.onInput(this.input),
+            onClick: () => this.onInput(this.input.value),
         });
         new BaseComponent<HTMLDivElement>({
             parent: editorWindow,
@@ -75,7 +75,7 @@ export class Editor extends BaseComponent {
     private addListeners(): void {
         this.input.addEventListener('keydown', (e: KeyboardEvent): void => {
             if (e.code === 'Enter') {
-                this.onInput(this.input);
+                this.onInput(this.input.value);
             }
         });
         this.input.addEventListener('input', (): void => {
