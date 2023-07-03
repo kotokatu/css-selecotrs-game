@@ -4,10 +4,10 @@ export function delay(ms: number): Promise<void> {
     });
 }
 
-export function disableElement(elem: HTMLInputElement | HTMLButtonElement) {
+export function disableElement(elem: HTMLInputElement | HTMLButtonElement): void {
     elem.disabled = true;
 }
 
-export function enableElement(elem: HTMLInputElement | HTMLButtonElement) {
+export function enableElement(elem: HTMLInputElement | HTMLButtonElement): void {
     elem.disabled = false;
 }

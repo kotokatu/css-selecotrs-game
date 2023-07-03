@@ -16,7 +16,7 @@ afterEach(() => {
     jest.clearAllMocks();
 });
 
-let container: HTMLElement;
+let container: HTMLDivElement;
 const f = (): null => null;
 
 beforeEach(() => {

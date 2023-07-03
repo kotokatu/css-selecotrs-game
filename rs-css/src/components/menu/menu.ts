@@ -19,14 +19,14 @@ export class Menu extends BaseComponent {
             className: 'levels-list',
         }).element;
 
-        const overlay = new BaseComponent({ parent, className: 'overlay' }).element;
+        const overlay: HTMLDivElement = new BaseComponent<HTMLDivElement>({ parent, className: 'overlay' }).element;
         overlay.addEventListener('click', this.hideMenu.bind(this));
 
         this.render();
     }
 
     private render(): void {
-        const menuContainer = new BaseComponent<HTMLHeadingElement>({
+        const menuContainer: HTMLDivElement = new BaseComponent<HTMLDivElement>({
             parent: this.element,
             className: 'levels-container',
         }).element;
@@ -108,7 +108,7 @@ export class Menu extends BaseComponent {
         this.element.classList.add('visible');
     }
 
-    public update(levelNum: number, levelsState: LevelState[]) {
+    public update(levelNum: number, levelsState: LevelState[]): void {
         this.levelNum = levelNum;
         this.levelsState = levelsState;
         this.renderList();

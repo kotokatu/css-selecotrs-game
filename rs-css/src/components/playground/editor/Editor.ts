@@ -8,10 +8,11 @@ import './editor.css';
 hljs.registerLanguage('css', css);
 
 export class Editor extends BaseComponent {
-    private mockInput: HTMLElement;
+    private mockInput: HTMLDivElement;
     private input: HTMLInputElement;
     private onInput: (input: HTMLInputElement) => void;
-    constructor(parent: HTMLElement, onInput: (input: HTMLInputElement) => void) {
+    private isCleared = false;
+    constructor(parent: HTMLDivElement, onInput: (input: HTMLInputElement) => void) {
         super({ parent, className: 'editor pane' });
         this.onInput = onInput;
         this.input = new BaseComponent<HTMLInputElement>({
@@ -19,7 +20,7 @@ export class Editor extends BaseComponent {
             className: 'editor-input',
         }).element;
         this.input.setAttribute('placeholder', 'Type in a CSS selector');
-        this.mockInput = new BaseComponent({
+        this.mockInput = new BaseComponent<HTMLDivElement>({
             tag: 'code',
             className: 'language-css mock-input',
         }).element;
@@ -30,23 +31,30 @@ export class Editor extends BaseComponent {
     }
 
     private render(): void {
-        const paneHeader: HTMLElement = new BaseComponent({
+        const paneHeader: HTMLDivElement = new BaseComponent<HTMLDivElement>({
             parent: this.element,
             className: 'pane-header',
             content: `CSS Editor`,
         }).element;
-        new BaseComponent({ tag: 'span', parent: paneHeader, className: 'filename', content: 'style.css' });
-        new BaseComponent({
+        new BaseComponent<HTMLSpanElement>({
+            tag: 'span',
+            parent: paneHeader,
+            className: 'filename',
+            content: 'style.css',
+        });
+        new BaseComponent<HTMLDivElement>({
             parent: this.element,
             className: 'gutter',
             content: '1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16',
         });
-        const editorWindow: HTMLElement = new BaseComponent({
+        const editorWindow: HTMLDivElement = new BaseComponent<HTMLDivElement>({
             parent: this.element,
             className: 'editor-window',
         }).element;
-        const inputWrapper: HTMLElement = new BaseComponent({ parent: editorWindow, className: 'input-wrapper' })
-            .element;
+        const inputWrapper: HTMLDivElement = new BaseComponent<HTMLDivElement>({
+            parent: editorWindow,
+            className: 'input-wrapper',
+        }).element;
         inputWrapper.append(this.input);
         inputWrapper.append(this.mockInput);
         new Button({
@@ -55,7 +63,7 @@ export class Editor extends BaseComponent {
             content: 'enter',
             onClick: () => this.onInput(this.input),
         });
-        new BaseComponent({
+        new BaseComponent<HTMLDivElement>({
             parent: editorWindow,
             className: 'editor-text',
             content: '{<br/>/* Styles would go here. */<br/>}',
@@ -65,15 +73,15 @@ export class Editor extends BaseComponent {
     }
 
     private addListeners(): void {
-        this.input.addEventListener('keydown', (e) => {
+        this.input.addEventListener('keydown', (e: KeyboardEvent): void => {
             if (e.code === 'Enter') {
                 this.onInput(this.input);
             }
         });
-        this.input.addEventListener('input', () => {
+        this.input.addEventListener('input', (): void => {
             this.setMockInputContent(this.input.value);
         });
-        this.input.addEventListener('scroll', () => {
+        this.input.addEventListener('scroll', (): void => {
             this.syncScroll();
         });
     }
@@ -83,6 +91,7 @@ export class Editor extends BaseComponent {
     }
 
     public async showAnswer(selector: string): Promise<void> {
+        this.isCleared = false;
         disableElement(this.input);
         await this.typewrite(selector, 0);
         enableElement(this.input);
@@ -90,8 +99,8 @@ export class Editor extends BaseComponent {
     }
 
     private async typewrite(selector: string, i: number): Promise<void> {
-        if (i < selector.length) {
-            const j = i + 1;
+        if (i < selector.length && !this.isCleared) {
+            const j: number = i + 1;
             this.setInputContent(selector.slice(0, j));
             await delay(150);
             return this.typewrite(selector, j);
@@ -113,6 +122,7 @@ export class Editor extends BaseComponent {
     }
 
     public clear(): void {
+        this.isCleared = true;
         this.setInputContent('');
         this.input.focus();
     }

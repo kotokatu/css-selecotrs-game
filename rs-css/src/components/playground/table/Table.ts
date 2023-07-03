@@ -28,7 +28,7 @@ export class Table extends BaseComponent<HTMLDivElement> {
             parent: this.element,
             className: 'table',
         }).element;
-        this.tableContainer.addEventListener('animationend', (e: AnimationEvent) => {
+        this.tableContainer.addEventListener('animationend', (e: AnimationEvent): void => {
             if (e.animationName === AnimationName.OnCompleteLevel) {
                 this.onAnimationEnd();
             }
@@ -45,8 +45,11 @@ export class Table extends BaseComponent<HTMLDivElement> {
         this.render();
     }
 
-    private render() {
-        const tableEdge = new BaseComponent<HTMLDivElement>({ parent: this.element, className: 'table-edge' }).element;
+    private render(): void {
+        const tableEdge: HTMLDivElement = new BaseComponent<HTMLDivElement>({
+            parent: this.element,
+            className: 'table-edge',
+        }).element;
         new BaseComponent<HTMLDivElement>({ parent: tableEdge, className: 'table-leg table-leg__left' });
         new BaseComponent<HTMLDivElement>({ parent: tableEdge, className: 'table-leg table-leg__right' });
         this.addItemsToTable();
@@ -98,8 +101,8 @@ export class Table extends BaseComponent<HTMLDivElement> {
     }
 
     private getTooltipContent(elem: HTMLElement): string {
-        const textElements = elem.textContent?.split('><');
-        return textElements ? `${textElements[0]}><${textElements[textElements.length - 1]}` : '';
+        const strings = elem.textContent?.split('><');
+        return strings ? `${strings[0]}><${strings[strings.length - 1]}` : '';
     }
 
     public removeActiveElements(elements: HTMLElement[]): void {

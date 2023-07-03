@@ -1,6 +1,7 @@
 import { BaseComponent } from '../base-component';
 import { ComponentParams } from '../base-component';
 import './button.css';
+
 export interface ButtonParams extends ComponentParams {
     onClick?: () => void;
 }

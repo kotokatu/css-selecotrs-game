@@ -18,7 +18,7 @@ export class Playground extends BaseComponent {
     private table: Table;
     private editor: Editor;
     private viewer: Viewer;
-    private editorWrapper: HTMLElement;
+    private editorWrapper: HTMLDivElement;
     private task: HTMLHeadingElement;
     private levelNum: number;
     private levelData: LevelObject;
@@ -46,7 +46,10 @@ export class Playground extends BaseComponent {
             content: 'help',
             onClick: this.handleHelpButtonClick.bind(this),
         }).element;
-        this.editorWrapper = new BaseComponent({ parent: this.element, className: 'editor-wrapper' }).element;
+        this.editorWrapper = new BaseComponent<HTMLDivElement>({
+            parent: this.element,
+            className: 'editor-wrapper',
+        }).element;
         this.editorWrapper.addEventListener('animationend', this.removeEditorAnimation.bind(this));
         this.editor = new Editor(this.editorWrapper, this.checkGuess.bind(this));
         this.viewer = new Viewer(
@@ -77,7 +80,7 @@ export class Playground extends BaseComponent {
         }
     }
 
-    private onMouseOut(e: MouseEvent): void {
+    public onMouseOut(e: MouseEvent): void {
         if (e.target instanceof HTMLElement) {
             const elem: HTMLElement = e.target.closest('.viewer-window div') || e.target;
 
@@ -152,7 +155,7 @@ export class Playground extends BaseComponent {
         this.editorWrapper.classList.remove(AnimationName.OnError);
     }
 
-    public update(levelData: LevelObject, levelNum: number, isGameOver?: boolean) {
+    public update(levelData: LevelObject, levelNum: number, isGameOver?: boolean): void {
         this.editor.clear();
         this.levelData = levelData;
         this.levelNum = levelNum;
