@@ -1,7 +1,7 @@
 import { BaseComponent } from '../abstract/base-component';
 import { Button } from '../abstract/button/button';
-import { observer } from '../../app';
 import { LevelState } from '../../app';
+import { observer } from '../../common/observer';
 import './menu.css';
 
 export class Menu extends BaseComponent {

@@ -1,6 +1,6 @@
 import { UpdateStateParams } from '../app';
 
-export class Observer {
+class Observer {
     observers: ((params: UpdateStateParams) => void)[];
     constructor() {
         this.observers = [];
@@ -14,3 +14,5 @@ export class Observer {
         this.observers.forEach((subscriber: (params: UpdateStateParams) => void) => subscriber(params));
     }
 }
+
+export const observer = new Observer();

@@ -1,10 +1,15 @@
-import '@testing-library/jest-dom';
+/**
+ * @jest-environment jsdom
+ */
+
 import { disableElement, enableElement } from '../common/helpers';
 import { BaseComponent } from '../components/abstract/base-component';
 import { App } from '../app';
-import { Menu } from '../components/menu/Menu';
+import { Playground } from '../components/playground/Playground';
 import { Table } from '../components/playground/table/Table';
 import { Editor } from '../components/playground/editor/Editor';
+import { Viewer } from '../components/playground/viewer/Viewer';
+import { Menu } from '../components/menu/Menu';
 
 let container: HTMLElement;
 const f = (): null => null;
@@ -25,11 +30,11 @@ describe('input disable/enable', () => {
     afterEach(() => {
         elem.remove();
     });
-    it('add attribute "disabled" to element', () => {
+    it('should add attribute "disabled" to element', () => {
         disableElement(elem);
         expect(elem).toBeDisabled();
     });
-    it('remove attribute "disabled" from element', () => {
+    it('should remove attribute "disabled" from element', () => {
         elem.disabled = true;
         enableElement(elem);
         expect(elem).toBeEnabled;
@@ -49,7 +54,7 @@ describe('BaseComponent', () => {
     afterAll(() => {
         testComponent.destroy();
     });
-    it('creates a base component', () => {
+    it('should create a base component', () => {
         expect(testComponent.element).not.toBeNull();
         expect(testComponent.element.textContent).toEqual('test-content');
         expect(testComponent.element.className).toEqual('component');
@@ -59,13 +64,45 @@ describe('BaseComponent', () => {
 
 jest.mock('../components/menu/Menu');
 const mockedMenu = jest.mocked(Menu, { shallow: false });
-afterAll(() => {
+afterEach(() => {
     mockedMenu.mockClear();
 });
 describe('Menu', () => {
-    it('calls Menu class constructor from App', () => {
+    it('should call Menu class constructor from App', () => {
         new App(document.body);
         expect(mockedMenu).toHaveBeenCalledTimes(1);
+    });
+});
+
+describe('Editor', () => {
+    let editor: Editor;
+    beforeEach(() => {
+        editor = new Editor(container, f);
+    });
+    afterEach(() => {
+        editor.destroy();
+    });
+    it('should clear input value', () => {
+        editor.clear();
+        expect(editor.input.value).toEqual('');
+    });
+});
+
+describe('Viewer', () => {
+    let viewer: Viewer;
+    beforeEach(() => {
+        const data = {
+            task: 'task1',
+            selector: 'selector1',
+            markup: [{ tag: 'parent', children: [{ tag: 'child' }] }],
+        };
+        viewer = new Viewer(container, data, f, f);
+    });
+    afterEach(() => {
+        viewer.destroy();
+    });
+    it('should create an array of elements', () => {
+        expect(viewer.viewerElements).not.toBeNull;
     });
 });
 
@@ -82,36 +119,27 @@ describe('Table', () => {
     afterEach(() => {
         table.destroy();
     });
-    it('adds message "Congratulations! You are a pro at CSS!" to table', () => {
+    it('should add all elements from array are in the DOM', () => {
+        table.tableElements.every((elem: HTMLElement) => expect(table.tableContainer).toContainElement(elem));
+    });
+    it('should add message "Congratulations! You are a pro at CSS!" to table', () => {
         table.displayWinMessage();
         expect(table.tableContainer.children.length).toEqual(1);
         expect(table.tableContainer.children[0].textContent).toEqual('Congratulations! You are a pro at CSS!');
     });
-    it('tests if all elements from array are in the DOM', () => {
-        table.tableElements.every((elem: HTMLElement) => expect(table.tableContainer).toContainElement(elem));
-    });
-    it('adds animation to table items', () => {
+    it('should add animation to table items', () => {
         table.addWrongItemAnimation(table.tableElements);
         table.tableElements.every((elem: HTMLElement) => expect(elem).toHaveClass('shake'));
     });
 });
 
-describe('editor.clear', () => {
-    let editor: Editor;
-    beforeEach(() => {
-        editor = new Editor(container, f);
-    });
-    afterEach(() => {
-        editor.destroy();
-    });
-    it('clear input value', () => {
-        editor.clear();
-        expect(editor.input.value).toEqual('');
-    });
-});
+// describe('Menu', () => {
+//     const menu: Menu = new Menu(container, 0, 1, [{ isCompleted: false, isHintUsed: false }]);
 
-jest.mock('../app');
-const mockedApp = jest.mocked(App, { shallow: false });
-afterEach(() => {
-    mockedApp.mockClear();
-});
+//     afterEach(() => {
+//         menu.destroy();
+//     });
+//     it('clear input value', () => {
+//         expect(1).not.toBeNull;
+//     });
+// });

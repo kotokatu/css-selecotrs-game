@@ -2,11 +2,11 @@ import { BaseComponent } from '../abstract/base-component';
 import { Editor } from './editor/Editor';
 import { Viewer } from './viewer/Viewer';
 import { Table } from './table/Table';
-import { observer } from '../../app';
 import { LevelObject } from '../../data/levelsData';
 import { Button } from '../abstract/button/button';
 import { AnimationName } from '../../app';
 import { disableElement, enableElement } from '../../common/helpers';
+import { observer } from '../../common/observer';
 import './playground.css';
 
 type ElementPair = {

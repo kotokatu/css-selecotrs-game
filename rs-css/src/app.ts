@@ -1,12 +1,11 @@
 import { Playground } from './components/playground/Playground';
 import { Menu } from './components/menu/Menu';
-import { Observer } from './common/observer';
+import { observer } from './common/observer';
 import { LEVELS_LIST } from './data/levelsData';
 import './css/style.css';
 
 export const LEVELS_TOTAL: number = LEVELS_LIST.length;
 export const DEFAULT_LEVEL = 0;
-export const observer = new Observer();
 
 export type UpdateStateParams = {
     levelNum?: number;
