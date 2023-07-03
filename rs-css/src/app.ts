@@ -37,8 +37,8 @@ export class App {
         this.currLevel = Number(localStorage.getItem(StorageKey.Level)) || DEFAULT_LEVEL;
         const storedState: string | null = localStorage.getItem(StorageKey.State);
         this.levelsState = typeof storedState === 'string' ? JSON.parse(storedState) : this.createDefaultLevelsState();
-        this.playground = new Playground(appRoot, LEVELS_LIST[this.currLevel], this.currLevel);
         this.menu = new Menu(appRoot, this.currLevel, LEVELS_TOTAL, this.levelsState);
+        this.playground = new Playground(appRoot, LEVELS_LIST[this.currLevel], this.currLevel);
         observer.subscribe(this.updateState.bind(this));
         window.addEventListener('beforeunload', () => {
             localStorage.setItem(StorageKey.State, JSON.stringify(this.levelsState));

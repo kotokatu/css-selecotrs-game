@@ -9,9 +9,9 @@ import { disableElement, enableElement } from '../../common/helpers';
 import { observer } from '../../common/observer';
 import './playground.css';
 
-type ElementPair = {
-    tableElement: HTMLElement;
-    viewerElement: HTMLElement;
+type ItemPair = {
+    tableItem: HTMLElement;
+    viewerItem: HTMLElement;
 };
 
 export class Playground extends BaseComponent {
@@ -62,15 +62,15 @@ export class Playground extends BaseComponent {
             const elem: HTMLElement = e.target.closest('.viewer-window div') || e.target;
 
             if (elem instanceof HTMLElement) {
-                const { tableElement, viewerElement }: ElementPair = this.getElements(elem);
+                const { tableItem, viewerItem }: ItemPair = this.getElements(elem);
 
-                if (tableElement && viewerElement) {
-                    tableElement.classList.add('hover');
-                    viewerElement.classList.add('hover');
+                if (tableItem && viewerItem) {
+                    tableItem.classList.add('hover');
+                    viewerItem.classList.add('hover');
                     this.table.showTooltip(
-                        viewerElement,
-                        tableElement.getBoundingClientRect().left,
-                        tableElement.getBoundingClientRect().top
+                        viewerItem,
+                        tableItem.getBoundingClientRect().left,
+                        tableItem.getBoundingClientRect().top
                     );
                 }
             }
@@ -82,28 +82,28 @@ export class Playground extends BaseComponent {
             const elem: HTMLElement = e.target.closest('.viewer-window div') || e.target;
 
             if (elem instanceof HTMLElement) {
-                const { tableElement, viewerElement }: ElementPair = this.getElements(elem);
+                const { tableItem, viewerItem }: ItemPair = this.getElements(elem);
 
-                if (tableElement && viewerElement) {
-                    tableElement.classList.remove('hover');
-                    viewerElement.classList.remove('hover');
+                if (tableItem && viewerItem) {
+                    tableItem.classList.remove('hover');
+                    viewerItem.classList.remove('hover');
                     this.table.hideTooltip();
                 }
             }
         }
     }
 
-    private getElements(elem: HTMLElement): ElementPair {
+    private getElements(elem: HTMLElement): ItemPair {
         let ind: number;
-        const viewerElements: HTMLElement[] = this.viewer.viewerElements;
-        const tableElements: HTMLElement[] = this.table.tableElements;
-        if (viewerElements.includes(elem)) {
-            ind = viewerElements.indexOf(elem);
+        const viewerItems: HTMLElement[] = this.viewer.viewerItems;
+        const tableItems: HTMLElement[] = this.table.tableItems;
+        if (viewerItems.includes(elem)) {
+            ind = viewerItems.indexOf(elem);
         } else {
-            ind = tableElements.indexOf(elem);
+            ind = tableItems.indexOf(elem);
         }
 
-        return { tableElement: tableElements[ind], viewerElement: viewerElements[ind] };
+        return { tableItem: tableItems[ind], viewerItem: viewerItems[ind] };
     }
 
     public checkGuess(input: HTMLInputElement): void {

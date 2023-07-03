@@ -8,8 +8,8 @@ import './editor.css';
 hljs.registerLanguage('css', css);
 
 export class Editor extends BaseComponent {
-    public mockInput: HTMLElement;
-    public input: HTMLInputElement;
+    private mockInput: HTMLElement;
+    private input: HTMLInputElement;
     private onInput: (input: HTMLInputElement) => void;
     constructor(parent: HTMLElement, onInput: (input: HTMLInputElement) => void) {
         super({ parent, className: 'editor pane' });

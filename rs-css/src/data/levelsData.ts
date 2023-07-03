@@ -1,16 +1,16 @@
 export type LevelObject = {
     task: string;
     selector: string;
-    markup: elemObject[];
+    markup: ElemObject[];
 };
 
-export type elemObject = {
+export type ElemObject = {
     tag: string;
     isAnimated?: boolean;
     class?: string;
     id?: string;
     attribute?: [string, string];
-    children?: elemObject[];
+    children?: ElemObject[];
 };
 
 export const LEVELS_LIST: readonly LevelObject[] = [

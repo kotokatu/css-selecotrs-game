@@ -1,11 +1,11 @@
 import { BaseComponent } from '../../abstract/base-component';
-import { elemObject, LevelObject } from '../../../data/levelsData';
+import { ElemObject, LevelObject } from '../../../data/levelsData';
 import { AnimationName } from '../../../app';
 import './table.css';
 
 export class Table extends BaseComponent<HTMLDivElement> {
     public tableContainer: HTMLElement;
-    public tableElements: HTMLElement[];
+    public tableItems: HTMLElement[];
     private tooltip: HTMLElement;
     private levelData: LevelObject;
     onMouseOver: (e: MouseEvent) => void;
@@ -23,7 +23,7 @@ export class Table extends BaseComponent<HTMLDivElement> {
         this.onMouseOut = onMouseOut;
         this.onAnimationEnd = onAnimationEnd;
         this.levelData = levelData;
-        this.tableElements = [];
+        this.tableItems = [];
         this.tableContainer = new BaseComponent<HTMLDivElement>({
             parent: this.element,
             className: 'table',
@@ -49,40 +49,40 @@ export class Table extends BaseComponent<HTMLDivElement> {
         const tableEdge = new BaseComponent<HTMLDivElement>({ parent: this.element, className: 'table-edge' }).element;
         new BaseComponent<HTMLDivElement>({ parent: tableEdge, className: 'table-leg table-leg__left' });
         new BaseComponent<HTMLDivElement>({ parent: tableEdge, className: 'table-leg table-leg__right' });
-        this.addElementsToTable();
+        this.addItemsToTable();
     }
 
-    private createTableElement(elemObject: elemObject): HTMLElement {
-        const elem: HTMLElement = document.createElement(elemObject.tag);
-        if (elemObject.class) {
-            elem.className = elemObject.class;
+    private createTableItem(itemData: ElemObject): HTMLElement {
+        const item: HTMLElement = document.createElement(itemData.tag);
+        if (itemData.class) {
+            item.className = itemData.class;
         }
 
-        if (elemObject.id) {
-            elem.id = elemObject.id;
+        if (itemData.id) {
+            item.id = itemData.id;
         }
 
-        if (elemObject.attribute) {
-            elem.setAttribute(elemObject.attribute[0], elemObject.attribute[1]);
+        if (itemData.attribute) {
+            item.setAttribute(itemData.attribute[0], itemData.attribute[1]);
         }
 
-        if (elemObject.children) {
-            elemObject.children.forEach((child: elemObject) => elem.append(this.createTableElement(child)));
+        if (itemData.children) {
+            itemData.children.forEach((child: ElemObject) => item.append(this.createTableItem(child)));
         }
 
-        if (elemObject.isAnimated) {
-            elem.classList.add(AnimationName.ActiveItem);
+        if (itemData.isAnimated) {
+            item.classList.add(AnimationName.ActiveItem);
         }
 
-        elem.addEventListener('mouseover', this.onMouseOver);
-        elem.addEventListener('mouseout', this.onMouseOut);
+        item.addEventListener('mouseover', this.onMouseOver);
+        item.addEventListener('mouseout', this.onMouseOut);
 
-        this.tableElements.push(elem);
-        return elem;
+        this.tableItems.push(item);
+        return item;
     }
 
-    private addElementsToTable(): void {
-        this.levelData.markup.forEach((elem: elemObject) => this.tableContainer.append(this.createTableElement(elem)));
+    private addItemsToTable(): void {
+        this.levelData.markup.forEach((item: ElemObject) => this.tableContainer.append(this.createTableItem(item)));
     }
 
     public showTooltip(elem: HTMLElement, posLeft: number, posTop: number): void {
@@ -130,9 +130,9 @@ export class Table extends BaseComponent<HTMLDivElement> {
             this.displayWinMessage();
         } else {
             if (levelData) this.levelData = levelData;
-            this.tableElements = [];
+            this.tableItems = [];
             this.tableContainer.replaceChildren();
-            this.addElementsToTable();
+            this.addItemsToTable();
         }
     }
 }
