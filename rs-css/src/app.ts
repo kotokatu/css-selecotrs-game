@@ -1,5 +1,5 @@
 import { Playground } from './components/playground/Playground';
-import { Menu } from './components/menu/Menu';
+import { Menu } from './components/menu/menu';
 import { observer } from './common/observer';
 import { LEVELS_LIST } from './data/levelsData';
 import './css/style.css';

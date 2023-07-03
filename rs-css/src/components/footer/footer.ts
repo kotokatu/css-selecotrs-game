@@ -20,6 +20,6 @@ export class Footer extends BaseComponent {
             parent: this.element,
             className: 'footer-rsschool',
         }).element;
-        rsSchoolLink.href = 'https://rs-school/js';
+        rsSchoolLink.href = 'https://rs.school/js/';
     }
 }

@@ -1,6 +1,6 @@
 import { BaseComponent } from '../abstract/base-component';
 import { Editor } from './editor/Editor';
-import { Viewer } from './viewer/Viewer';
+import { Viewer } from './viewer/viewer';
 import { Table } from './table/Table';
 import { Footer } from '../footer/footer';
 import { LevelData } from '../../data/levelsData';
