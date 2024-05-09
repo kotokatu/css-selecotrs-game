@@ -1,5 +1,4 @@
-Link to deploy [https://rolling-scopes-school.github.io/kotokatu-JSFE2023Q1/rs-css/]
-Description:
+Link to deploy: [https://rolling-scopes-school.github.io/kotokatu-JSFE2023Q1/rs-css/]
 
 # RS Селекторы
 
